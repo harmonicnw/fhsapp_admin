@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<title>Log In</title>
+
+<style type="text/css">
+#form-wrap {
+
+/* max width allows the width to become smaller as the page gets smaller*/
+	max-width: 450px;
+	margin: 100px auto;
+	
+
+}
+fieldset {
+
+		border: 3px solid;
+}
+		label {
+			display: block ; 
+			float: left;
+			width: 70px;/* the length of space between the username/password and the login box*/
+
+		}
+			input[type=text]{
+				clear: none;
+				float: left;
+
+			}
+
+			.row{
+					width: 100%;
+					clear: both;
+					float: left;
+
+
+			}
+	</style>
+
+</head>
+<body>
+
+
+<div id="form-wrap">
+
+<form action="login.php" method="post" name="login_form">
+
+	<fieldset>
+
+	<legend><h2>Login</h2></legend>
+
+	<div class="row"><input name="q" onblur="if (this.value=='') this.value='Username'" onfocus="if (this.value=='Username') this.value = ''" type="text" value="Username"></div> <!--<label>Username: </label><input type="text" name="user"/>-->
+
+	<div class="row"><input id="password_text" onfocus="this.style.display='none';document.getElementById('password').style.display='block'; document.getElementById('password').focus()" type="text" value="Password"><input onblur="if (this.value==''){this.style.display='none';document.getElementById('password_text').style.display='block'}" id="password" style="display: none" type="password" name="password"/></div><!--<label>Password: </label><input type="password" name="pass"/></div>-->
+
+	<input type="submit" value="Login"/>
+
+</fieldset>
+	<br/>
+	<input type="checkbox" name="Stay_Logged_In"/> Stay Logged In
+</form>
+
+</body>
+</html>

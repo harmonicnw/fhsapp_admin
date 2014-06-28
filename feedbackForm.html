@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+	<title>Feedback Survey</title>
+	<style type="text/css">
+	@font-face {
+		font-family: MyriadPro;
+		src: url(fonts/MyriadPro-Regular.eot);
+	}
+	
+	body {
+		font-family: "MyriadPro", Helvetica, Arial, Lucieda Grande, Sans-Serif;
+		font-size: 16px;
+		background-color:rgb(235,235,241) ;
+		overflow-y: auto;
+		margin: 0;
+		
+	}
+
+	.feedbackForm {
+		padding: .5em;
+	}
+	
+	form {
+		padding: 0;
+		margin: 0;
+		
+	}
+	
+	#contact {
+		clear: both;
+	}
+	</style>
+</head>
+
+<body>
+<div style="background-color:#fff" class="feedbackForm">
+	<form method="post" action="http://www.fhsapp.com/admin/feedbackEmail.php" class="feedbackForm">
+		<label>Your grade:</label>
+		
+		<input type="radio" name="grade" value="9"><label>9</label>
+		<input type="radio" name="grade" value="10"><label>10</label>
+		<input type="radio" name="grade" value="11"><label>11</label>
+		<input type="radio" name="grade" value="12"><label>12</label>
+		<br />
+		<br />
+		<label>Give us some feedback! Bugs, design, functionality, any little bit helps:</label>
+		<br />
+		<textarea name="feedback" rows="5" cols="40" class="feedbackText"></textarea>
+		
+		<br />
+		<input type="submit" value="Submit" style="">
+		<br />
+		<br />
+		<label id="contact">Contact Us: fhsapp@gmail.com</label>
+	</form>
+	
+	
+</div>
+</body>

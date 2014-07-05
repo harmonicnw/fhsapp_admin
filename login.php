@@ -1,17 +1,62 @@
 <?php
 session_start();
-require_once('functions.php');
 include('lib/config.php');
 include('lib/db.class.php');
+<<<<<<< HEAD
 ini_set('display_errors',1);
+=======
+include_once('functions.php');
+assist_log();
+
+ini_set('display_errors',0);
+>>>>>>> parent of deda5c5... Standardization of login functions
 error_reporting(E_ALL);
 $db = new Db($dbConfig);
-assist_log();
+
+//if($_POST['user'])
+function set_session($typedusername) {
+		$userdata = mysql_fetch_array(mysql_query("SELECT * FROM users WHERE username='$typedusername'"));
+		$_SESSION['user_id'] = $userdata['id'];
+		$_SESSION['admin'] = $userdata['admin'];
+		$_SESSION['teacher'] = $userdata['teacher'];
+		$_SESSION['club'] = $userdata['club'];
+		$_SESSION['sports'] = $userdata['sports'];
+		$_SESSION['username'] = $typedusername;
+	}
 
 if(!empty($_POST)) {
 	login();
 } else {
 	//echo "The post is empty!";
+}
+
+function login(){
+	
+$typedusername= (addslashes($_POST['user'])); //thought we didn't need the array or slashes -- could be wrong
+$typedhash= md5((addslashes($_POST['pass'])));
+
+$result = mysql_query("SELECT password FROM users WHERE username='".$typedusername."'");
+if(!$result) { die('goofed' . mysql_error() ); }
+
+$hash = null; //this isn't needed, right?
+
+if($result){
+	$row = mysql_fetch_row($result);
+	$hash = $row[0]; 
+	} else {
+		//echo "Invalid Username.";
+	}
+if($typedhash === $hash){
+	//echo "Login Successful";
+	set_session($typedusername);
+	kLA();
+	header('Location: main.php?current=1');
+	exit();
+	} else {
+		/*echo "typedhash = ". $typedhash;
+		echo "hash = ". $hash; 
+		echo "Login Failed."; */
+	}
 }
 
 ?>

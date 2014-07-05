@@ -128,7 +128,8 @@
 		$_SESSION['sports'] = $userdata[0]['sports'];
 		$_SESSION['admin'] = $userdata[0]['admin'];
 	}	
-	
+				
+}	
 	function enforce_log() {
 		if(!isset($_SESSION['user_id'])) {
 			check_cookie();
@@ -136,8 +137,6 @@
 			set_cookie_session();
 		}
 	}
-	
-	
 	
 	function check_cookie() {
 		if(isset($_COOKIE['staylogged'])) {

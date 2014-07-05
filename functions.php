@@ -35,9 +35,9 @@
 	// array of days.  
 	return $aDays;  
 	}
-
+#region Login functions
 	//For setting session variables at the login
-	/*function set_session($typedusername) {
+	function set_session($typedusername) {
 		$userdata = mysql_fetch_array(mysql_query("SELECT * FROM users WHERE username='$typedusername'"));
 		$_SESSION['user_id'] = $userdata['id'];
 		$_SESSION['admin'] = $userdata['admin'];
@@ -45,9 +45,45 @@
 		$_SESSION['club'] = $userdata['club'];
 		$_SESSION['sports'] = $userdata['sports'];
 		$_SESSION['username'] = $typedusername;
-	}*/
-
+	}
 	
+	function login(){
+		
+		$typedusername= (addslashes($_POST['user'])); //thought we didn't need the array or slashes -- could be wrong
+		$typedhash= md5((addslashes($_POST['pass'])));
+
+		$result = mysql_query("SELECT password FROM users WHERE username='".$typedusername."'");
+		if(!$result) { die('goofed' . mysql_error() ); }
+	
+		if($result){
+			$row = mysql_fetch_row($result);
+			$hash = $row[0]; 
+		} else {
+			//echo "Invalid Username.";
+		}
+	
+		if($typedhash === $hash){
+			set_session($typedusername);
+			kLA();
+			header('Location: main.php?current=1');
+			exit();
+		} else {	
+			/*echo "typedhash = ". $typedhash;
+			echo "hash = ". $hash; 
+			echo "Login Failed."; */
+		}
+	}
+
+	function get_post_inputs() {
+		$typedusername= (addslashes($_POST['user'])); //thought we didn't need the array or slashes -- could be wrong
+		$typedhash= md5((addslashes($_POST['pass'])));
+
+		$result = mysql_query("SELECT password FROM users WHERE username='".$typedusername."'");
+		if(!$result) { die('goofed' . mysql_error() ); }
+	}
+#endregion
+	
+#region cookies
 	function set_cookie_session(){
 		$user_id = $_SESSION['user_id'];
 		$query = "SELECT * FROM users WHERE id='$user_id'";
@@ -104,6 +140,6 @@
 			header('Location: main.php?current=1');
 		}
 	}
-	
+#endregion	
 	
 ?>

@@ -36,8 +36,10 @@
 	return $aDays;  
 	}
 
+/*Login Functions*/	
+	
 	//For setting session variables at the login
-	/*function set_session($typedusername) {
+	function set_session($typedusername) {
 		$userdata = mysql_fetch_array(mysql_query("SELECT * FROM users WHERE username='$typedusername'"));
 		$_SESSION['user_id'] = $userdata['id'];
 		$_SESSION['admin'] = $userdata['admin'];
@@ -45,8 +47,40 @@
 		$_SESSION['club'] = $userdata['club'];
 		$_SESSION['sports'] = $userdata['sports'];
 		$_SESSION['username'] = $typedusername;
-	}*/
+	}
 
+	function login() {
+	
+		$typedusername= (addslashes($_POST['user'])); //thought we didn't need the array or slashes -- could be wrong
+		$typedhash= md5((addslashes($_POST['pass'])));
+
+		$result = mysql_query("SELECT password FROM users WHERE username='".$typedusername."'");
+		
+		if(!$result){ 
+			die('goofed' . mysql_error() ); 
+		}
+
+		$hash = null; //this isn't needed, right?
+	
+		if($result) {
+			$row = mysql_fetch_row($result);
+			$hash = $row[0]; 
+		} else {
+			//echo "Invalid Username.";
+		}
+	
+		if($typedhash === $hash){
+			//echo "Login Successful";
+			set_session($typedusername);
+			kLA();
+			header('Location: main.php?current=1');
+			exit();
+		} else {
+			/*echo "typedhash = ". $typedhash;
+			echo "hash = ". $hash; 
+			echo "Login Failed."; */
+		}
+	}
 	
 	function set_cookie_session(){
 		$user_id = $_SESSION['user_id'];
@@ -62,7 +96,8 @@
 		$_SESSION['sports'] = $userdata[0]['sports'];
 		$_SESSION['admin'] = $userdata[0]['admin'];
 				
-}	
+	}	
+	
 	function enforce_log() {
 		if(!isset($_SESSION['user_id'])) {
 			check_cookie();

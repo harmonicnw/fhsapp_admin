@@ -3,7 +3,7 @@ session_start();
 require_once('functions.php');
 include('lib/config.php');
 include('lib/db.class.php');
-ini_set('display_errors',0);
+ini_set('display_errors',1);
 error_reporting(E_ALL);
 $db = new Db($dbConfig);
 assist_log();

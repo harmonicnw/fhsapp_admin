@@ -9,7 +9,7 @@ ini_set('display_errors',0);
 error_reporting(E_ALL);
 $db = new Db($dbConfig);
 
-
+//yo so and so was here
 //if($_POST['user'])
 function set_session($typedusername) {
 		$userdata = mysql_fetch_array(mysql_query("SELECT * FROM users WHERE username='$typedusername'"));

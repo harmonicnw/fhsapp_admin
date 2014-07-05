@@ -2,16 +2,13 @@
 session_start();
 include('lib/config.php');
 include('lib/db.class.php');
-<<<<<<< HEAD
-ini_set('display_errors',1);
-=======
 include_once('functions.php');
 assist_log();
 
 ini_set('display_errors',0);
->>>>>>> parent of deda5c5... Standardization of login functions
 error_reporting(E_ALL);
 $db = new Db($dbConfig);
+
 
 //if($_POST['user'])
 function set_session($typedusername) {

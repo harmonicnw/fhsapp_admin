@@ -2,15 +2,18 @@
 session_start();
 include('lib/config.php');
 include('lib/db.class.php');
+//include_once('include_classes.php');
 include_once('functions.php');
 assist_log();
 
-ini_set('display_errors',1);
+ini_set('display_errors',0);
 error_reporting(E_ALL);
 $db = new Db($dbConfig);
 
 if(!empty($_POST)) {
 	login();
+	//$login = new login();
+	//$login->create_login();
 } else {
 	//echo "The post is empty!";
 }

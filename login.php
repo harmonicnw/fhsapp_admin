@@ -59,8 +59,8 @@ if(!empty($_POST)) {
 </head>
 <body class="login">
 	<div class="header">
-		<img class="logo" src="Images/daytime.png">
-		<img class="beta" src="Images/betterbeta.png">
+		<img class="logo" src="images/daytime.png">
+		<img class="beta" src="images/betterbeta.png">
 		<h1>FHS APP	</h1>
 	</div>	
 	<div class="columns_wrapper"><div class="columns">

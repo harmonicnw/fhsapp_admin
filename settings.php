@@ -251,8 +251,8 @@ $sports = $_SESSION['sports'];
 
 ?>
 <div class="header">
-		<img class="logo" src="Images/daytime.png">
-		<img class="beta" src="Images/betterbeta.png">
+		<img class="logo" src="images/daytime.png">
+		<img class="beta" src="images/betterbeta.png">
 		<h1>FHS APP	</h1>
 
 		<div class="buttons">

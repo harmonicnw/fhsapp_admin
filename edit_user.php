@@ -87,8 +87,8 @@ $sports=$user[0]['sports'];*/
 
 <body>
 	<div class="header">
-		<img class="logo" src="Images/daytime.png">
-		<img class="beta" src="Images/betterbeta.png">
+		<img class="logo" src="images/daytime.png">
+		<img class="beta" src="images/betterbeta.png">
 		<h1>FHS APP	</h1>
 		<div class="buttons">
 			<a class="home_button" href="main.php?current=1">Home</a>			

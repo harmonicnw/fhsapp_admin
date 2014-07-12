@@ -25,8 +25,8 @@ $users=$db->runQuery($query);
 
 <body>
 	<div class="header">
-		<img class="logo" src="http://fhsapp.com/v2/Images/daytime.png">
-		<img class="beta" src="http://fhsapp.com/v2/Images/betterbeta.png">
+		<img class="logo" src="Images/daytime.png">
+		<img class="beta" src="Images/betterbeta.png">
 		<h1>FHS APP	</h1>
 
 		<div class="buttons">

@@ -5,7 +5,7 @@ include('lib/db.class.php');
 include_once('functions.php');
 assist_log();
 
-ini_set('display_errors',0);
+ini_set('display_errors',1);
 error_reporting(E_ALL);
 $db = new Db($dbConfig);
 
@@ -59,8 +59,8 @@ if(!empty($_POST)) {
 </head>
 <body class="login">
 	<div class="header">
-		<img class="logo" src="http://fhsapp.com/v2/Images/daytime.png">
-		<img class="beta" src="http://fhsapp.com/v2/Images/betterbeta.png">
+		<img class="logo" src="Images/daytime.png">
+		<img class="beta" src="Images/betterbeta.png">
 		<h1>FHS APP	</h1>
 	</div>	
 	<div class="columns_wrapper"><div class="columns">

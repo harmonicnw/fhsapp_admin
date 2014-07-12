@@ -1,14 +1,17 @@
 <?php 
 session_start(); 
-require_once('functions.php');
 include('lib/config.php');
 include('lib/db.class.php');
 include('include_classes.php');
+include('functions.php');
+
 ini_set('display_errors',0);
 error_reporting(E_ALL);
+
 $db = new Db($dbConfig);
-//Maybe make a function that takes all the Session variables and sticks them into easier to use variable names.
+
 enforce_log();
+
 $user_id = $_SESSION['user_id'];
 
 //*First time login with no classes set.

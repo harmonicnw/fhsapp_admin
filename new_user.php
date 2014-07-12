@@ -1,13 +1,16 @@
 <?php
-session_start();
-
-require_once('lib/config.php');
-require_once('lib/db.class.php');
+session_start(); 
+include('lib/config.php');
+include('lib/db.class.php');
+include('include_classes.php');
+include('functions.php');
 
 ini_set('display_errors', 0);
-error_reporting(E_ALL);
 
+error_reporting(E_ALL);
 $db = new Db($dbConfig);
+
+enforce_log();
 ?>
 
 <!DOCTYPE HTML>
@@ -72,40 +75,11 @@ $db = new Db($dbConfig);
 		<img class="logo" src="images/daytime.png">
 		<img class="beta" src="images/betterbeta.png">
 		<h1>FHS APP	</h1>
-		<!--<div class="buttons">
-			 <a class="logout_button" href="logout.php">Log Out</a>
-		</div>	
 		
-		<div class="settings_button" >
-			<a href="settings.php"><img src="images/settings_gear.png" width="40" height="40"/></a>
-		</div>
-		
-		<div class="home_button_div">
-		 <a class="home_button" href="main.php?current=1">Home</a>
-		</div>
-		
-		<a href="create.php">
-			<div class="add_announcements_wrapper">
-			<div class="add_announcements_button">Add Announcement</div>
-			<img class="add_image" src="images/add.png" />
-			</div>
-		</a>-->
-		
-		<div class="buttons">
-			
-			<a class="home_button" href="main.php?current=1">Home</a>
-			<a class="logout_button" href="logout.php">Log Out</a>		
-		</div>
-
-		<div class="settings_button">
-			<a href="settings.php"><img src="images/settings_gear.png" width="40" height="40"/></a>
-		</div>
-
-		<a href="create.php">
-			<div class="add_announcements_button">Add Announcement</div>
-			<img class="add_image" src="images/add.png" /> <!--Icons by DryIcons-->
-			</div>
-		</a>
+		<?php
+		$header = new header();
+		$header->generate_header();
+		?>
 
 		</div>	
 

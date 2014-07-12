@@ -17,6 +17,7 @@ class header {
 		$this->new_user_button();
 		
 		$this->add_announcement_button();
+		
 	}
 	
 	private function add_announcement_button() {

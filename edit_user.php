@@ -1,11 +1,15 @@
 <?php 
 session_start(); 
-require_once('functions.php');
 include('lib/config.php');
 include('lib/db.class.php');
-ini_set('display_errors',0);
+include('include_classes.php');
+include('functions.php');
+
+ini_set('display_errors', 0);
+
 error_reporting(E_ALL);
 $db = new Db($dbConfig);
+
 enforce_log();
 
 //REQUEST var e_user_id
@@ -90,29 +94,11 @@ $sports=$user[0]['sports'];*/
 		<img class="logo" src="images/daytime.png">
 		<img class="beta" src="images/betterbeta.png">
 		<h1>FHS APP	</h1>
-		<div class="buttons">
-			<a class="home_button" href="main.php?current=1">Home</a>			
-			<a class="logout_button" href="logout.php">Log Out</a>
-		</div>	
-		
-		<div class="settings_button" >
-			<a href="settings.php"><img src="images/settings_gear.png" width="40" height="40"/></a>
-		</div>
 		
 		<?php
-		if($_SESSION['admin']) {
-			echo '<div class="new_user_button" >';
-			echo '<a href="new_user.php">Create New User</a><br />';
-			echo '</div>';
-		}
+		$header = new header();
+		$header->generate_header();
 		?>
-		
-		<a href="create.php">
-			
-			<div class="add_announcements_button">Add Announcement</div>
-			<img class="add_image" src="images/add.png" /> <!--Icons by DryIcons-->
-			</div>
-		</a>
 	</div>
 	
 	<div class="main_wrapper">

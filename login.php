@@ -10,12 +10,14 @@ error_reporting(E_ALL);
 
 $db = new Db($dbConfig);
 
-assist_log();
+c_cookie::assist_log();
 
 if(!empty($_POST)) {
-	login();
-	//$login = new login();
-	//$login->create_login();
+	//login();
+	$user = $_POST['user'];
+	$pass = $_POST['pass'];
+	$login = new login( $user, $pass );
+	$login->create_login();
 } else {
 	//echo "The post is empty!";
 }

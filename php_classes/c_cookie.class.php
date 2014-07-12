@@ -1,11 +1,6 @@
 <?php
 
-class $c_cookie {
-	
-	// private $user_id;
-	// private $query;
-	// private $result;
-	// private $userdata;
+class c_cookie {
 	
 	function __construct() {
 	
@@ -25,11 +20,13 @@ class $c_cookie {
 		$_SESSION['sports'] = $userdata[0]['sports'];
 		$_SESSION['admin'] = $userdata[0]['admin'];
 				
-}	
-	public function enforce_log() {
+	}
+	
+	public static function enforce_log() {
 		if(!isset($_SESSION['user_id'])) {
 			check_cookie();
-		}else{ set_cookie_session();
+		} else { 
+			set_cookie_session();
 		}
 	}
 	
@@ -41,7 +38,7 @@ class $c_cookie {
 	private function check_cookie() {
 		if(isset($_COOKIE['staylogged'])) {
 			$_SESSION['user_id']= $_COOKIE['staylogged'];
-			set_cookie_session();
+			$this->set_cookie_session();
 			header('Location: main.php?current=1');
 		}else{
 			header('Location: login.php');
@@ -62,7 +59,7 @@ class $c_cookie {
 		}
 	}
 	
-	private function assist_log(){
+	public static function assist_log(){
 		if(isset($_COOKIE['staylogged'])){
 			header('Location: main.php?current=1');
 		}

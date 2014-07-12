@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 
 $db = new Db($dbConfig);
 
-enforce_log();
+c_cookie::enforce_log();
 
 $user_id = $_SESSION['user_id'];
 

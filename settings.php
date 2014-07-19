@@ -515,7 +515,7 @@ $faculty = $_SESSION['faculty'];
 								
 								?>
 								
-																<?php 
+								<?php 
 								
 								if($faculty) {
 									echo "<div id='faculty_info'><h1>Faculty:</h1>";
@@ -527,7 +527,7 @@ $faculty = $_SESSION['faculty'];
 												<label>Faculty '.$i.':</label>
 												<input name="fname[]" type="text" value="'. $faculty_value["name"] .'"/>
 												<input name="fid[]" type="hidden" value="'. $faculty_value["id"] .'"/>
-												<a href="#" class="delete_faculty">X</a>
+												
 												<br /></div>';
 											$i++;
 										}
@@ -539,7 +539,7 @@ $faculty = $_SESSION['faculty'];
 									}
 									
 									echo "</div>";
-									echo "<button id='add_faculty'>Add new faculty</button>";
+									
 								}
 								
 								?>

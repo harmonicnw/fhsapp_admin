@@ -19,6 +19,7 @@ $admin = $_SESSION['admin'];
 $teacher = $_SESSION['teacher'];
 $club_p = $_SESSION['club'];
 $sports = $_SESSION['sports'];
+$faculty = $_SESSION['faculty'];
 			
 //////////////**SUBMITTING THE FORM**///////////////////////////////////////////////////////////////////////////////////////////////			
 				if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form yet.
@@ -180,6 +181,63 @@ $sports = $_SESSION['sports'];
 						
 						//echo "<b>Sport(s) have been updated!</b><br />";
 					}
+					///FACULTRONS IN PROGRESS
+					if($faculty) {
+						if(isset($_REQUEST['fname'])) {
+							$faculty_name = $_REQUEST['fname'];
+						}
+						
+						if(isset($_REQUEST['fid'])) {
+							$faculty_id = $_REQUEST['fid'];
+						}
+						
+						if(isset($_REQUEST['fdelete'])) {
+							$faculty_delete = $_REQUEST['fdelete'];
+						}
+						
+						$query = "SELECT id, name FROM subtype WHERE author_id = '$user_id' AND type_id = '5';";
+						$existing_faculties = $db->runQuery($query);
+						
+						$faculty_count = 0;
+						foreach($faculty_name as $faculty) { //*$faculty is the name of the faculty
+							foreach($existing_faculties as $existing_faculty) { //this was all copy-pasta'd by the way, might b rong
+								if($faculty_id[$faculty_count] == $existing_faculty['id']) {
+									$query = "UPDATE subtype SET name='$faculty' WHERE id='{$existing_faculty['id']}'";
+									mysql_query($query);
+									$existing_f = true;
+									//echo "Updated $sport. <br />";
+									break;
+								} else {
+									$existing_f = false;
+								}
+							}
+							
+							if(!$existing_f) {
+								$query = "INSERT INTO subtype(name, type_id, author_id, period) VALUES ('$faculty', '5', '$user_id', '0');";
+								mysql_query($query);
+								//echo "Inserted $sport. <br />";
+							}
+							$faculty_count++;
+						}
+						
+						//DELETE SPORTS HERE
+						if(!empty($faculty_delete)) {
+							foreach($faculty_delete as $faculty) {
+								if(!empty($faculty)) {
+									$query = "DELETE FROM subtype WHERE id='{$faculty}'";
+									mysql_query($query);
+									//echo "<p>Sport Deleted!</p><br />";
+								}
+							}
+						}
+						
+						//echo "<b>Sport(s) have been updated!</b><br />";
+					}
+					
+					
+					
+					
+					
 				
 ////////////////////UPDATE STUFF///////////////////////////////////////////////////////////////////////////////////////////////////
 					//*Update your password first
@@ -308,6 +366,10 @@ $sports = $_SESSION['sports'];
 					}
 				}
 				
+				//FACULTRONY
+				if($faculty){
+					$faculty_values = $db->runQuery("SELECT * FROM subtype WHERE author_id = '$user_id' AND type_id = '5' ORDER BY id;");
+				}
 		?>
 		
 		<pre>
@@ -450,6 +512,36 @@ $sports = $_SESSION['sports'];
 									echo "</div>";
 									echo "<button id='add_sports'>Add new sport</button>";
 								}
+								
+								?>
+								
+																<?php 
+								
+								if($faculty) {
+									echo "<div id='faculty_info'><h1>Faculty:</h1>";
+									
+									$i = 1;
+									if(!empty($faculty_values)) {
+										foreach($faculty_values as $faculty_value) {
+											echo '<div class="faculty_wrapper">
+												<label>Faculty '.$i.':</label>
+												<input name="fname[]" type="text" value="'. $faculty_value["name"] .'"/>
+												<input name="fid[]" type="hidden" value="'. $faculty_value["id"] .'"/>
+												<a href="#" class="delete_faculty">X</a>
+												<br /></div>';
+											$i++;
+										}
+									} else {
+										echo '<label>Faculty 1:</label>
+											<input name="fname[]" type="text" value=""/>
+											<input name="fid[]" type="hidden" value=""/>
+											<br />';
+									}
+									
+									echo "</div>";
+									echo "<button id='add_faculty'>Add new faculty</button>";
+								}
+								
 								?>
 							</div>
 							

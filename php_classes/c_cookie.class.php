@@ -3,7 +3,7 @@
 class c_cookie {
 	
 	function __construct() {
-	
+	//c is for cookie
 	}
 	
 	private static function set_cookie_session(){
@@ -19,6 +19,7 @@ class c_cookie {
 		$_SESSION['club'] = $userdata[0]['club'];
 		$_SESSION['sports'] = $userdata[0]['sports'];
 		$_SESSION['admin'] = $userdata[0]['admin'];
+		$_SESSION['faculty'] = $userdata[0]['faculty'];
 				
 	}
 	

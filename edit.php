@@ -19,6 +19,7 @@ $admin_p = $_SESSION['admin'];
 $teacher_p = $_SESSION['teacher'];
 $club_p = $_SESSION['club'];
 $sports_p = $_SESSION['sports'];
+$faculty_p = $_SESSION['faculty'];
 ?>
 
 <?php
@@ -319,6 +320,32 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 					$checked = false;
 					$id = $sport['id'];
 					$name = $sport['name'];
+					foreach($anno_cb as $anno_cbc) {
+						if($anno_cbc['subtype_id']==$id) {
+							echo '<label class="cat_subtype_label">'.$name.':</label>
+							<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
+							<br />';
+							$checked = true;
+							break;
+						}
+					}
+					if(!$checked) {
+						echo '<label class="cat_subtype_label">'.$name.':</label>
+						<input name="check[]" type="checkbox" value="'.$id.'" />
+						<br />';
+					}
+				}
+				echo "</div>";
+			}
+			
+			if($faculty_p) {
+				$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='5'";
+				$faculties = $db->runQuery($query);
+				echo "<div class='cat_div'><label class='cat_label'>Faculty(s):</label><br />";
+				foreach($faculties as $faculty) {
+					$checked = false;
+					$id = $faculty['id'];
+					$name = $faculty['name'];
 					foreach($anno_cb as $anno_cbc) {
 						if($anno_cbc['subtype_id']==$id) {
 							echo '<label class="cat_subtype_label">'.$name.':</label>

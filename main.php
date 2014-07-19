@@ -49,27 +49,6 @@ if(!$subtype_id) {
 
 <!DOCTYPE HTML>
 
-<!--Okay, this is tough. In order to make the sorting functionality that we want, I think it'd be best to simply grab all the announcements
-in an array from the db, then everytime that it's sorted. But then, that array would only be accessible through the php, unless we manage to
-stick that array into one used by javascript and then use javascript to write the table instead of php. The other option would be to use an
-iframe that somehow...
-
-	Okay, looks like it could work just by resubmitting the page each time. However, the problem is that we need to figure out how to make 
-it submit with the variable that tells it to get only the selected categories.
-
-	Make it so each button for each category has a link back to the main page with a variable at the end of the url like ?anno_id=#.
-	
-	Steps:
-	DONE 1.Start with getting all of them:
-	DONE  a.Select all the announcements BASED ON author ids.
-	DONE  b.Shove them into the table below
-	DONE 2.-Once that works, add the sorting functionality. May finally use the JOIN property here.
-	DONE  a.Select all the subtypes from the subtypes table based on author ids.
-	DONE  b.Make the buttons with the hrefs that will have something like ?subtype_id=# at the end of them based on the subtypes.
-	DONE  c.Using the subtype_id given to the main.php, it'll go to the anno_subtype table and find all the anno_ids associated with that 
-	  subtype then grab all the announcements based on the anno_ids. The JOIN property will most likely be used here.
-	Looks like this is all it's gonna take.
--->
 <html>
 
 

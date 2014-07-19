@@ -6,7 +6,7 @@ class c_cookie {
 	
 	}
 	
-	private function set_cookie_session(){
+	private static function set_cookie_session(){
 		$user_id = $_SESSION['user_id'];
 		$query = "SELECT * FROM users WHERE id='$user_id'";
 		$result = mysql_query($query);
@@ -24,21 +24,21 @@ class c_cookie {
 	
 	public static function enforce_log() {
 		if(!isset($_SESSION['user_id'])) {
-			check_cookie();
+			c_cookie::check_cookie();
 		} else { 
-			set_cookie_session();
+			c_cookie::set_cookie_session();
 		}
 	}
 	
-	private function make_cookie() {
+	private static function make_cookie() {
 		$expire = time()+(60*60*24*150);
 		setcookie("staylogged", $_SESSION['user_id'], $expire);
 	}
 	
-	private function check_cookie() {
+	private static function check_cookie() {
 		if(isset($_COOKIE['staylogged'])) {
 			$_SESSION['user_id']= $_COOKIE['staylogged'];
-			$this->set_cookie_session();
+			/*$this->*/c_cookie::set_cookie_session();
 			header('Location: main.php?current=1');
 		}else{
 			header('Location: login.php');
@@ -46,16 +46,16 @@ class c_cookie {
 		}
 	}
 	
-	private function delete_cookie() {
+	public static function delete_cookie() {
 		$expire = time()-1;
 		setcookie("staylogged", $_SESSION['user_id'], $expire);
 	}
 	
 	public static function kLA() {
 		if(isset($_POST['staylogged'])){
-			make_cookie();
+			c_cookie::make_cookie();
 		}else{
-			delete_cookie();
+			c_cookie::delete_cookie();
 		}
 	}
 	

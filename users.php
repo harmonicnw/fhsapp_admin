@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 
 $db = new Db($dbConfig);
 
-enforce_log();
+c_cookie::enforce_log();
 
 $query = "SELECT * FROM users";
 $users=$db->runQuery($query);

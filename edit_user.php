@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 
 $db = new Db($dbConfig);
 
-enforce_log();
+c_cookie::enforce_log();
 
 //REQUEST var e_user_id
 $e_user_id = $_REQUEST['e_user_id'];

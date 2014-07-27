@@ -5,10 +5,10 @@ class header {
 	public function generate_header() {
 		
 		echo '<div class="buttons">';
-		
+		//$this->add_feedback_button();
 		$this->home_button();
 		$this->log_out_button();
-		
+
 		echo '</div>';
 		
 		$this->settings_button();
@@ -18,6 +18,15 @@ class header {
 		
 		$this->add_announcement_button();
 		
+	}
+	
+	private function add_feedback_button()
+	{
+		//Just temporary, needs the script	
+		
+		$html = '<a class="add_feedback_button" href="feedback.php">Feedback</a>';
+
+		echo $html;
 	}
 	
 	private function add_announcement_button() {

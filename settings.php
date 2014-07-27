@@ -19,7 +19,7 @@ $admin = $_SESSION['admin'];
 $teacher = $_SESSION['teacher'];
 $club_p = $_SESSION['club'];
 $sports = $_SESSION['sports'];
-$faculty = $_SESSION['faculty'];
+$faculty_p = $_SESSION['faculty'];
 			
 //////////////**SUBMITTING THE FORM**///////////////////////////////////////////////////////////////////////////////////////////////			
 				if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form yet.
@@ -182,7 +182,7 @@ $faculty = $_SESSION['faculty'];
 						//echo "<b>Sport(s) have been updated!</b><br />";
 					}
 					///FACULTRONS IN PROGRESS
-					if($faculty) {
+					if($faculty_p) {
 						if(isset($_REQUEST['fname'])) {
 							$faculty_name = $_REQUEST['fname'];
 						}
@@ -199,7 +199,9 @@ $faculty = $_SESSION['faculty'];
 						$existing_faculties = $db->runQuery($query);
 						
 						$faculty_count = 0;
-						foreach($faculty_name as $faculty) { //*$faculty is the name of the faculty
+						foreach($faculty_name as $faculty) { //*$faculty is the name of the faculty							
+							$existing_f = false;
+							
 							foreach($existing_faculties as $existing_faculty) { //this was all copy-pasta'd by the way, might b rong
 								if($faculty_id[$faculty_count] == $existing_faculty['id']) {
 									$query = "UPDATE subtype SET name='$faculty' WHERE id='{$existing_faculty['id']}'";
@@ -220,7 +222,7 @@ $faculty = $_SESSION['faculty'];
 							$faculty_count++;
 						}
 						
-						//DELETE SPORTS HERE
+						//DELETE FACULTRONS HERE
 						if(!empty($faculty_delete)) {
 							foreach($faculty_delete as $faculty) {
 								if(!empty($faculty)) {
@@ -368,7 +370,7 @@ $faculty = $_SESSION['faculty'];
 				}
 				
 				//FACULTRONY
-				if($faculty){
+				if($faculty_p){
 					$faculty_values = $db->runQuery("SELECT * FROM subtype WHERE author_id = '$user_id' AND type_id = '5' ORDER BY id;");
 				}
 		?>
@@ -518,7 +520,7 @@ $faculty = $_SESSION['faculty'];
 								
 								<?php 
 								
-								if($faculty) {
+								if($faculty_p) {
 									echo "<div id='faculty_info'><h1>Faculty:</h1>";
 									
 									$i = 1;

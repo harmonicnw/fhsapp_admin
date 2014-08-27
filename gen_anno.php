@@ -1,13 +1,16 @@
 <?php 
 session_start(); 
-require_once('functions.php');
 include('lib/config.php');
 include('lib/db.class.php');
+include('include_classes.php');
+include('functions.php');
+
 ini_set('display_errors',0);
 error_reporting(E_ALL);
-$db = new Db($dbConfig);
-enforce_log();
 
+$db = new Db($dbConfig);
+
+c_cookie::enforce_log();
 //Right now, only getting the announcements. Still need to format the title a bit. Also, club news will be different.
 
 //?INCLUDE CHECK FOR START DATE

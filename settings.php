@@ -407,12 +407,12 @@ $faculty_p = $_SESSION['faculty'];
 
 								<div class="row">
 									<label>Password:</label>
-									<input name="new_password" type="text" value=""/> 
+									<input name="new_password" type="password" value=""/> 
 								</div>	
 										
 								<div class="row">
 									<label>Confirm Password:</label>
-									<input name="new_username_2" type="text" value=""/> 
+									<input name="new_password_2" type="password" value=""/> 
 								</div>
 
 								<div class="row">
@@ -551,7 +551,7 @@ $faculty_p = $_SESSION['faculty'];
 							<div class="settings_save_div">
 								<?php 
 									if($updated) {
-										echo "<div class='settings_updated_alert'>Settings Updated</div>";
+										echo "<div class='settings_updated_alert'>Settings Updated. <a href='main.php?current=1'>Go to home</a></div>";
 									}
 								?>
 								<input id="settings_save_button" type="submit" value="Save"/>

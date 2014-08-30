@@ -128,14 +128,14 @@ c_cookie::enforce_log();
 						if($admin||$teacher||$club||$sports||$faculty) {	//*Has permission been selected?
 							$e_subject = "Fhsapp Username and Password";
 							$e_content = "Your login credentials for Fhsapp: \n\nUsername: $username\nPassword: $e_password\n\nhttp://fhsapp.com/admin/login.php\n\nWe recommend using Google Chrome: https://www.google.com/intl/en/chrome/browser/\n\nThe website the students use: www.fhsapp.com\nHave them save it to their home screen on their mobile devices.\n\nThank you\nThe FHS Appteam";
-							//$mail = mail($email, $e_subject, $e_content); //*EMAIL!!!
-							//if($mail) {
+							$mail = mail($email, $e_subject, $e_content); //*EMAIL!!!
+							if($mail) {
 								//*Once the mail has worked
 								//*Create the user
 								$query = "INSERT into users(username, password, email, first_name, last_name, admin, teacher, club, sports, faculty) VALUES('$username', '$password', '$email', '$first_name', '$last_name', '$admin', '$teacher', '$club', '$sports', '$faculty');";
 								mysql_query($query);
 								echo "<p>New user has been created!</p>";
-							//} else {
+							} //else {
 								//echo "<p style='color:red;'>Unable to send e-mail.</p>";
 							//}
 						} else {

@@ -610,6 +610,8 @@ input[type=submit]:hover{
 
 .settings_updated_alert {
 	color: red;
+	font-size: 20px;
+	font-weight:bold;
 }
 
 pre {

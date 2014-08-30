@@ -19,7 +19,7 @@ $admin_p = $_SESSION['admin'];
 $teacher_p = $_SESSION['teacher'];
 $club_p = $_SESSION['club'];
 $sports_p = $_SESSION['sports'];
-$faculty_p = $_SESSION['faculty'];
+$staff_p = $_SESSION['staff'];
 ?>
 
 <?php
@@ -263,13 +263,13 @@ $faculty_p = $_SESSION['faculty'];
 					echo "</div>";
 				}
 				
-				if($faculty_p) {
+				if($staff_p) {
 					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='5'";
-					$faculties = $db->runQuery($query);
+					$staffs = $db->runQuery($query);
 					echo "<div class='cat_div'><label class='cat_label'>Faculty(s):</label><br />";
-					foreach($faculties as $faculty) {
-						$id = $faculty['id'];
-						$name = $faculty['name'];
+					foreach($staffs as $staff) {
+						$id = $staff['id'];
+						$name = $staff['name'];
 						echo '<label class="cat_subtype_label">'.$name.':</label>
 						<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
 						<br />';

@@ -370,8 +370,8 @@ $staff_p = $_SESSION['staff'];
 				}
 				
 				//FACULTRONY
-				if($faculty_p){
-					$faculty_values = $db->runQuery("SELECT * FROM subtype WHERE author_id = '$user_id' AND type_id = '5' ORDER BY id;");
+				if($staff_p){
+					$staff_values = $db->runQuery("SELECT * FROM subtype WHERE author_id = '$user_id' AND type_id = '5' ORDER BY id;");
 				}
 		?>
 		
@@ -520,24 +520,24 @@ $staff_p = $_SESSION['staff'];
 								
 								<?php 
 								
-								if($faculty_p) {
-									echo "<div id='faculty_info'><h1>Faculty:</h1>";
+								if($staff_p) {
+									echo "<div id='staff_info'><h1>Staff:</h1>";
 									
 									$i = 1;
-									if(!empty($faculty_values)) {
-										foreach($faculty_values as $faculty_value) {
-											echo '<div class="faculty_wrapper">
-												<label>Faculty '.$i.':</label>
-												<input name="fname[]" type="text" value="'. $faculty_value["name"] .'"/>
-												<input name="fid[]" type="hidden" value="'. $faculty_value["id"] .'"/>
+									if(!empty($staff_values)) {
+										foreach($staff_values as $staff_value) {
+											echo '<div class="staff_wrapper">
+												<label>Staff '.$i.':</label>
+												<input name="stname[]" type="text" value="'. $staff_value["name"] .'"/>
+												<input name="stid[]" type="hidden" value="'. $staff_value["id"] .'"/>
 												
 												<br /></div>';
 											$i++;
 										}
 									} else {
-										echo '<label>Faculty 1:</label>
-											<input name="fname[]" type="text" value=""/>
-											<input name="fid[]" type="hidden" value=""/>
+										echo '<label>Staff 1:</label>
+											<input name="stname[]" type="text" value=""/>
+											<input name="stid[]" type="hidden" value=""/>
 											<br />';
 									}
 									

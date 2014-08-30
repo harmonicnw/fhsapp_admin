@@ -112,7 +112,7 @@ c_cookie::enforce_log();
 					$teacher = checkbox_checked($_REQUEST['teacher']);
 					$club = checkbox_checked($_REQUEST['club']);
 					$sports = checkbox_checked($_REQUEST['sports']);
-					$faculty = checkbox_checked($_REQUEST['faculty']);
+					$staff = checkbox_checked($_REQUEST['staff']);
 					
 					//*Duplicate prevention
 					$already_exists = 0;
@@ -125,14 +125,14 @@ c_cookie::enforce_log();
 					}
 				
 					if(!$already_exists) { //*Check if they exist.
-						if($admin||$teacher||$club||$sports||$faculty) {	//*Has permission been selected?
+						if($admin||$teacher||$club||$sports||$staff) {	//*Has permission been selected?
 							$e_subject = "Fhsapp Username and Password";
 							$e_content = "Your login credentials for Fhsapp: \n\nUsername: $username\nPassword: $e_password\n\nhttp://fhsapp.com/admin/login.php\n\nWe recommend using Google Chrome: https://www.google.com/intl/en/chrome/browser/\n\nThe website the students use: www.fhsapp.com\nHave them save it to their home screen on their mobile devices.\n\nThank you\nThe FHS Appteam";
 							$mail = mail($email, $e_subject, $e_content); //*EMAIL!!!
 							if($mail) {
 								//*Once the mail has worked
 								//*Create the user
-								$query = "INSERT into users(username, password, email, first_name, last_name, admin, teacher, club, sports, faculty) VALUES('$username', '$password', '$email', '$first_name', '$last_name', '$admin', '$teacher', '$club', '$sports', '$faculty');";
+								$query = "INSERT into users(username, password, email, first_name, last_name, admin, teacher, club, sports, staff) VALUES('$username', '$password', '$email', '$first_name', '$last_name', '$admin', '$teacher', '$club', '$sports', '$staff');";
 								mysql_query($query);
 								echo "<p>New user has been created!</p>";
 							} //else {
@@ -192,7 +192,7 @@ c_cookie::enforce_log();
 							<input type="checkbox" name="teacher"/> Teacher
 							<input type="checkbox" name="sports"/> Coach 
 							<input type="checkbox" name="club"/> Club Leader 
-							<input type="checkbox" name="faculty"/>Faculty
+							<input type="checkbox" name="staff"/>Staff
 						</div>
 					</div>
 

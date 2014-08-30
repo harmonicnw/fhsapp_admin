@@ -19,7 +19,7 @@ $admin = $_SESSION['admin'];
 $teacher = $_SESSION['teacher'];
 $club_p = $_SESSION['club'];
 $sports = $_SESSION['sports'];
-$faculty_p = $_SESSION['faculty'];
+$staff_p = $_SESSION['staff'];
 			
 //////////////**SUBMITTING THE FORM**///////////////////////////////////////////////////////////////////////////////////////////////			
 				if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form yet.
@@ -182,51 +182,51 @@ $faculty_p = $_SESSION['faculty'];
 						//echo "<b>Sport(s) have been updated!</b><br />";
 					}
 					///FACULTRONS IN PROGRESS
-					if($faculty_p) {
-						if(isset($_REQUEST['fname'])) {
-							$faculty_name = $_REQUEST['fname'];
+					if($staff_p) {
+						if(isset($_REQUEST['stname'])) {
+							$staff_name = $_REQUEST['stname'];
+						}
+						//"st" is the prefix for "staff,", so Staff ID --> is "stid" to prevent confusion with sports id and stuff
+						if(isset($_REQUEST['stid'])) {
+							$staff_id = $_REQUEST['stid'];
 						}
 						
-						if(isset($_REQUEST['fid'])) {
-							$faculty_id = $_REQUEST['fid'];
-						}
-						
-						if(isset($_REQUEST['fdelete'])) {
-							$faculty_delete = $_REQUEST['fdelete'];
+						if(isset($_REQUEST['stdelete'])) {
+							$staff_delete = $_REQUEST['stdelete'];
 						}
 						
 						$query = "SELECT id, name FROM subtype WHERE author_id = '$user_id' AND type_id = '5';";
-						$existing_faculties = $db->runQuery($query);
+						$existing_staffs = $db->runQuery($query);
 						
-						$faculty_count = 0;
-						foreach($faculty_name as $faculty) { //*$faculty is the name of the faculty							
-							$existing_f = false;
+						$staff_count = 0;
+						foreach($staff_name as $staff) { //$staff is the name of staff						
+							$existing_st = false;
 							
-							foreach($existing_faculties as $existing_faculty) { //this was all copy-pasta'd by the way, might b rong
-								if($faculty_id[$faculty_count] == $existing_faculty['id']) {
-									$query = "UPDATE subtype SET name='$faculty' WHERE id='{$existing_faculty['id']}'";
+							foreach($existing_staffs as $existing_staff) { //this was all copy-pasta'd by the way, might b rong
+								if($staff_id[$staff_count] == $existing_staff['id']) {
+									$query = "UPDATE subtype SET name='$staff' WHERE id='{$existing_staff['id']}'";
 									mysql_query($query);
-									$existing_f = true;
-									//echo "Updated $sport. <br />";
+									$existing_st = true;
+									//echo "Updated $staff. <br />";
 									break;
 								} else {
-									$existing_f = false;
+									$existing_st = false;
 								}
 							}
 							
-							if(!$existing_f) {
-								$query = "INSERT INTO subtype(name, type_id, author_id, period) VALUES ('$faculty', '5', '$user_id', '0');";
+							if(!$existing_st) {
+								$query = "INSERT INTO subtype(name, type_id, author_id, period) VALUES ('$staff', '5', '$user_id', '0');";
 								mysql_query($query);
 								//echo "Inserted $sport. <br />";
 							}
-							$faculty_count++;
+							$staff_count++;
 						}
 						
 						//DELETE FACULTRONS HERE
-						if(!empty($faculty_delete)) {
-							foreach($faculty_delete as $faculty) {
-								if(!empty($faculty)) {
-									$query = "DELETE FROM subtype WHERE id='{$faculty}'";
+						if(!empty($staff_delete)) {
+							foreach($staff_delete as $staff) {
+								if(!empty($staff)) {
+									$query = "DELETE FROM subtype WHERE id='{$staff}'";
 									mysql_query($query);
 									//echo "<p>Sport Deleted!</p><br />";
 								}

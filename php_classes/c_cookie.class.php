@@ -19,7 +19,7 @@ class c_cookie {
 		$_SESSION['club'] = $userdata[0]['club'];
 		$_SESSION['sports'] = $userdata[0]['sports'];
 		$_SESSION['admin'] = $userdata[0]['admin'];
-		$_SESSION['faculty'] = $userdata[0]['faculty'];
+		$_SESSION['staff'] = $userdata[0]['staff'];
 				
 	}
 	

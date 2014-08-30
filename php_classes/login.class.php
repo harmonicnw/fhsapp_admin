@@ -18,7 +18,7 @@ class login {
 		$_SESSION['teacher'] = $userdata['teacher'];
 		$_SESSION['club'] = $userdata['club'];
 		$_SESSION['sports'] = $userdata['sports'];
-		$_SESSION['faculty'] = $userdata['faculty'];
+		$_SESSION['staff'] = $userdata['staff'];
 		$_SESSION['username'] = $this->typedusername;
 	}
 	

@@ -139,6 +139,7 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 	</script>
 	<!--<link rel="stylesheet" href="style.css" />-->
 	<link rel="stylesheet" href="style.css" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
 </head>
 
@@ -163,14 +164,18 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 			<br />-->
 			<div class="anno_left">
 			
+			<div id="required_label_div">
+				<label id="required_label"><span style="color:red">*</span> - Required</label>
+			</div>
+			
 			<div class="anno_title">
-				<label class="anno_title_label">Title:</label>
+				<label class="anno_title_label">Title<span style="color:red">*</span></label>
 				<input name="title" type="text" value="<?php echo $title;?>" class="anno_text_title"/>
 				<br />
 			</div>
 			
 			<div class="anno_description">
-				<label class="anno_description_label">Description:</label>
+				<label class="anno_description_label">Description<span style="color:red">*</span></label>
 				<div class="mcedummy">
 					<textarea name="description" rows="5" col="50"><?php echo $description;?></textarea>
 				</div>
@@ -181,31 +186,31 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 				<label class="anno_optional_label">Additional Information:</label>
 				
 				<div class="anno_start_date">
-					<label class="anno_start_date_label">Announcement Starting Date:</label>
+					<label class="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
 					<input id="start_date" name="start_date" type="text" value="<?php echo $start_date;?>" class="anno_text_start_date"/>
 					<br />
 				</div>
 				
 				<div class="anno_end_date">
-					<label class="anno_end_date_label">Announcement End Date:</label>
+					<label class="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
 					<input id="end_date" name="end_date" type="text" value="<?php echo $end_date;?>" class="anno_text_end_date"/>
 					<br />
 				</div>
 			
 				<div class="anno_date">
-					<label class="anno_date_label">>Actual Date of Event:</label>
+					<label class="anno_date_label">Actual Date of Event</label>
 					<input id="date" name="date" type="text" value="<?php if($date != "0000-00-00"){echo $date;}?>" class="anno_text_date"/>
 					<br />
 				</div>
 				
 				<div class="anno_time">
-					<label class="anno_time_label">Time of Event:</label>
+					<label class="anno_time_label">Time of Event</label>
 					<input name="time" type="text" value="<?php echo $time;?>" class="anno_text_time"/>
 					<br />
 				</div>
 				
 				<div class="anno_location">
-					<label class="anno_location_label">Location:</label>
+					<label class="anno_location_label">Location</label>
 					<input name="location" type="text" value="<?php echo $location;?>" class="anno_text_location"/>
 					<br />
 				</div>
@@ -227,7 +232,7 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 			
 			<div class="anno_right">
 			<div class="anno_cats">
-				<label class="anno_cats_label">Categories:</label>
+				<label class="anno_cats_label">Categories<span style="color:red">*</span></label>
 			<!--Gonna need to check if these are checked too...-->
 			<?php
 			if($admin_p) {
@@ -311,7 +316,7 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 				echo "</div>";
 			}
 			
-			
+			//must add checks for blanks
 			if($sports_p) {
 				$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='4'";
 				$sports = $db->runQuery($query);

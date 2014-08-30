@@ -456,15 +456,7 @@ input[type=checkbox]{
 	}
 
 	
-		 label {
-			display: block ; 
-			float: left;
-			width: 100px;/* the length of space between the username/password and the login box*/
-			margin: .3em;
-
-
-
-		}
+		
 		input[type=checkbox]{
 			float: left;
 			margin-top: .7em;
@@ -731,11 +723,38 @@ pre {
 	
 }
 
+#required_label_div {
+	float:right;
+	width: auto;
+	padding: 0;
+	margin: .5em .5em .5em 0;
+	border-top: 1px solid rgb(200,200,200);
+	border-bottom: 1px solid rgb(200,200,200);
+	border-radius: 8px;
+	background: white
+}
+
+#required_label {
+	font-size: 10px;
+	font-weight: none;
+	padding-left: 0;
+	margin: 0 1.1em 0 1.1em;
+	padding-top: .3em;
+	padding-bottom: .3em;
+	float: left;
+	width: auto
+}
+
+/*#required_label span {
+	display: block;
+	float: left
+}*/
+
 .anno_title {
 	float:left;
-	width: 98.7%;
+	width: 87.5%;
 	padding: 1em 0;
-	margin: .5em;
+	margin: .5em .1em .5em .5em;
 	border-top: 1px solid rgb(200,200,200);
 	border-bottom: 1px solid rgb(200,200,200);
 	border-radius: 8px;
@@ -755,7 +774,8 @@ pre {
 .anno_text_title {
 	height: 2em;
 	font-size: 16px;
-	width: 86%;
+	width: 84%;
+	margin-left: 1em;
 }
 
 .anno_description {

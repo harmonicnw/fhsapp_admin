@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 30, 2014 at 12:56 PM
+-- Generation Time: Aug 30, 2014 at 01:00 PM
 -- Server version: 5.1.73
 -- PHP Version: 5.3.3
 
@@ -305,30 +305,6 @@ INSERT INTO `anno_subtype` (`index`, `anno_id`, `subtype_id`) VALUES
 (513, 142, 351),
 (514, 143, 398),
 (515, 136, 349);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `example`
---
-
-CREATE TABLE IF NOT EXISTS `example` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `text` varchar(100) NOT NULL,
-  `radio` varchar(5) NOT NULL,
-  `checkbox` varchar(5) NOT NULL,
-  `select` varchar(10) NOT NULL,
-  `textarea` varchar(10000) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `example`
---
-
-INSERT INTO `example` (`id`, `text`, `radio`, `checkbox`, `select`, `textarea`) VALUES
-(1, 'First', 'r1', 'on', 'opt1', 'ajdqofjqiofpwjdio'),
-(2, 'First', 'r1', 'on', 'opt1', 'ajdqofjqiofpwjdio');
 
 -- --------------------------------------------------------
 

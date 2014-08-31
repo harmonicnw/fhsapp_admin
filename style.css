@@ -1,3 +1,5 @@
+
+/*Basic general stuff************************************************************************************************************/
 body {
 	background-color: rgb(76,16,9);
 	font-size: 14px;
@@ -7,13 +9,15 @@ body {
 	/*font-family: "lucida grande", tahoma, sans-serif;*/
 }
 
+
 h2{
 	margin: .5em 0em;
 	font-size: 1.4em;
 	text-align: center;
 }
 
-/*Main Page CSS*/
+
+/*Main Page CSS******************************************************************************************************************/
 .main_wrapper {
 	/*background-color: white;*/
 	float: left;
@@ -22,6 +26,8 @@ h2{
 	margin-top: 40px;
 	z-index: 0;
 }
+
+/**Category stuff (left column)**/
 .category_title {
 	position: fixed;
 	padding-left: 1em;
@@ -30,20 +36,6 @@ h2{
 	box-shadow: 0 2px 2px rgb(24,24,24);
 	z-index: 50;
 	box-sizing: border-box
-}
-
-.table_title {
-	position: fixed;
-	padding-left: 1em;
-	background-color: rgb(200,200,200);
-	width: 85%;
-	box-shadow: 0 2px 2px rgb(24,24,24);
-}
-
-.table_title p{
-	box-sizing: border-box;
-	width: auto;
-	float: left;
 }
 
 .category_wrapper {
@@ -81,6 +73,21 @@ h2{
 	opacity: 1;
 }
 
+/**Table stuff (right column)**/
+.table_title {
+	position: fixed;
+	padding-left: 1em;
+	background-color: rgb(200,200,200);
+	width: 85%;
+	box-shadow: 0 2px 2px rgb(24,24,24);
+}
+
+.table_title p{
+	box-sizing: border-box;
+	width: auto;
+	float: left;
+}
+
 .table_wrapper {
 	width: 85%;
 	box-sizing: border-box;
@@ -98,28 +105,12 @@ h2{
 	border-collapse: collapse;
 	padding-top: .5em;
 }
-.nice_table {
-	width: 100%;
-	/*margin: 4em 0 1em 0;*/
-	border: 1px solid black;
-	
-	border-collapse: collapse;
-	padding-top: .5em;
-}
-.nice_table th{
-	background-color: #ccc;
-	text-align: left;
-
-}
-.nice_table td{
-	background-color: #fff;
-}
-
 
 .table_spacer{
 	height: 4em;
 }
 
+/***Styles of the table header***/
 .anno_header_row {
 	border: 1px solid black;
 	background-color: gray;
@@ -129,6 +120,7 @@ h2{
 	padding: .25em;
 }
 
+/***Styles of the announcement rows***/
 .anno_row {
 	border: 1px solid black;
 	background-color: white;
@@ -166,6 +158,18 @@ h2{
 	width: 6%;
 }
 
+/***For the empty table row***/
+.table_empty {
+	background-color: white;
+	padding: .5em;
+}
+
+.table_empty td {
+	padding: .5em;
+}
+
+/***Paginator***/
+
 .pag {
 	width: 100%;
 	float: right;
@@ -197,16 +201,27 @@ h2{
 	color: black;
 }
 
-.table_empty {
-	background-color: white;
-	padding: .5em;
+
+/*Users.php stuff****************************************************************************************************************/
+.nice_table {
+	width: 100%;
+	/*margin: 4em 0 1em 0;*/
+	border: 1px solid black;
+	
+	border-collapse: collapse;
+	padding-top: .5em;
+}
+.nice_table th{
+	background-color: #ccc;
+	text-align: left;
+
+}
+.nice_table td{
+	background-color: #fff;
 }
 
-.table_empty td {
-	padding: .5em;
-}
+/*Column stuff, shared by login.php, new_user.php, and settings.php**************************************************************/
 
-/*Column stuff, important for settings and new_user (I think)*/
 .columns_wrapper{
 	float: left;
 	clear: both;
@@ -221,7 +236,7 @@ h2{
 	box-sizing: border-box;
 }
 
-/*Header stuff*/
+/*Header stuff********************************************************************************************************************/
 .header{
 	background: rgb(150,150,150);
 	clear: both;
@@ -232,6 +247,29 @@ h2{
 	box-shadow: 0 2px 2px rgb(24,24,24);
 	z-index:999;
 }
+
+.header .logo{
+	height: 40px;
+	width: auto;
+	float: left;
+}
+.header .beta{
+	height: 40px;
+	float: left;
+	width: auto;
+
+}
+.header h1{
+	margin: 2px 0 0 10px;
+	font-size: 28px;
+	float: left;
+	clear: none;
+	width: auto;
+}
+
+/**Buttons**/
+
+/*?Make shared button class here?*/
 
 .settings_button {
 	float: right;
@@ -328,28 +366,6 @@ h2{
 	color: blue;
 }
 
-
-
-.header .logo{
-	height: 40px;
-	width: auto;
-	float: left;
-}
-.header .beta{
-	height: 40px;
-	float: left;
-	width: auto;
-
-}
-.header h1{
-margin: 2px 0 0 10px;
-font-size: 28px;
-float: left;
-clear: none;
-width: auto;
-
-}
-
 .column{
 	border: 3px solid;
 	clear: none;
@@ -360,6 +376,7 @@ width: auto;
 	box-sizing: border-box;
 }
 
+/*?Figure out what these are specifically used for?*/
 label {
 	display: block ; 
 	float: left;
@@ -515,12 +532,7 @@ input[type=submit]:hover{
 	color: blue;
 }
 
-
-
-
-
-
-
+/*New User CSS*******************************************************************************************************************/
  .new_user #form-wrap {
 	max-width: 600px;
 	margin: 100px auto;
@@ -554,6 +566,7 @@ input[type=submit]:hover{
 	float: left;
 }
 
+/*Settings***********************************************************************************************************************/
 #classes_info{
 	text-align: left;
 }
@@ -638,16 +651,7 @@ pre {
 	display: block;
 }
 
-::-webkit-scrollbar {  
-    width: 5px;  
-}  
-::-webkit-scrollbar-track {  
-    background-color: white;  
-    border-left: 1px solid #ccc;  
-}  
-::-webkit-scrollbar-thumb {  
-    background-color: gray;  
-} 
+
 
 .number_columns_3 .column {
 
@@ -669,7 +673,7 @@ pre {
 	margin-top: 1em;
 }
 
-/*Create Announcement CSS*/
+/*Create Announcement CSS********************************************************************************************************/
 .create_wrapper {
 	margin-top: 40px;
 	float:left;
@@ -776,7 +780,7 @@ pre {
 .anno_text_title {
 	height: 2em;
 	font-size: 16px;
-	width: 84%;
+	width: 80%;
 	margin-left: 1em;
 }
 
@@ -1029,6 +1033,20 @@ pre {
 .anno_cancel a:hover {
 	color: blue;
 }
+
+/*Scroll bar CSS*/
+::-webkit-scrollbar {  
+    width: 5px;  
+}  
+::-webkit-scrollbar-track {  
+    background-color: white;  
+    border-left: 1px solid #ccc;  
+}  
+::-webkit-scrollbar-thumb {  
+    background-color: gray;  
+} 
+
+
 /*
 . {
 

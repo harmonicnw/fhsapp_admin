@@ -123,12 +123,7 @@ $staff_p = $_SESSION['staff'];
 		
 	</div>	
 
-	<div class="create_wrapper">
-		<!--<div class="create_title">
-			<img class="add_image_title" src="images/add.png" /> <!--Icons by DryIcons-->
-		<!--	<h1>Add Announcement</h1>
-		</div>-->
-	
+	<div class="create_wrapper">	
 		<form id="form" method="get" action="create.php" class="anno_form">
 			<!--<label></label>
 			<input name="" type="text" value=""/>
@@ -152,10 +147,6 @@ $staff_p = $_SESSION['staff'];
 				</div>
 				<br />
 			</div>
-			
-			<!--<div class="anno_start_end">
-				
-			</div>-->
 			
 			<div class="anno_optional">
 				<label class="anno_optional_label">Additional Information:</label>

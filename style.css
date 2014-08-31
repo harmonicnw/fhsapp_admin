@@ -244,8 +244,7 @@ h2{
 	box-sizing: border-box;
 }
 
-
-/** Login and settings labels *********************************************/
+/** Login and settings shared CSS *********************************************/
 
 /*?Rename?*/
 
@@ -259,23 +258,6 @@ label {
 input[type=checkbox]{
 	float: left;
 	margin-top: .7em;
-}
-
-input[type=submit]  {
-	font-size:1em;
-	border-radius: 15px;
-	border: 1px solid #bbb;
-	background-color: white;
-	color: black;
-	display: block;
-	padding: .5em .5em;
-	margin: .9em 0em;
-	cursor: pointer;
-	float: right;
-}
-
-input[type=submit]:hover{
-	color: blue;
 }
 
 .row {
@@ -801,7 +783,7 @@ Make one overarching class, and then anything specific can be applied through th
 /** Header Buttons ******************************************************/
 /*?Eventually need to make class that extends to all buttons overall?*/
 
-.button {
+.button{
 	display: block;
 	width: auto;
 	clear: none;
@@ -813,49 +795,31 @@ Make one overarching class, and then anything specific can be applied through th
 	text-decoration: none;
 }
 
-.button a{
-	display: block;
-	width: auto;
-	clear: none;
-	font-size:1em;
-	background-color: white;
-	color: black;
-	border: 1px solid #bbb;
-	border-radius: 15px;
-	display: block;
-	margin: 7px .3em .1em 0em;
-	padding: .2em .2em;
-	text-decoration: none;
-}
-
-.header .buttons a{
-	display: block;
-	float: left;
-	width: auto;
-	clear: none;
-	font-size:1em;
-	background-color: white;
-	color: black;
-	border: 1px solid #bbb;
-	border-radius: 15px;
-	display: block;
-	margin: 7px .3em .1em 0em;
-	padding: .2em .2em;
-	text-decoration: none;
-}
-
-.header .buttons a:hover {
+.button:hover {
 	color: blue;
 }
 
-.header .buttons{
+.button a{
+	text-decoration: none;
+	color: black;
+}
+
+.button a:hover {
+	text-decoration: none;
+	color: blue;
+}
+
+/**/
+
+
+.header .buttons{ 
 	float: right;
 	clear: none;
 	width: auto;
 }
 
 /*** Settings button ************************************************/
-.settings_button {
+#settings_button {
 	float: right;
 	border-right: 1px solid rgb(200,200,200);
 	border-left: 1px solid rgb(200,200,200); /*Temp border*/
@@ -867,28 +831,21 @@ Make one overarching class, and then anything specific can be applied through th
 }
 	
 /*** New User Button ***********************************************/	
-.new_user_button {
+#new_user_button {
 	float: right;
-	font-size:1em;
-	background-color: white;
-	color: black;
-	border: 1px solid #bbb;
 	border-right: 1px solid rgb(200,200,200);
 	border-left: 1px solid rgb(200,200,200);
-	border-radius: 10px;
-	display: block;
 	margin: 7px .3em .1em 0em;
 	padding: .2em .2em;
-	text-decoration: none;
 }
 
-.new_user_button a {
-	text-decoration: none;
-	color: black;
-}
-
-.new_user_button a:hover{
-	color: blue;
+/*** Manage Users Button ***/
+#manage_users_button {
+	float: right;
+	border-right: 1px solid rgb(200,200,200);
+	border-left: 1px solid rgb(200,200,200);
+	margin: 7px .3em .1em 0em;
+	padding: .2em .2em;
 }
 
 /*** Add announcement button ****************************************/
@@ -906,59 +863,49 @@ Make one overarching class, and then anything specific can be applied through th
 	margin-right: 4px;
 }
 
-.add_announcements_button {
+#add_announcements_button {
 	float: right;
-	font-size:1em;
-	background-color: white;
-	color: black;
-	border: 1px solid #bbb;
-	border-radius: 10px;
-	display: block;
 	margin: 7px .3em .1em 0em;
 	padding: .2em .2em;
-	text-decoration: none;
-}
-
-.add_announcements_button:hover{
-	color: blue;
-}
-
-.header .buttons a.add_button{
-	background:white url("images/add.png") no-repeat left center;
-	background-size: 20px;
-	padding-left: 25px;
 }
 
 /*** Logout Button ************************************************/
-.logout_button:hover{
-	color: blue;	
+#logout_button {
+	float: left;
+	margin: 7px .3em .1em 0em;
+	padding: .2em .2em;
+}
+
+/*** Home Button ***/
+#home_button{
+	float: left;
+	margin: 7px .3em .1em 0em;
+	padding: .2em .2em;
 }
 
 /*** Generate announcement button *********************************/
 /*?Not even in header?*/
 .gen_anno_button {
 	float: right;
-	font-size:1em;
-	background-color: white;
-	color: black;
-	border: 1px solid #bbb;
-	border-radius: 10px;
-	display: block;
 	margin: 10px 20px .1em 0em;
 	padding: .2em .2em;
-	text-decoration: none;
 }
 
-.gen_anno_button a {
-	text-decoration: none;
+/** Submit buttons **/
+input[type=submit]  {
+	font-size:1em;
+	border-radius: 15px;
+	border: 1px solid #bbb;
+	background-color: white;
 	color: black;
+	display: block;
+	padding: .5em .5em;
+	margin: .9em 0em;
+	cursor: pointer;
+	float: right;
 }
 
-.gen_anno_button:hover{
-	color: blue;
-}
-
-.gen_anno_button a:hover{
+input[type=submit]:hover{
 	color: blue;
 }
 
@@ -981,9 +928,3 @@ pre {
 	clear: both;
 	color: white;
 }
-
-/*
-. {
-
-}
-*/

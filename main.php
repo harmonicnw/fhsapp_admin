@@ -123,7 +123,7 @@ if(!$subtype_id) {
 				<p>Announcements:</p>
 				<?php 
 					if($_SESSION['admin']) {
-						echo '<div class="gen_anno_button" >';
+						echo '<div class="button" id="gen_anno_button" >';
 						echo '<a href="gen_anno.php">Generate Bulletin</a><br />';
 						echo '</div>';
 					}

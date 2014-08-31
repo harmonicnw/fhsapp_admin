@@ -32,7 +32,7 @@ class header {
 	private function add_announcement_button() {
 		$html = '
 		<a href="create.php">
-			<div class="add_announcements_button">Add Announcement</div>
+			<div class="button" id="add_announcements_button">Add Announcement</div>
 			<img class="add_image" src="images/add.png" /> <!--Icons by DryIcons-->
 			</div>
 		</a>';
@@ -41,26 +41,25 @@ class header {
 	
 	private function settings_button() {
 		$html = '
-		<div class="settings_button" >
+		<div id="settings_button" >
 			<a href="settings.php"><img src="images/settings_gear.png" width="40" height="40"/></a>
 		</div>';
 		echo $html;
 	}
 	
 	private function log_out_button() {
-		$html = '<a class="logout_button" href="logout.php">Log Out</a>';
+		$html = '<a class="button" id="logout_button" href="logout.php">Log Out</a>';
 		echo $html;
 	}
 	
 	private function home_button() {
-		$html = '<a class="home_button" href="main.php?current=1">Home</a>';
+		$html = '<a class="button" id="home_button" href="main.php?current=1">Home</a>';
 		echo $html;
-		
 	}
 	
 	private function manage_users_button() {
 		if($_SESSION['admin']) {
-			echo '<div class="new_user_button" >';
+			echo '<div class="button" id="manage_users_button" >';
 			echo '<a href="users.php">Manage Users</a><br />';
 			echo '</div>';
 		}
@@ -68,7 +67,7 @@ class header {
 	
 	private function new_user_button() {
 		if($_SESSION['admin']) {
-			echo '<div class="new_user_button" >';
+			echo '<div class="button" id="new_user_button">';
 			echo '<a href="new_user.php">Create New User</a><br />';
 			echo '</div>';
 		}

@@ -357,8 +357,6 @@ label .error{
 	box-sizing: border-box;
 }
 
-
-
 .settings_updated_alert {
 	color: red;
 	font-size: 20px;
@@ -821,7 +819,7 @@ Make one overarching class, and then anything specific can be applied through th
 }
 
 .header .buttons{ 
-/*?Applies to logout and home?*/
+/*?Applies to logout and home wrapper?*/
 	float: right;
 	clear: none;
 	width: auto;
@@ -846,25 +844,8 @@ Make one overarching class, and then anything specific can be applied through th
 }
 
 /** Submit buttons **/
-/*Used by login, +create, +edit, +new_user, +edit_user, +settings*/
-/*input[type=submit]  {
-	font-size:1em;
-	border-radius: 15px;
-	border: 1px solid #bbb;
-	background-color: white;
-	color: black;
-	display: block;
-	padding: .5em .5em;
-	margin: .9em 0em;
-	cursor: pointer;
-	float: right;
-}
+/*Used by login, create, edit, new_user, edit_user, settings*/
 
-input[type=submit]:hover{
-	color: blue;
-}*/
-
-/**/
 #anno_submit_button {
 	padding: .5em .5em;
 	margin: .9em 0em;

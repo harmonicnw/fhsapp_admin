@@ -554,7 +554,7 @@ $staff_p = $_SESSION['staff'];
 										echo "<div class='settings_updated_alert'>Settings Updated. <a href='main.php?current=1'>Go to home</a></div>";
 									}
 								?>
-								<input id="settings_save_button" type="submit" value="Save"/>
+								<input class="button" id="settings_save_button" type="submit" value="Save"/>
 							</div>			
 							
 							</div>	<!--end inner-->	

@@ -197,7 +197,7 @@ c_cookie::enforce_log();
 					</div>
 
 					<div>
-						<input type="submit" value="Submit"/>
+						<input type="submit" value="Submit" class="button" id="submit_new_user_button"/>
 					</div>
 				</form>
 			</div> <!--end column -->

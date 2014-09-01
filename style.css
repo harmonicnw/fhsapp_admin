@@ -357,9 +357,7 @@ label .error{
 	box-sizing: border-box;
 }
 
-#settings_save_button{
-	margin-right: 30px;
-}
+
 
 .settings_updated_alert {
 	color: red;
@@ -712,42 +710,7 @@ Make one overarching class, and then anything specific can be applied through th
 	box-sizing: border-box;
 }
 
-/** Submitting **/
-.anno_submit {
-	float: left;
-	clear: both;
-	width: 100%;
-	box-sizing: border-box;
-}
 
-.anno_submit input[type=text]{
-	float: left;
-}
-
-/** Cancel Button **/
-.anno_cancel {
-	float: right;
-}
-
-.anno_cancel a {
-	display: block;
-	float: right;
-	width: auto;
-	clear: none;
-	font-size:1em;
-	background-color: white;
-	color: black;
-	border: 1px solid #bbb;
-	border-radius: 15px;
-	display: block;
-	margin: 7px .3em .1em 0em;
-	padding: .2em .2em;
-	text-decoration: none;
-}
-
-.anno_cancel a:hover {
-	color: blue;
-}
 
 /* Header stuff ********************************************************************************************************************/
 .header{
@@ -781,10 +744,11 @@ Make one overarching class, and then anything specific can be applied through th
 }
 
 /** Header Buttons ******************************************************/
-/*?Eventually need to make class that extends to all buttons overall?*/
 
 .button{
+/*Buttons need to have float, margins, and padding set in ID CSS*/
 	display: block;
+	float:none;
 	width: auto;
 	clear: none;
 	font-size:1em;
@@ -809,16 +773,6 @@ Make one overarching class, and then anything specific can be applied through th
 	color: blue;
 }
 
-/**/
-
-
-.header .buttons{ 
-	float: right;
-	clear: none;
-	width: auto;
-}
-
-/*** Settings button ************************************************/
 #settings_button {
 	float: right;
 	border-right: 1px solid rgb(200,200,200);
@@ -829,8 +783,7 @@ Make one overarching class, and then anything specific can be applied through th
 	line-height: 0.000001em;
 	font-size: 0.000001em;
 }
-	
-/*** New User Button ***********************************************/	
+
 #new_user_button {
 	float: right;
 	border-right: 1px solid rgb(200,200,200);
@@ -839,7 +792,6 @@ Make one overarching class, and then anything specific can be applied through th
 	padding: .2em .2em;
 }
 
-/*** Manage Users Button ***/
 #manage_users_button {
 	float: right;
 	border-right: 1px solid rgb(200,200,200);
@@ -848,7 +800,6 @@ Make one overarching class, and then anything specific can be applied through th
 	padding: .2em .2em;
 }
 
-/*** Add announcement button ****************************************/
 .add_announcements_wrapper {
 	float:right;
 	height: 40px;
@@ -869,30 +820,34 @@ Make one overarching class, and then anything specific can be applied through th
 	padding: .2em .2em;
 }
 
-/*** Logout Button ************************************************/
+.header .buttons{ 
+/*?Applies to logout and home?*/
+	float: right;
+	clear: none;
+	width: auto;
+}
+
 #logout_button {
 	float: left;
 	margin: 7px .3em .1em 0em;
 	padding: .2em .2em;
 }
 
-/*** Home Button ***/
 #home_button{
 	float: left;
 	margin: 7px .3em .1em 0em;
 	padding: .2em .2em;
 }
 
-/*** Generate announcement button *********************************/
-/*?Not even in header?*/
-.gen_anno_button {
+#gen_anno_button {
 	float: right;
 	margin: 10px 20px .1em 0em;
 	padding: .2em .2em;
 }
 
 /** Submit buttons **/
-input[type=submit]  {
+/*Used by login, +create, +edit, +new_user, +edit_user, +settings*/
+/*input[type=submit]  {
 	font-size:1em;
 	border-radius: 15px;
 	border: 1px solid #bbb;
@@ -907,6 +862,44 @@ input[type=submit]  {
 
 input[type=submit]:hover{
 	color: blue;
+}*/
+
+/**/
+#anno_submit_button {
+	padding: .5em .5em;
+	margin: .9em 0em;
+	float: right;
+}
+
+#anno_cancel_button {
+	float: right;
+	clear: both;
+	margin: 7px .3em .1em 0em;
+	padding: .2em .2em;
+}
+
+#submit_new_user_button {
+	padding: .5em .5em;
+	margin: .9em 0em;
+	float: right;
+}
+
+#submit_edit_user_button {
+	padding: .5em .5em;
+	margin: .9em 0em;
+	float: right;
+}
+
+#settings_save_button{
+	padding: .5em .5em;
+	margin: .9em 30px .9em 0;
+	float: right;
+}
+
+#submit_login_button {
+	padding: .5em .5em;
+	margin: .9em 0em;
+	float: right;
 }
 
 /* Scroll bar CSS ***************************************************************************************************************/

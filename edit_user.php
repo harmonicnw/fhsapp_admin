@@ -121,7 +121,7 @@ $sports=$user[0]['sports'];*/
 			<input name="password_2" type="password" value="">
 			<br />
 			
-			<input name="submit" type="submit" value="Save Changes">
+			<input name="submit" type="submit" class="button" id="submit_edit_user_button" value="Save Changes">
 		</form>
 	</div>
 </body>

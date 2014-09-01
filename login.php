@@ -18,8 +18,6 @@ if(!empty($_POST)) {
 	$pass = $_POST['pass'];
 	$login = new login( $user, $pass );
 	$login->create_login();
-} else {
-	//echo "The post is empty!";
 }
 
 ?>
@@ -35,27 +33,23 @@ if(!empty($_POST)) {
 	<script type="text/javascript"> //The easy way to validate. Credit this later.
 	$(document).ready(
 		function(){	
-				jQuery.validator.addMethod("notEqual", function(value, element, param) {
-  return this.optional(element) || value != param;
-}, "Please specify a different (non-default) value");
-	$("form").validate({
-		 ignore: "",
-		rules: {
-		user: {
-			required: true,
-				'notEqual': "Username"
-			},
-			
-			
-			pass: {
-				required: true,
-
-			},
-			
-			}
-				
+			jQuery.validator.addMethod("notEqual", function(value, element, param) {
+  				return this.optional(element) || value != param;
+			}, "Please specify a different (non-default) value");
+	
+			$("form").validate({
+				 ignore: "",
+				rules: {
+					user: {
+						required: true, 'notEqual': "Username"
+					},
+						
+					pass: {
+						required: true,
+					},
+				}
+						
 			});
-
 		}
 	);
 	</script>
@@ -92,8 +86,7 @@ if(!empty($_POST)) {
 				</div>
 	
 				<div class="row">
-					<input type="submit" value="Login"/>
-
+					<input type="submit" class="button" id="submit_login_button" value="Login"/>
 				</div>
 			</div>
 	

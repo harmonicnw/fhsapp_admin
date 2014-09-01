@@ -183,12 +183,12 @@ $staff_p = $_SESSION['staff'];
 			</div>
 			
 			<div class="anno_submit">
-				<input type="submit" value="Create Announcement" />
+				<input type="submit" class="button" id="anno_submit_button" value="Create Announcement" />
 			</div>
 			<br />
 			
 			<div class="anno_cancel">
-				<a class="home_button" href="main.php?current=1">Cancel</a>
+				<a class="button" id="anno_cancel_button" href="main.php?current=1">Cancel</a>
 			</div>
 			
 			</div>

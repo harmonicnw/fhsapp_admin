@@ -155,3 +155,14 @@ $(document).ready( function() {
 		}
 	);
 });
+
+$.fn.initTabs =function(){
+	$(this).find("a").click(function(e){
+		e.preventDefault();
+		$(".tab_content").hide();
+		$("#"+ $(this).attr("data-target")).show();
+	});
+};
+
+
+

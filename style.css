@@ -902,3 +902,36 @@ pre {
 	clear: both;
 	color: white;
 }
+/*help page wrapper ********************************************************************************************************************/
+.content_wrapper{
+	background: white ;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 750px;
+	padding: 60px;
+	box-sizing:border-box;
+
+
+}
+
+.help_links{
+	width:100%;
+	color: white;
+	text-align: center;
+	float: left;
+	clear: both;
+	margin: 0;
+	padding: 80px 0 30px 0;
+	
+
+}
+.help_links li{
+	list-style: none;
+	display: inline;
+	margin: 30px;
+
+
+}
+.help_links li a{
+	text-decoration: none;
+}

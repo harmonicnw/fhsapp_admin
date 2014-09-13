@@ -9,51 +9,56 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 $db = new Db($dbConfig);
+$error = new error();
 
 c_cookie::enforce_log();
-?>
 
-<?php 
 $user_id = $_SESSION['user_id']; 
 $admin_p = $_SESSION['admin'];
 $teacher_p = $_SESSION['teacher'];
 $club_p = $_SESSION['club'];
 $sports_p = $_SESSION['sports'];
 $staff_p = $_SESSION['staff'];
-?>
 
-<?php
-	//Inserting stuff.
-	if(!empty($_REQUEST)) {
+//Inserting stuff.
+if(!empty($_REQUEST)) {
+	
+	if(isset($_REQUEST['check']) && !empty($_REQUEST['check'])) {
 		$subtype_ids = $_REQUEST['check'];
-		if(!empty($subtype_ids)) {
-			//*Insert the actual announcement into the announcement table
-			$title = mysql_real_escape_string($_REQUEST['title']);
-			$description = mysql_real_escape_string( $_REQUEST['description'] );
-			$start_date = mysql_real_escape_string( $_REQUEST['start_date']);
-			$end_date = mysql_real_escape_string( $_REQUEST['end_date']);
-			$date = mysql_real_escape_string($_REQUEST['date']);
-			$location = mysql_real_escape_string($_REQUEST['location']);
-			$time = mysql_real_escape_string($_REQUEST['time']);
-			
-			$query = "INSERT INTO announcements(title, description, start_date, end_date, date, location, time, author) VALUES('$title', '$description', '$start_date', '$end_date', '$date', '$location', '$time', '$user_id');";
+		
+		//*Insert the actual announcement into the announcement table
+		$title = mysql_real_escape_string($_REQUEST['title']);
+		$description = mysql_real_escape_string( $_REQUEST['description'] );
+		$start_date = mysql_real_escape_string( $_REQUEST['start_date']);
+		$end_date = mysql_real_escape_string( $_REQUEST['end_date']);
+		$date = mysql_real_escape_string($_REQUEST['date']);
+		$location = mysql_real_escape_string($_REQUEST['location']);
+		$time = mysql_real_escape_string($_REQUEST['time']);
+		
+		$query = "INSERT INTO announcements(title, description, start_date, end_date, date, location, time, author) VALUES('$title', '$description', '$start_date', '$end_date', '$date', '$location', '$time', '$user_id');";
+		mysql_query($query);
+		
+		//*Insert the anno_subtype relationship into its table
+		$anno_id = mysql_insert_id();
+		//echo $anno_id;
+		foreach($subtype_ids as $subtype_id) {
+			$query = "INSERT INTO anno_subtype(anno_id, subtype_id) VALUES('$anno_id', '$subtype_id');";
 			mysql_query($query);
-			
-			//*Insert the anno_subtype relationship into its table
-			$anno_id = mysql_insert_id();
-			//echo $anno_id;
-			foreach($subtype_ids as $subtype_id) {
-				$query = "INSERT INTO anno_subtype(anno_id, subtype_id) VALUES('$anno_id', '$subtype_id');";
-				mysql_query($query);
-			}
-			//redirect here maybe?
-			header("Location: main.php?current=1");
-		} //else {
-			//$need_check = true; //*Use this to make a comment that says something needs to be checked.
-		//}
+		}
+		//redirect here maybe?
+		header("Location: main.php?current=1");
+	} else {
+		//echo "failure";
+		/*$message = "You must check a category.";
+		$error = new error($message);
+		$error->check_error();//This needs to go to beneath the actual html.*/
+		$message = "You must check a category.";
+		$error->set_message($message);
 	}
+}
 
 ?>
+
 <!DOCTYPE HTML>
 
 <html>
@@ -283,6 +288,8 @@ $staff_p = $_SESSION['staff'];
 		initDescrHeight();
 		
 	</script>
+	
+	<?php $error->check_error(); ?>
 </body>
 
 </html>

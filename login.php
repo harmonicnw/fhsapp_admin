@@ -9,6 +9,7 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 $db = new Db($dbConfig);
+$error = new error();
 
 c_cookie::assist_log();
 
@@ -17,7 +18,8 @@ if(!empty($_POST)) {
 	$user = $_POST['user'];
 	$pass = $_POST['pass'];
 	$login = new login( $user, $pass );
-	$login->create_login();
+	$error_message = $login->create_login();
+	$error->set_message($error_message);
 }
 
 ?>
@@ -94,6 +96,7 @@ if(!empty($_POST)) {
 		</form>
 	</div>
 	</div>
-
+	
+	<?php $error->check_error(); ?>
 </body>
 </html>

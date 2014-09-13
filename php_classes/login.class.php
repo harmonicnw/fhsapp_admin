@@ -25,15 +25,11 @@ class login {
 	public function create_login(){
 		
 		$result = mysql_query("SELECT password FROM users WHERE username='".$this->typedusername."'");
-		if(!$result) { die('goofed' . mysql_error() ); }
+		//if(!$result) { die('goofed' . mysql_error() ); }
 	
 		if($result){
 			$row = mysql_fetch_row($result);
 			$hash = $row[0]; 
-		} else {
-			//echo "Invalid Username.";
-			//$message = "wrong answer";
-			
 		}
 	
 		if($this->typedhash === $hash){
@@ -42,9 +38,7 @@ class login {
 			header('Location: main.php?current=1');
 			exit();
 		} else {	
-			/*echo "typedhash = ". $typedhash;
-			echo "hash = ". $hash; 
-			echo "Login Failed."; */
+			return "The password you have typed in does not match the username you typed in. Please try again or contact an administrator.";
 		}
 	}
 }

@@ -48,10 +48,6 @@ if(!empty($_REQUEST)) {
 		//redirect here maybe?
 		header("Location: main.php?current=1");
 	} else {
-		//echo "failure";
-		/*$message = "You must check a category.";
-		$error = new error($message);
-		$error->check_error();//This needs to go to beneath the actual html.*/
 		$message = "You must check a category.";
 		$error->set_message($message);
 	}

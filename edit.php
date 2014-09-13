@@ -9,6 +9,7 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 $db = new Db($dbConfig);
+$error = new error();
 
 c_cookie::enforce_log();
 ?>
@@ -54,6 +55,10 @@ $staff_p = $_SESSION['staff'];
 				mysql_query($query);
 			}
 			header("Location: main.php?current=1");
+		} else {
+			//$message = "You must check a category.";
+			//$error->set_message($message);
+			//?This doesn't work right now because it when you go to the page, there isn't anything for check. Address this issue when you finally decide to merge create and edit into one function.
 		}
 		
 		$query = "SELECT * FROM announcements WHERE id='$anno_id'"; //*Get the announcement
@@ -76,9 +81,7 @@ $staff_p = $_SESSION['staff'];
 		$anno_cb = $db->runQuery($query); //*This is where the the checkbox info is
 		//redirect here maybe?
 		
-	} //else {
-		//$need_check = true; //*Use this to make a comment that says something needs to be checked.
-	//}
+	}
 	
 
 ?>
@@ -379,6 +382,8 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 		initDescrHeight();
 		
 	</script>
+	
+	<?php $error->check_error(); ?>
 </body>
 
 </html>

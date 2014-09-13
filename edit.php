@@ -158,7 +158,7 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 	
 	<div class="create_wrapper">
 		
-		<form id="form" method="get" action="edit.php" class="anno_form">
+		<form id="form" method="get" action="edit.php?anno_id=<?php echo $_REQUEST['anno_id']; ?>" class="anno_form">
 			<!--<label></label>
 			<input name="" type="text" value=""/>
 			<br />-->

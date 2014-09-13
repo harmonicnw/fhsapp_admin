@@ -1,7 +1,6 @@
 <?php
 
 class login {
-
 	public $typedusername;
 	public $typedhash;
 	
@@ -12,7 +11,8 @@ class login {
 	
 	//For setting session variables at the login
 	private function set_session() {
-		$userdata = mysql_fetch_array(mysql_query("SELECT * FROM users WHERE username='$this->typedusername'"));
+		$query = "SELECT * FROM users WHERE username='$this->typedusername'";
+		$userdata = mysql_fetch_array(mysql_query($query));
 		$_SESSION['user_id'] = $userdata['id'];
 		$_SESSION['admin'] = $userdata['admin'];
 		$_SESSION['teacher'] = $userdata['teacher'];
@@ -33,7 +33,7 @@ class login {
 		} else {
 			//echo "Invalid Username.";
 			//$message = "wrong answer";
-			//echo "<script type='text/javascript'>alert('$message');</script>";
+			
 		}
 	
 		if($this->typedhash === $hash){

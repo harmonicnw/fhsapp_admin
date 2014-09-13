@@ -9,6 +9,7 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 $db = new Db($dbConfig);
+$error = new error();
 
 c_cookie::enforce_log();
 ?>
@@ -135,9 +136,9 @@ c_cookie::enforce_log();
 								$query = "INSERT into users(username, password, email, first_name, last_name, admin, teacher, club, sports, staff) VALUES('$username', '$password', '$email', '$first_name', '$last_name', '$admin', '$teacher', '$club', '$sports', '$staff');";
 								mysql_query($query);
 								echo "<p>New user has been created!</p>";
-							} //else {
-								//echo "<p style='color:red;'>Unable to send e-mail.</p>";
-							//}
+							} else {
+								echo "<p style='color:red;'>Unable to send e-mail.</p>"; //I don't remember why I had this commented out.
+							}
 						} else {
 							echo "<p style='color:red;'>Please select a permission.</p>";
 						}

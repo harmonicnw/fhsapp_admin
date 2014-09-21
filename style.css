@@ -442,6 +442,33 @@ label .error{
 	overflow: auto;	
 }
 
+.anno_section {
+	float:left;
+	/*clear:left;*/ /*Test this in a bit*/
+	box-sizing: border-box;
+	border-top: 1px solid rgb(200,200,200);
+	border-bottom: 1px solid rgb(200,200,200);
+	border-radius: 8px;
+	background: white /*url(images/gradient-lightgray.png) repeat-x top*/;
+}
+
+.anno_label {
+
+}
+
+.anno_text {
+
+}
+
+.anno_opt_section {
+	float:left;
+	width: 95%;
+	padding: .5em 0;
+	margin: 0 2.5%;
+	border: 1px solid rgb(200,200,200);
+	border-radius: 6px;
+	background: white url(images/gradient-lightgray.png) repeat-x top;
+}
 
 /** The required label **/
 #required_label_div {
@@ -468,14 +495,9 @@ label .error{
 
 /** Title **/
 #anno_title {
-	float:left;
 	width: 87.5%;
 	padding: 1em 0;
 	margin: .5em .1em .5em .5em; /*Change to percentages or auto*/
-	border-top: 1px solid rgb(200,200,200);
-	border-bottom: 1px solid rgb(200,200,200);
-	border-radius: 8px;
-	background: white /*url(images/gradient-lightgray.png) repeat-x top*/;
 }
 
 #anno_title_label {
@@ -497,14 +519,9 @@ label .error{
 
 /** Description box **/
 #anno_description {
-	float:left;
 	clear: left;
 	width: 98.7%;
 	margin: .5em;
-	border-top: 1px solid rgb(200,200,200);
-	border-bottom: 1px solid rgb(200,200,200);
-	border-radius: 8px;
-	background: white /*url(images/gradient-lightgray.png) repeat-x top*/;
 	padding-bottom: .5em;
 	/*margin-top: .5em;*/
 }
@@ -529,16 +546,10 @@ label .error{
 
 /**The additional info box (optional)**/
 #anno_optional {
-	float:left;
 	clear: left;
 	width: 98.7%;
 	padding-bottom: 1em;
 	margin: .5em;
-	border-top: 1px solid rgb(150,150,150);
-	border-bottom: 1px solid rgb(150,150,150);
-	border-radius: 8px;
-	/*background: white url(images/gradient-lightgray.png) repeat-x top;*/
-	background: white;
 }
 
 #anno_optional_label{
@@ -554,13 +565,6 @@ Make one overarching class, and then anything specific can be applied through th
 
 /** Start Date Input **/
 #anno_start_date {
-	float:left;
-	width: 95%;
-	padding: .5em 0;
-	margin: 0 2.5%;
-	border: 1px solid rgb(200,200,200);
-	border-radius: 6px;
-	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
 #anno_start_date_label {
@@ -575,13 +579,6 @@ Make one overarching class, and then anything specific can be applied through th
 
 /** End Date Input **/
 #anno_end_date {
-	float:left;
-	width: 95%;
-	padding: .5em 0;
-	margin: 0 2.5%;
-	border: 1px solid rgb(200,200,200);
-	border-radius: 6px;
-	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
 #anno_end_date_label {
@@ -596,13 +593,6 @@ Make one overarching class, and then anything specific can be applied through th
 
 /** Date input **/
 #anno_date {
-	float:left;
-	width: 95%;
-	padding: .5em 0;
-	margin: 0 2.5%;
-	border: 1px solid rgb(160,160,160);
-	border-radius: 6px;
-	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
 #anno_date_label {
@@ -618,13 +608,6 @@ Make one overarching class, and then anything specific can be applied through th
 
 /** Time input **/
 #anno_time {
-	float:left;
-	width: 95%;
-	padding: .5em 0;
-	margin: 0 2.5%;
-	border: 1px solid rgb(160,160,160);
-	border-radius: 6px;
-	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
 #anno_time_label {
@@ -640,13 +623,6 @@ Make one overarching class, and then anything specific can be applied through th
 
 /** Location input **/
 #anno_location {
-	float:left;
-	width: 95%;
-	padding: .5em 0;
-	margin: 0 2.5%;
-	border: 1px solid rgb(160,160,160);
-	border-radius: 6px;
-	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
 #anno_location_label {

@@ -135,13 +135,13 @@ if(!empty($_REQUEST)) {
 				<label id="required_label"><span style="color:red">*</span> - Required</label>
 			</div>
 			
-			<div id="anno_title">
+			<div class="anno_section" id="anno_title" >
 				<label id="anno_title_label">Title<span style="color:red">*</span></label>
 				<input name="title" type="text" value="" id="anno_text_title"/>
 				<br />
 			</div>
 			
-			<div id="anno_description">
+			<div class="anno_section" id="anno_description">
 				<label id="anno_description_label">Description<span style="color:red">*</span></label>
 				<div class="mcedummy">
 					<textarea name="description" rows="5" col="50" id="anno_textarea"></textarea>
@@ -149,34 +149,34 @@ if(!empty($_REQUEST)) {
 				<br />
 			</div>
 			
-			<div id="anno_optional">
+			<div class="anno_section" id="anno_optional">
 				<label id="anno_optional_label">Additional Information:</label>
 				
-				<div id="anno_start_date">
+				<div class="anno_opt_section" id="anno_start_date">
 					<label id="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
 					<input id="start_date" name="start_date" type="text" value="" id="anno_text_start_date"/>
 					<br />
 				</div>
 			
-				<div id="anno_end_date">
+				<div class="anno_opt_section" id="anno_end_date">
 					<label id="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
 					<input id="end_date" name="end_date" type="text" value="" id="anno_text_end_date"/>
 					<br />
 				</div>
 				
-				<div id="anno_date">
+				<div class="anno_opt_section" id="anno_date">
 					<label id="anno_date_label">Actual Date of Event</label>
 					<input id="date" name="date" type="text" value="" id="anno_text_date"/>
 					<br />
 				</div>
 				
-				<div id="anno_time">
+				<div class="anno_opt_section" id="anno_time">
 					<label id="anno_time_label">Time of Event</label>
 					<input name="time" type="text" value="" id="anno_text_time"/>
 					<br />
 				</div>
 				
-				<div id="anno_location">
+				<div class="anno_opt_section" id="anno_location">
 					<label id="anno_location_label">Location</label>
 					<input name="location" type="text" value="" id="anno_text_location"/>
 					<br />

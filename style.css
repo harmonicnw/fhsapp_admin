@@ -444,7 +444,7 @@ label .error{
 
 .anno_section {
 	float:left;
-	/*clear:left;*/ /*Test this in a bit*/
+	clear:left; /*Test this in a bit*/
 	box-sizing: border-box;
 	border-top: 1px solid rgb(200,200,200);
 	border-bottom: 1px solid rgb(200,200,200);
@@ -453,7 +453,8 @@ label .error{
 }
 
 .anno_label {
-
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .anno_text {
@@ -461,13 +462,18 @@ label .error{
 }
 
 .anno_opt_section {
-	float:left;
+	float: left;
 	width: 95%;
 	padding: .5em 0;
 	margin: 0 2.5%;
 	border: 1px solid rgb(200,200,200);
 	border-radius: 6px;
 	background: white url(images/gradient-lightgray.png) repeat-x top;
+}
+
+.anno_opt_label {
+	float: left;
+	width: 20%;
 }
 
 /** The required label **/
@@ -501,8 +507,6 @@ label .error{
 }
 
 #anno_title_label {
-	font-size: 20px;
-	font-weight: bold;
 	padding-left: 0;
 	margin: 0 .3em 0 1.1em;
 	padding-top: .3em;
@@ -527,8 +531,6 @@ label .error{
 }
 
 #anno_description_label {
-	font-size: 20px;
-	font-weight: bold;
 	margin-left: 2%;
 	width: 96.5%;
 	/*border-bottom: 1px solid grey;*/
@@ -553,8 +555,6 @@ label .error{
 }
 
 #anno_optional_label{
-	font-size: 20px;
-	font-weight: bold;
 	margin-left: 2.5%;
 	margin-top: .5em;
 	width: 95%;
@@ -568,7 +568,7 @@ Make one overarching class, and then anything specific can be applied through th
 }
 
 #anno_start_date_label {
-	width: 20%;
+
 }
 
 #anno_text_start_date {
@@ -582,7 +582,7 @@ Make one overarching class, and then anything specific can be applied through th
 }
 
 #anno_end_date_label {
-	width: 20%;
+
 }
 
 #anno_text_end_date {
@@ -596,8 +596,6 @@ Make one overarching class, and then anything specific can be applied through th
 }
 
 #anno_date_label {
-	float:left;
-	width: 20%;
 }
 
 #anno_text_date {
@@ -611,8 +609,6 @@ Make one overarching class, and then anything specific can be applied through th
 }
 
 #anno_time_label {
-	float:left;
-	width: 20%;
 }
 
 #anno_text_time {
@@ -626,7 +622,6 @@ Make one overarching class, and then anything specific can be applied through th
 }
 
 #anno_location_label {
-	width: 20%;
 }
 
 #anno_text_location {

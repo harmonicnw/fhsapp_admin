@@ -94,8 +94,8 @@ if(!empty($_REQUEST)) {
 				}
 			});
 			
-			$("#start_date").datepicker({ dateFormat: "yy-mm-dd" });
-			$("#end_date").datepicker({ dateFormat: "yy-mm-dd" });
+			$("#anno_text_start_date").datepicker({ dateFormat: "yy-mm-dd" });
+			$("#anno_text_end_date").datepicker({ dateFormat: "yy-mm-dd" });
 			$("#date").datepicker({ dateFormat: "yy-mm-dd" });
 		}
 		
@@ -131,15 +131,24 @@ if(!empty($_REQUEST)) {
 			<br />-->
 			<div id="anno_left">
 			
-			<div id="required_label_div">
-				<label id="required_label"><span style="color:red">*</span> - Required</label>
-			</div>
+			
 			
 			<div class="anno_section" id="anno_title" >
 				<label class="anno_label" id="anno_title_label">Title<span style="color:red">*</span></label>
 				<input name="title" type="text" value="" class="anno_text" id="anno_text_title"/>
 				<br />
 			</div>
+			
+			<script>
+				function setTitleHeight() {	
+					var cornerHeight = $("#anno_corner").height();
+					console.log("Here is the height of the corner: " + cornerHeight);
+					$("#anno_title").height(cornerHeight);
+					$("#anno_text_title").height(cornerHeight / 1.5);
+				}
+				
+				//setTitleHeight();
+			</script>
 			
 			<div class="anno_section" id="anno_description">
 				<label class="anno_label" id="anno_description_label">Description<span style="color:red">*</span></label>
@@ -149,20 +158,22 @@ if(!empty($_REQUEST)) {
 				<br />
 			</div>
 			
-			<div class="anno_section" id="anno_optional">
-				<label class="anno_label" id="anno_optional_label">Additional Information:</label>
-				
-				<div class="anno_opt_section" id="anno_start_date">
+			<div class="anno_section" id="anno_start_end">
+				<div class="anno_se_section" id="anno_start_date">
 					<label class="anno_opt_label" id="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
-					<input id="start_date" name="start_date" type="text" value="" class="anno_text" id="anno_text_start_date"/>
+					<input name="start_date" type="text" value="" id="anno_text_start_date" class="anno_text" />
 					<br />
 				</div>
 			
-				<div class="anno_opt_section" id="anno_end_date">
+				<div class="anno_se_section" id="anno_end_date">
 					<label class="anno_opt_label" id="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
-					<input id="end_date" name="end_date" type="text" value="" class="anno_text" id="anno_text_end_date"/>
+					<input name="end_date" type="text" value="" id="anno_text_end_date" class="anno_text" />
 					<br />
 				</div>
+			</div>
+			
+			<div class="anno_section" id="anno_optional">
+				<label class="anno_label" id="anno_optional_label">Additional Information:</label>
 				
 				<div class="anno_opt_section" id="anno_date">
 					<label class="anno_opt_label" id="anno_date_label">Actual Date of Event</label>
@@ -183,13 +194,18 @@ if(!empty($_REQUEST)) {
 				</div>
 			</div>
 			
-			<div id="anno_submit">
-				<input type="submit" class="button" id="anno_submit_button" value="Create Announcement" />
-			</div>
-			<br />
+			<div id="anno_corner">
+				<div id="required_label_div">
+					<label id="required_label"><span style="color:red">*</span> - Required</label>
+				</div>
+				
+				<div id="anno_submit">
+					<input type="submit" class="button" id="anno_submit_button" value="Create Announcement" />
+				</div>
 			
-			<div id="anno_cancel">
-				<a class="button" id="anno_cancel_button" href="main.php?current=1">Cancel</a>
+				<div id="anno_cancel">
+					<a class="button" id="anno_cancel_button" href="main.php?current=1">Cancel</a>
+				</div>
 			</div>
 			
 			</div>
@@ -282,7 +298,7 @@ if(!empty($_REQUEST)) {
 	<script type="text/javascript">
 		initLRHeight();
 		initDescrHeight();
-		
+		//initTinymce();
 	</script>
 	
 	<?php $error->check_error(); ?>

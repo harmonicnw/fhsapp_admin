@@ -435,9 +435,9 @@ label .error{
 }
 
 #anno_right {
-	width: 17.5%;
+	width: 18%;
 	float:right;
-	background-color: rgb(76,16,9);
+	background-color: rgb(200, 200, 200);
 	/*border: 1px solid black;*/
 	overflow: auto;	
 }
@@ -458,62 +458,117 @@ label .error{
 }
 
 .anno_text {
-	height: 1em;
+	height: 1.5em;
 	font-size: 16px;
-	width: 75%;
-	
+	width: 75%;	
+	box-shadow: inset 0 1px 2px rgba(200,200,200, .6);
+	border: 1px solid #ddd;
+}
+
+.anno_se_section {
+	float: left;
+	box-sizing: border-box;
+	width: 47.5%;
+	padding: .5em 0;
+	margin: .5em 1.25%;
+	/*border: 1px solid rgb(200,200,200);
+	border-radius: 6px;
+	background: white url(images/gradient-lightgray.png) repeat-x top;*/
+}
+
+.anno_se_label {
+	float: left;
+	width: 20%;
+	font-weight: bold;
 }
 
 .anno_opt_section {
 	float: left;
-	width: 95%;
+	width: 30%;
 	padding: .5em 0;
-	margin: 0 2.5%;
-	border: 1px solid rgb(200,200,200);
+	margin: 0 1.5%;
+	border-right: 1px solid rgb(200,200,200);
+	
+	/*border: 1px solid rgb(200,200,200);
 	border-radius: 6px;
-	background: white url(images/gradient-lightgray.png) repeat-x top;
+	background: white url(images/gradient-lightgray.png) repeat-x top;*/
+}
+
+.anno_opt_section:last-of-type {
+   border-right: none;
 }
 
 .anno_opt_label {
 	float: left;
+	width: 100%;
+	font-weight: bold;
+	
+}
+
+#anno_corner {
+	float: right;
+	box-sizing: border-box;
 	width: 20%;
+	margin: .5em 1.25% .5em 1.25%;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background: rgb(200, 200, 200);
 }
 
 /** The required label **/
 #required_label_div {
 	float:right;
-	width: auto;
+	width: 90%;
 	padding: 0;
-	margin: .5em .5em .5em 0;
+	margin: .5em 5% .5em 5%;
 	border-top: 1px solid rgb(200,200,200);
 	border-bottom: 1px solid rgb(200,200,200);
 	border-radius: 8px;
-	background: white
+	background: white;
 }
 
 #required_label {
-	font-size: 10px;
+	font-size: 1em;
 	font-weight: none;
 	padding-left: 0;
-	margin: 0 1.1em 0 1.1em;
+	margin: 0;
 	padding-top: .3em;
 	padding-bottom: .3em;
 	float: left;
-	width: auto
+	width: 100%;
+	text-align: center;
+}
+
+
+#anno_submit_button {
+	padding: .5em .5em;
+	margin: 0 5% 0 5%;
+	float: right;
+	width: 90%;
+	box-sizing: border-box;
+}
+
+#anno_cancel_button {
+	padding: .5em .5em;
+	margin: .5em 5% .5em 5%;
+	float: right;
+	width: 90%;
+	box-sizing: border-box;
+	text-align: center;
 }
 
 /** Title **/
 #anno_title {
-	width: 87.5%;
+	width: 97.5%;
 	padding: 1em 0;
-	margin: .5em .1em .5em .5em; /*Change to percentages or auto*/
+	margin: .5em 1.25%.5em 1.25%; /*Change to percentages or auto*/
 }
 
 #anno_title_label {
 	padding-left: 0;
 	margin: 0 .3em 0 1.1em;
 	padding-top: .3em;
-	padding-bottom: .3em;
+	/*padding-bottom: .3em;*/
 	/*border-bottom: 1px solid grey;*/
 }
 
@@ -525,8 +580,8 @@ label .error{
 /** Description box **/
 #anno_description {
 	clear: left;
-	width: 98.7%;
-	margin: .5em;
+	width: 97.5%;
+	margin: .5em 1.25%.5em 1.25%;
 	padding-bottom: .5em;
 	/*margin-top: .5em;*/
 }
@@ -537,9 +592,7 @@ label .error{
 	/*border-bottom: 1px solid grey;*/
 }
 
-#anno_textarea {
-
-}
+#anno_textarea {}
 
 #mce_29 {
 	width: 97%;
@@ -547,32 +600,60 @@ label .error{
 	margin: 1em 1.5% 0 1.5%;
 }
 
+#anno_start_end {
+	clear: left;
+	width: 97.5%;
+	margin: .5em 1.25%.5em 1.25%;
+}
+
+/** Start Date Input **/
+#anno_start_date {
+	border-right: 1px solid rgb(200,200,200);
+}
+
+#anno_start_date_label {
+	width: 45%;
+	font-weight: bold;
+}
+
+#anno_text_start_date {
+	width: 50%;
+	
+}
+
+/** End Date Input **/
+#anno_end_date {
+	
+}
+
+#anno_end_date_label {
+	width: 45%;
+	font-weight: bold;
+}
+
+#anno_text_end_date {
+	width: 50%;	
+}
+
 /**The additional info box (optional)**/
 #anno_optional {
 	clear: left;
-	width: 98.7%;
+	width: 75%;
+	margin: .5em 1.25%.5em 1.25%;
 	padding-bottom: 1em;
-	margin: .5em;
 }
 
 #anno_optional_label{
-	margin-left: 2.5%;
+	margin-left: 1.5%;
 	margin-top: .5em;
 	width: 95%;
+	border-bottom: 1px solid rgb(200,200,200);
 }
 
 /*?These inputs are all practically the same. 
 Make one overarching class, and then anything specific can be applied through their specific ID/Class?*/
 
-/** Start Date Input **/
-#anno_start_date {}
-#anno_start_date_label {}
-#anno_text_start_date {}
 
-/** End Date Input **/
-#anno_end_date {}
-#anno_end_date_label {}
-#anno_text_end_date {}
 
 /** Date input **/
 #anno_date {}
@@ -588,6 +669,7 @@ Make one overarching class, and then anything specific can be applied through th
 #anno_location {}
 #anno_location_label {}
 #anno_text_location {}
+
 
 /** Categories **/
 #anno_cats {
@@ -777,18 +859,6 @@ Make one overarching class, and then anything specific can be applied through th
 /** Submit buttons **/
 /*Used by login, create, edit, new_user, edit_user, settings*/
 
-#anno_submit_button {
-	padding: .5em .5em;
-	margin: .9em 0em;
-	float: right;
-}
-
-#anno_cancel_button {
-	float: right;
-	clear: both;
-	margin: 7px .3em .1em 0em;
-	padding: .2em .2em;
-}
 
 #submit_new_user_button {
 	padding: .5em .5em;

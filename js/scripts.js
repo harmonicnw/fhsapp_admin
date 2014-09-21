@@ -22,7 +22,9 @@ function initLRHeight() {
 	var totalHeight = docHeight - 40 - titleHeight - 2;
 	$("#anno_left, #anno_right").css("height", totalHeight);
 }
+
 //205
+//This doesn't work very well, as it doesn't really take into account other things, like the submit and cancel button at the bottom.
 function initDescrHeight() {
 	var LHeight = $("#anno_left").height();
 	var aTitleHeight = $("#anno_title").outerHeight();
@@ -65,6 +67,17 @@ function initDescrHeight() {
 		console.log("mce Height: " + mceHeight);
 		$(".anno_description").css("height", aDescrLabelHeight + mceHeight);*/
 	}
+}
+
+function initTinymce() {
+	tinymce.init({
+		selector: "textarea",
+		plugins: [
+			"advlist autolink lists link image charmap print preview anchor",
+			"searchreplace visualblocks code fullscreen"
+		],
+		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+	});
 }
 
 function init_delete_clubs() { 

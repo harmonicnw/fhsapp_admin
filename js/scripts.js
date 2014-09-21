@@ -26,18 +26,24 @@ function initLRHeight() {
 //205
 //This doesn't work very well, as it doesn't really take into account other things, like the submit and cancel button at the bottom.
 function initDescrHeight() {
-	var LHeight = $("#anno_left").height();
-	var aTitleHeight = $("#anno_title").outerHeight();
-	var aSEHeight = $("#anno_start_end").outerHeight();
-	var aOptHeight = $("#anno_optional").outerHeight();
-	var aCalcDescrHeight = LHeight - aTitleHeight - aSEHeight - aOptHeight - 2;
-	console.log(aCalcDescrHeight);
-	var aDescrLabelHeight = $("#anno_description_label").outerHeight();
+	var LHeight = $("#anno_left").outerHeight( true );
+	console.log("The height of the whole left side should be: " + LHeight);
+	var aTitleHeight = $("#anno_title").outerHeight( true );
+	var aSEHeight = $("#anno_start_end").outerHeight( true );
+	var aOptHeight = $("#anno_optional").outerHeight( true );
+	
+	var aCalcDescrHeight = LHeight - aTitleHeight - aSEHeight - aOptHeight - 2 - 10 ;
+	
+	console.log("The height of the description block should be: " + aCalcDescrHeight);
+	var aDescrLabelHeight = $("#anno_description_label").outerHeight(true);
 	if (aCalcDescrHeight > aDescrLabelHeight + 210) { //*If the height of the mce is smaller than the actual descr div, then resize it to the div
-		$("#anno_description").css("height", aCalcDescrHeight);
+		var aRecalcDescrHeight = aCalcDescrHeight - $("#anno_description").css("margin-top").replace("px", "") - $("#anno_description").css("margin-bottom").replace("px", "");
+		console.log(aRecalcDescrHeight);
+		$("#anno_description").css("height", aRecalcDescrHeight);
+		//$("#anno_description").outerHeight(aCalcDescrHeight);
 		console.log("resizing mce");
-		var aDescrHeight = $("#anno_description").outerHeight();
-		var aDescrLabelHeight = $("#anno_description_label").outerHeight();
+		var aDescrHeight = $("#anno_description").outerHeight( true );
+		var aDescrLabelHeight = $("#anno_description_label").outerHeight( true );
 		var mceHeight = aDescrHeight - aDescrLabelHeight - 35 - 34 - 34 - 32; //vicious vicious hack. The mceHeight only does it for the white space, so I had to subtract the height of the headers and footers. Must fix later.
 		tinymce.init({
 		selector: "textarea",

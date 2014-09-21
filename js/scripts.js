@@ -20,22 +20,22 @@ function initLRHeight() {
 	var docHeight = $(window).height();
 	var titleHeight = 0; //$(".create_title").outerHeight();
 	var totalHeight = docHeight - 40 - titleHeight - 2;
-	$(".anno_left, .anno_right").css("height", totalHeight);
+	$("#anno_left, #anno_right").css("height", totalHeight);
 }
 //205
 function initDescrHeight() {
-	var LHeight = $(".anno_left").height();
-	var aTitleHeight = $(".anno_title").outerHeight();
-	var aSEHeight = $(".anno_start_end").outerHeight();
-	var aOptHeight = $(".anno_optional").outerHeight();
+	var LHeight = $("#anno_left").height();
+	var aTitleHeight = $("#anno_title").outerHeight();
+	var aSEHeight = $("#anno_start_end").outerHeight();
+	var aOptHeight = $("#anno_optional").outerHeight();
 	var aCalcDescrHeight = LHeight - aTitleHeight - aSEHeight - aOptHeight - 2;
 	console.log(aCalcDescrHeight);
-	var aDescrLabelHeight = $(".anno_description_label").outerHeight();
+	var aDescrLabelHeight = $("#anno_description_label").outerHeight();
 	if (aCalcDescrHeight > aDescrLabelHeight + 210) { //*If the height of the mce is smaller than the actual descr div, then resize it to the div
-		$(".anno_description").css("height", aCalcDescrHeight);
+		$("#anno_description").css("height", aCalcDescrHeight);
 		console.log("resizing mce");
-		var aDescrHeight = $(".anno_description").outerHeight();
-		var aDescrLabelHeight = $(".anno_description_label").outerHeight();
+		var aDescrHeight = $("#anno_description").outerHeight();
+		var aDescrLabelHeight = $("#anno_description_label").outerHeight();
 		var mceHeight = aDescrHeight - aDescrLabelHeight - 35 - 34 - 34 - 32; //vicious vicious hack. The mceHeight only does it for the white space, so I had to subtract the height of the headers and footers. Must fix later.
 		tinymce.init({
 		selector: "textarea",

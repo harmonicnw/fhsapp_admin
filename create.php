@@ -124,79 +124,79 @@ if(!empty($_REQUEST)) {
 		
 	</div>	
 
-	<div class="create_wrapper">	
+	<div id="create_wrapper">	
 		<form id="form" method="get" action="create.php" class="anno_form">
 			<!--<label></label>
 			<input name="" type="text" value=""/>
 			<br />-->
-			<div class="anno_left">
+			<div id="anno_left">
 			
 			<div id="required_label_div">
 				<label id="required_label"><span style="color:red">*</span> - Required</label>
 			</div>
 			
-			<div class="anno_title">
-				<label class="anno_title_label">Title<span style="color:red">*</span></label>
-				<input name="title" type="text" value="" class="anno_text_title"/>
+			<div id="anno_title">
+				<label id="anno_title_label">Title<span style="color:red">*</span></label>
+				<input name="title" type="text" value="" id="anno_text_title"/>
 				<br />
 			</div>
 			
-			<div class="anno_description">
-				<label class="anno_description_label">Description<span style="color:red">*</span></label>
+			<div id="anno_description">
+				<label id="anno_description_label">Description<span style="color:red">*</span></label>
 				<div class="mcedummy">
-					<textarea name="description" rows="5" col="50" class="anno_textarea"></textarea>
+					<textarea name="description" rows="5" col="50" id="anno_textarea"></textarea>
 				</div>
 				<br />
 			</div>
 			
-			<div class="anno_optional">
-				<label class="anno_optional_label">Additional Information:</label>
+			<div id="anno_optional">
+				<label id="anno_optional_label">Additional Information:</label>
 				
-				<div class="anno_start_date">
-					<label class="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
-					<input id="start_date" name="start_date" type="text" value="" class="anno_text_start_date"/>
+				<div id="anno_start_date">
+					<label id="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
+					<input id="start_date" name="start_date" type="text" value="" id="anno_text_start_date"/>
 					<br />
 				</div>
 			
-				<div class="anno_end_date">
-					<label class="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
-					<input id="end_date" name="end_date" type="text" value="" class="anno_text_end_date"/>
+				<div id="anno_end_date">
+					<label id="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
+					<input id="end_date" name="end_date" type="text" value="" id="anno_text_end_date"/>
 					<br />
 				</div>
 				
-				<div class="anno_date">
-					<label class="anno_date_label">Actual Date of Event</label>
-					<input id="date" name="date" type="text" value="" class="anno_text_date"/>
+				<div id="anno_date">
+					<label id="anno_date_label">Actual Date of Event</label>
+					<input id="date" name="date" type="text" value="" id="anno_text_date"/>
 					<br />
 				</div>
 				
-				<div class="anno_time">
-					<label class="anno_time_label">Time of Event</label>
-					<input name="time" type="text" value="" class="anno_text_time"/>
+				<div id="anno_time">
+					<label id="anno_time_label">Time of Event</label>
+					<input name="time" type="text" value="" id="anno_text_time"/>
 					<br />
 				</div>
 				
-				<div class="anno_location">
-					<label class="anno_location_label">Location</label>
-					<input name="location" type="text" value="" class="anno_text_location"/>
+				<div id="anno_location">
+					<label id="anno_location_label">Location</label>
+					<input name="location" type="text" value="" id="anno_text_location"/>
 					<br />
 				</div>
 			</div>
 			
-			<div class="anno_submit">
+			<div id="anno_submit">
 				<input type="submit" class="button" id="anno_submit_button" value="Create Announcement" />
 			</div>
 			<br />
 			
-			<div class="anno_cancel">
+			<div id="anno_cancel">
 				<a class="button" id="anno_cancel_button" href="main.php?current=1">Cancel</a>
 			</div>
 			
 			</div>
 			
-			<div class="anno_right">
-			<div class="anno_cats">
-				<label class="anno_cats_label">Categories<span style="color:red">*</span></label>
+			<div id="anno_right">
+			<div id="anno_cats">
+				<label id="anno_cats_label">Categories<span style="color:red">*</span></label>
 				<!--php must generate these...-->
 				<?php
 				if($admin_p) {

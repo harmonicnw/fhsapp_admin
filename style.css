@@ -408,7 +408,7 @@ label .error{
 }*/
 
 /*Create Announcement CSS********************************************************************************************************/
-.create_wrapper {
+#create_wrapper {
 	margin-top: 40px;
 	float:left;
 	width: 100%;
@@ -418,7 +418,7 @@ label .error{
 
 }
 
-.anno_left {
+#anno_left {
 	width: 82%;
 	float: left;
 	background-color: rgb(76,16,9);
@@ -426,7 +426,15 @@ label .error{
 	overflow: auto;	
 }
 
-.anno_right {
+#anno_form label {
+
+}
+
+#anno_form input[type=text] {
+	
+}
+
+#anno_right {
 	width: 17.5%;
 	float:right;
 	background-color: rgb(76,16,9);
@@ -434,13 +442,6 @@ label .error{
 	overflow: auto;	
 }
 
-.anno_form label {
-
-}
-
-.anno_form input[type=text] {
-	
-}
 
 /** The required label **/
 #required_label_div {
@@ -466,18 +467,18 @@ label .error{
 }
 
 /** Title **/
-.anno_title {
+#anno_title {
 	float:left;
 	width: 87.5%;
 	padding: 1em 0;
-	margin: .5em .1em .5em .5em;
+	margin: .5em .1em .5em .5em; /*Change to percentages or auto*/
 	border-top: 1px solid rgb(200,200,200);
 	border-bottom: 1px solid rgb(200,200,200);
 	border-radius: 8px;
 	background: white /*url(images/gradient-lightgray.png) repeat-x top*/;
 }
 
-.anno_title_label {
+#anno_title_label {
 	font-size: 20px;
 	font-weight: bold;
 	padding-left: 0;
@@ -487,7 +488,7 @@ label .error{
 	/*border-bottom: 1px solid grey;*/
 }
 
-.anno_text_title {
+#anno_text_title {
 	height: 2em;
 	font-size: 16px;
 	width: 80%;
@@ -495,7 +496,7 @@ label .error{
 }
 
 /** Description box **/
-.anno_description {
+#anno_description {
 	float:left;
 	clear: left;
 	width: 98.7%;
@@ -508,7 +509,7 @@ label .error{
 	/*margin-top: .5em;*/
 }
 
-.anno_description_label {
+#anno_description_label {
 	font-size: 20px;
 	font-weight: bold;
 	margin-left: 2%;
@@ -516,7 +517,7 @@ label .error{
 	/*border-bottom: 1px solid grey;*/
 }
 
-.anno_textarea {
+#anno_textarea {
 
 }
 
@@ -527,7 +528,7 @@ label .error{
 }
 
 /**The additional info box (optional)**/
-.anno_optional {
+#anno_optional {
 	float:left;
 	clear: left;
 	width: 98.7%;
@@ -540,7 +541,7 @@ label .error{
 	background: white;
 }
 
-.anno_optional_label{
+#anno_optional_label{
 	font-size: 20px;
 	font-weight: bold;
 	margin-left: 2.5%;
@@ -552,7 +553,7 @@ label .error{
 Make one overarching class, and then anything specific can be applied through their specific ID/Class?*/
 
 /** Start Date Input **/
-.anno_start_date {
+#anno_start_date {
 	float:left;
 	width: 95%;
 	padding: .5em 0;
@@ -562,18 +563,18 @@ Make one overarching class, and then anything specific can be applied through th
 	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
-.anno_start_date_label {
+#anno_start_date_label {
 	width: 20%;
 }
 
-.anno_text_start_date {
+#anno_text_start_date {
 	height: 1em;
 	font-size: 16px;
 	width: 75%;
 }
 
 /** End Date Input **/
-.anno_end_date {
+#anno_end_date {
 	float:left;
 	width: 95%;
 	padding: .5em 0;
@@ -583,18 +584,18 @@ Make one overarching class, and then anything specific can be applied through th
 	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
-.anno_end_date_label {
+#anno_end_date_label {
 	width: 20%;
 }
 
-.anno_text_end_date {
+#anno_text_end_date {
 	height: 1em;
 	font-size: 16px;
 	width: 75%;
 }
 
 /** Date input **/
-.anno_date {
+#anno_date {
 	float:left;
 	width: 95%;
 	padding: .5em 0;
@@ -604,19 +605,19 @@ Make one overarching class, and then anything specific can be applied through th
 	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
-.anno_date_label {
+#anno_date_label {
 	float:left;
 	width: 20%;
 }
 
-.anno_text_date {
+#anno_text_date {
 	height: 1em;
 	font-size: 16px;
 	width: 75%;
 }
 
 /** Time input **/
-.anno_time {
+#anno_time {
 	float:left;
 	width: 95%;
 	padding: .5em 0;
@@ -626,19 +627,19 @@ Make one overarching class, and then anything specific can be applied through th
 	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
-.anno_time_label {
+#anno_time_label {
 	float:left;
 	width: 20%;
 }
 
-.anno_text_time {
+#anno_text_time {
 	height: 1em;
 	font-size: 16px;
 	width: 75%;
 }
 
 /** Location input **/
-.anno_location {
+#anno_location {
 	float:left;
 	width: 95%;
 	padding: .5em 0;
@@ -648,23 +649,23 @@ Make one overarching class, and then anything specific can be applied through th
 	background: white url(images/gradient-lightgray.png) repeat-x top;
 }
 
-.anno_location_label {
+#anno_location_label {
 	width: 20%;
 }
 
-.anno_text_location {
+#anno_text_location {
 	height: 1em;
 	font-size: 16px;
 	width: 75%;
 }
 
 /** Categories **/
-.anno_cats {
+#anno_cats {
 	float: right;
 	box-sizing: border-box;
 }
 
-.anno_cats_label {
+#anno_cats_label {
 	font-size: 20px;
 	font-weight: bold;
 	margin: .5em;

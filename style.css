@@ -458,7 +458,10 @@ label .error{
 }
 
 .anno_text {
-
+	height: 1em;
+	font-size: 16px;
+	width: 75%;
+	
 }
 
 .anno_opt_section {
@@ -516,9 +519,7 @@ label .error{
 
 #anno_text_title {
 	height: 2em;
-	font-size: 16px;
 	width: 80%;
-	margin-left: 1em;
 }
 
 /** Description box **/
@@ -564,71 +565,29 @@ label .error{
 Make one overarching class, and then anything specific can be applied through their specific ID/Class?*/
 
 /** Start Date Input **/
-#anno_start_date {
-}
-
-#anno_start_date_label {
-
-}
-
-#anno_text_start_date {
-	height: 1em;
-	font-size: 16px;
-	width: 75%;
-}
+#anno_start_date {}
+#anno_start_date_label {}
+#anno_text_start_date {}
 
 /** End Date Input **/
-#anno_end_date {
-}
-
-#anno_end_date_label {
-
-}
-
-#anno_text_end_date {
-	height: 1em;
-	font-size: 16px;
-	width: 75%;
-}
+#anno_end_date {}
+#anno_end_date_label {}
+#anno_text_end_date {}
 
 /** Date input **/
-#anno_date {
-}
-
-#anno_date_label {
-}
-
-#anno_text_date {
-	height: 1em;
-	font-size: 16px;
-	width: 75%;
-}
+#anno_date {}
+#anno_date_label {}
+#anno_text_date {}
 
 /** Time input **/
-#anno_time {
-}
-
-#anno_time_label {
-}
-
-#anno_text_time {
-	height: 1em;
-	font-size: 16px;
-	width: 75%;
-}
+#anno_time {}
+#anno_time_label {}
+#anno_text_time {}
 
 /** Location input **/
-#anno_location {
-}
-
-#anno_location_label {
-}
-
-#anno_text_location {
-	height: 1em;
-	font-size: 16px;
-	width: 75%;
-}
+#anno_location {}
+#anno_location_label {}
+#anno_text_location {}
 
 /** Categories **/
 #anno_cats {

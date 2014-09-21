@@ -137,7 +137,7 @@ if(!empty($_REQUEST)) {
 			
 			<div class="anno_section" id="anno_title" >
 				<label class="anno_label" id="anno_title_label">Title<span style="color:red">*</span></label>
-				<input name="title" type="text" value="" id="anno_text_title"/>
+				<input name="title" type="text" value="" class="anno_text" id="anno_text_title"/>
 				<br />
 			</div>
 			
@@ -154,31 +154,31 @@ if(!empty($_REQUEST)) {
 				
 				<div class="anno_opt_section" id="anno_start_date">
 					<label class="anno_opt_label" id="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
-					<input id="start_date" name="start_date" type="text" value="" id="anno_text_start_date"/>
+					<input id="start_date" name="start_date" type="text" value="" class="anno_text" id="anno_text_start_date"/>
 					<br />
 				</div>
 			
 				<div class="anno_opt_section" id="anno_end_date">
 					<label class="anno_opt_label" id="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
-					<input id="end_date" name="end_date" type="text" value="" id="anno_text_end_date"/>
+					<input id="end_date" name="end_date" type="text" value="" class="anno_text" id="anno_text_end_date"/>
 					<br />
 				</div>
 				
 				<div class="anno_opt_section" id="anno_date">
 					<label class="anno_opt_label" id="anno_date_label">Actual Date of Event</label>
-					<input id="date" name="date" type="text" value="" id="anno_text_date"/>
+					<input id="date" name="date" type="text" value="" class="anno_text" id="anno_text_date"/>
 					<br />
 				</div>
 				
 				<div class="anno_opt_section" id="anno_time">
 					<label class="anno_opt_label" id="anno_time_label">Time of Event</label>
-					<input name="time" type="text" value="" id="anno_text_time"/>
+					<input name="time" type="text" value="" class="anno_text" id="anno_text_time"/>
 					<br />
 				</div>
 				
 				<div class="anno_opt_section" id="anno_location">
 					<label class="anno_opt_label" id="anno_location_label">Location</label>
-					<input name="location" type="text" value="" id="anno_text_location"/>
+					<input name="location" type="text" value="" class="anno_text" id="anno_text_location"/>
 					<br />
 				</div>
 			</div>

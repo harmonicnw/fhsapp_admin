@@ -1,21 +1,30 @@
 body {
+	font-family: arial;
+}
 
+h1 {
+	text-align: center;
 }
 
 h2 {
 	text-align: center;
 }
 
-.title_wrapper {
+p:first-child {
+	display: inline;
+}
 
+.title_wrapper {
+	font-family: "Arial Black", Gadget, sans-serif
 }
 
 #title {
-
+	font-size: 36px;
 }
 
 #subtitle {
-
+	font-family: "Arial Black", Gadget, sans-serif;
+	font-size: 20px;
 }
 
 .announcement_block {
@@ -23,7 +32,10 @@ h2 {
 }
 
 .anno_block_heading {
-
+	font-family: "Arial Black", Gadget, sans-serif;
+	font-size: 20;
+	border: black solid 3px;
+	padding: 10px 0;
 }
 
 .gen_list {
@@ -31,11 +43,11 @@ h2 {
 }
 
 .gen_list_item {
-
+	font-size: 16px;
 }
 
 .gen_anno_title {
-
+	font-weight: bold;
 }
 
 .gen_anno_description {
@@ -43,7 +55,13 @@ h2 {
 }
 
 #newTimely {
+	font-weight: bold;
+}
 
+#newTimely li {
+	list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 #newTimelyHeading {

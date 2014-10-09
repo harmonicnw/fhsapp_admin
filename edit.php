@@ -159,83 +159,85 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 		
 	</div>	
 	
-	<div class="create_wrapper">
+	<div id="create_wrapper">
 		
 		<form id="form" method="get" action="edit.php?anno_id=<?php echo $_REQUEST['anno_id']; ?>" class="anno_form">
 			<!--<label></label>
 			<input name="" type="text" value=""/>
 			<br />-->
-			<div class="anno_left">
+			<div id="anno_left">
 			
-			<div id="required_label_div">
-				<label id="required_label"><span style="color:red">*</span> - Required</label>
-			</div>
-			
-			<div class="anno_title">
-				<label class="anno_title_label">Title<span style="color:red">*</span></label>
-				<input name="title" type="text" value="<?php echo $title;?>" class="anno_text_title"/>
+			<div class="anno_section" id="anno_title" >
+				<label class="anno_label" id="anno_title_label">Title<span style="color:red">*</span></label>
+				<input name="title" type="text" value="<?php echo $title;?>" class="anno_text" id="anno_text_title"/>
 				<br />
 			</div>
 			
-			<div class="anno_description">
-				<label class="anno_description_label">Description<span style="color:red">*</span></label>
+			<div class="anno_section" id="anno_description">
+				<label class="anno_label" id="anno_description_label">Description<span style="color:red">*</span></label>
 				<div class="mcedummy">
-					<textarea name="description" rows="5" col="50"><?php echo $description;?></textarea>
+					<textarea name="description" rows="5" col="50" id="anno_textarea"><?php echo $description;?></textarea>
 				</div>
 				<br />
 			</div>
 			
-			<div class="anno_optional">
-				<label class="anno_optional_label">Additional Information:</label>
-				
-				<div class="anno_start_date">
-					<label class="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
-					<input id="start_date" name="start_date" type="text" value="<?php echo $start_date;?>" class="anno_text_start_date"/>
+			<div class="anno_section" id="anno_start_end">
+				<div class="anno_se_section" id="anno_start_date">
+					<label class="anno_opt_label" id="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
+					<input name="start_date" type="text" value="<?php echo $start_date;?>" id="anno_text_start_date" class="anno_text"/>
 					<br />
 				</div>
 				
-				<div class="anno_end_date">
-					<label class="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
-					<input id="end_date" name="end_date" type="text" value="<?php echo $end_date;?>" class="anno_text_end_date"/>
+				<div class="anno_se_section" id="anno_end_date">
+					<label class="anno_opt_label" id="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
+					<input name="end_date" type="text" value="<?php echo $end_date;?>" id="anno_text_end_date" class="anno_text" />
 					<br />
 				</div>
+			</div>
 			
-				<div class="anno_date">
-					<label class="anno_date_label">Actual Date of Event</label>
-					<input id="date" name="date" type="text" value="<?php if($date != "0000-00-00"){echo $date;}?>" class="anno_text_date"/>
+			<div class="anno_section" id="anno_optional">	
+				<label class="anno_label" id="anno_optional_label">Additional Information:</label>
+			
+				<div class="anno_opt_section" id="anno_date">
+					<label class="anno_opt_label" id="anno_date_label">Actual Date of Event</label>
+					<input id="date" name="date" type="text" value="<?php if($date != "0000-00-00"){echo $date;}?>" class="anno_text" id="anno_text_date"/>
 					<br />
 				</div>
 				
-				<div class="anno_time">
-					<label class="anno_time_label">Time of Event</label>
-					<input name="time" type="text" value="<?php echo $time;?>" class="anno_text_time"/>
+				<div class="anno_opt_section" id="anno_time">
+					<label class="anno_opt_label" id="anno_time_label">Time of Event</label>
+					<input name="time" type="text" value="<?php echo $time;?>" class="anno_text" id="anno_text_time"/>
 					<br />
 				</div>
 				
-				<div class="anno_location">
-					<label class="anno_location_label">Location</label>
-					<input name="location" type="text" value="<?php echo $location;?>" class="anno_text_location"/>
+				<div class="anno_opt_section" id="anno_location">
+					<label class="anno_opt_label" id="anno_location_label">Location</label>
+					<input name="location" type="text" value="<?php echo $location;?>" class="anno_text" id="anno_text_location"/>
 					<br />
 				</div>
 				
 				<input name="anno_id" type="hidden" value="<?php echo $anno_id;?>"/>
+			</div>
+			
+			<div id="anno_corner">
+				<div id="required_label_div">
+					<label id="required_label"><span style="color:red">*</span> - Required</label>
+				</div>
 				
+				<div id="anno_submit">
+					<input type="submit" class="button" id="anno_submit_button" value="Create Announcement" />
+				</div>
+			
+				<div id="anno_cancel">
+					<a class="button" id="anno_cancel_button" href="main.php?current=1">Cancel</a>
+				</div>
 			</div>
 			
-			<div class="anno_submit">
-				<input type="submit" class="button" id="anno_submit_button" value="Create Announcement" />
-			</div>
-			<br />
-			
-			<div class="anno_cancel">
-				<a class="button" id="anno_cancel_button" href="main.php?current=1">Cancel</a>
 			</div>
 			
-			</div>
-			
-			<div class="anno_right">
+			<div id="anno_right">
 			<div class="anno_cats">
-				<label class="anno_cats_label">Categories<span style="color:red">*</span></label>
+				<label id="anno_cats_label">Categories<span style="color:red">*</span></label>
 			<!--Gonna need to check if these are checked too...-->
 			<?php
 			if($admin_p) {
@@ -380,7 +382,6 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 	<script type="text/javascript">
 		initLRHeight();
 		initDescrHeight();
-		
 	</script>
 	
 	<?php $error->check_error(); ?>

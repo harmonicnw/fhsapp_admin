@@ -131,8 +131,6 @@ if(!empty($_REQUEST)) {
 			<br />-->
 			<div id="anno_left">
 			
-			
-			
 			<div class="anno_section" id="anno_title" >
 				<label class="anno_label" id="anno_title_label">Title<span style="color:red">*</span></label>
 				<input name="title" type="text" value="" class="anno_text" id="anno_text_title"/>
@@ -298,7 +296,6 @@ if(!empty($_REQUEST)) {
 	<script type="text/javascript">
 		initLRHeight();
 		initDescrHeight();
-		//initTinymce();
 	</script>
 	
 	<?php $error->check_error(); ?>

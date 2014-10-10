@@ -674,6 +674,7 @@ Make one overarching class, and then anything specific can be applied through th
 #anno_cats {
 	float: right;
 	box-sizing: border-box;
+	height: 100%;
 }
 
 #anno_cats_label {

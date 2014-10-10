@@ -407,6 +407,18 @@ label .error{
 	height: 100%;
 }*/
 
+.club_wrapper {
+	clear: both;
+}
+
+.sports_wrapper {
+	clear: both;
+}
+
+#staff_info {
+	clear: both;
+}
+
 /*Create Announcement CSS********************************************************************************************************/
 #create_wrapper {
 	margin-top: 40px;

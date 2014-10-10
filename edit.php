@@ -132,9 +132,9 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 				}
 			});
 			
-			$("#start_date").datepicker({ dateFormat: "yy-mm-dd" });
-			$("#end_date").datepicker({ dateFormat: "yy-mm-dd" });
-			$("#date").datepicker({ dateFormat: "yy-mm-dd" });
+			$("#anno_text_start_date").datepicker({ dateFormat: "yy-mm-dd" });
+			$("#anno_text_end_date").datepicker({ dateFormat: "yy-mm-dd" });
+			$("#anno_text_date").datepicker({ dateFormat: "yy-mm-dd" });
 		}
 		
 		

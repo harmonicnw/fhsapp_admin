@@ -936,3 +936,7 @@ pre {
 .help_links li a{
 	text-decoration: none;
 }
+
+.help h2{
+	padding-top: 45px;
+}

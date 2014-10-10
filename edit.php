@@ -225,7 +225,7 @@ DONE-Grab the subtypes from db so you can check them. Remember checked="checked"
 				</div>
 				
 				<div id="anno_submit">
-					<input type="submit" class="button" id="anno_submit_button" value="Create Announcement" />
+					<input type="submit" class="button" id="anno_submit_button" value="Update Announcement" />
 				</div>
 			
 				<div id="anno_cancel">

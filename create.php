@@ -116,6 +116,7 @@ if(!empty($_REQUEST)) {
 		<img class="logo" src="images/daytime.png">
 		<img class="beta" src="images/betterbeta.png">
 		<h1>FHS APP	</h1>
+		<a href="help.php"><img class="help" src="images/help-icon.png" alt="help-icon"></a>
 
 		<?php
 		$header = new header();

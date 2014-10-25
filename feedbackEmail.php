@@ -1,5 +1,5 @@
 <?php
-	$email = "dustindiep0@gmail.com";
+	$email = "fhsapp.contact@gmail.com";
 	$grade = $_POST['grade'];
 	$feedback = $_POST['feedback'];
 	$e_subject = "Feedback";

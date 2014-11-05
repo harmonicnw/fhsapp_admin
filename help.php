@@ -77,7 +77,7 @@ c_cookie::assist_log();
 <h2 id="teachers">For Teachers</h2>
 <h3>Help video</h3>
 
-<p><iframe width="630" height="425" src="//www.youtube.com/embed/LbNl3J8HXw4" frameborder="0" allowfullscreen></iframe></p>
+<p><iframe width="630" height="425" src="//www.youtube.com/embed/iRPp7ObMMc0" frameborder="0" allowfullscreen></iframe></p>
 
 <h3>Making an announcement</h3>
 	<p><img src="images/instructions-home.png" alt="instructions-home"></p>

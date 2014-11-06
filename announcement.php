@@ -6,7 +6,7 @@ include('include_classes.php');
 include('php_classes/anno.class.php');
 include('functions.php');
 
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 $db = new Db($dbConfig);
@@ -22,48 +22,18 @@ $club_p = $_SESSION['club'];
 $sports_p = $_SESSION['sports'];
 $staff_p = $_SESSION['staff'];
 
-$submit = $_REQUEST['submit']; //?Make a variable called submit that goes through request. If you're just coming to the page, submit should't exist.
+$submitted = $_REQUEST['submitted']; //?Make a variable called submit that goes through request. If you're just coming to the page, submit should't exist.
 $page_type = $_REQUEST['page_type']; //?We are going to have to add this in. page_type can equal "create" or "edit"
 
 //*Check the page_type. If "create", start creating
-if($submit = "true") {
-	//anno object will be instantiated here.
+if($submitted == "true") {
+	$anno = new anno();
+	$check_subtype = $anno->set_subtype_ids();
 	
-	$subtype_ids; //?This will exist in the object later.
-	
-	if(isset($_REQUEST['check']) && !empty($_REQUEST['check'])) { //*Check to see if the checkboxes have been checked
-		//*This should get placed in the object
-		$subtype_ids = $_REQUEST['check']; //*The checkbox data
-	} 
-	
-	if(!empty($subtype_ids) {
+	if(!$check_subtype) {
 		if($page_type = "create") {
-			//*Insert the actual announcement into the announcement table //?These will all be variables in the object
-			$title = mysql_real_escape_string($_REQUEST['title']);
-			$description = mysql_real_escape_string( $_REQUEST['description'] );
-			$start_date = mysql_real_escape_string( $_REQUEST['start_date']);
-			$end_date = mysql_real_escape_string( $_REQUEST['end_date']);
-			$date = mysql_real_escape_string($_REQUEST['date']);
-			$location = mysql_real_escape_string($_REQUEST['location']);
-			$time = mysql_real_escape_string($_REQUEST['time']);
-			
-			$query = "INSERT INTO announcements(title, description, start_date, end_date, date, location, time, author) VALUES('$title', '$description', '$start_date', '$end_date', '$date', '$location', '$time', '$user_id');";
-			mysql_query($query);
-			
-			//*Insert the anno_subtype relationship into its table
-			$anno_id = mysql_insert_id();
-
-			foreach($subtype_ids as $subtype_id) {
-				$query = "INSERT INTO anno_subtype(anno_id, subtype_id) VALUES('$anno_id', '$subtype_id');";
-				mysql_query($query);
-			}
-			
-			//*Redirect to main page
-			header("Location: main.php?current=1");
-		}
-	} else {                                                      //*If there is no checkbox checked, throw up an error.
-		$message = "You must check a category.";
-		$error->set_message($message);
+			$anno->create_announcement();
+		} 
 	}
 }
 
@@ -75,7 +45,7 @@ if($submit = "true") {
 
 <head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
-	<title>Create Announcement</title>
+	<title>Announcement</title>
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 	<!--Credit: http://jqueryvalidation.org/-->
 	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
@@ -304,6 +274,9 @@ if($submit = "true") {
 				}
 				?>
 			</div>
+				
+			<input name="submitted" type="hidden" value="true"/>
+			<input name="page_type" type="hidden" value="<?php echo $page_type; ?>"/>
 				
 			<br />
 		</form>

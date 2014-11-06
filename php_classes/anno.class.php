@@ -43,7 +43,8 @@ class anno {
 	}
 	
 	private function insert_data() {
-		$query = "INSERT INTO announcements(title, description, start_date, end_date, date, location, time, author) VALUES('$title', '$description', '$start_date', '$end_date', '$date', '$location', '$time', '$user_id');";
+		//?This might need to be more like '".$this->title."' etc.
+		$query = "INSERT INTO announcements(title, description, start_date, end_date, date, location, time, author) VALUES('$this->title', '$this->description', '$this->start_date', '$this->end_date', '$this->date', '$this->location', '$this->time', '$this->user_id');";
 		mysql_query($query);
 		
 		$this->anno_id = mysql_insert_id();

@@ -1,0 +1,25 @@
+body{
+	border: 10px ridge blue; 
+	font-family: 'Poiret One', cursive;
+	text-align: center;
+	
+}
+
+.wrapper{
+	padding: 30px 20px;
+	position: relative;
+}
+
+h2{
+	border-bottom: 1px solid black;
+	margin: 0px 290px;
+	
+}
+
+.ribbon{
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	width: 80px;
+	height: auto;
+}

@@ -225,7 +225,7 @@ if(!$subtype_id) {
 					function initEmptyTable() {	
 						if($("tbody tr").length == 0) {
 							console.log("tbody is empty");
-							$("tbody").html("<tr class='table_empty'><td colspan='5'>No announcements! To make some, go to \"Add Announcement\" or click <a href='create.php'>here.</a></td></tr>"); //Make something so that it shows a row that says "MAKE A NEW ANNOUNCMENT"
+							$("tbody").html("<tr class='table_empty'><td colspan='5'>No announcements! To make some, go to \"Add Announcement\" or click <a href='announcements.php?page_type=create'>here.</a></td></tr>"); //Make something so that it shows a row that says "MAKE A NEW ANNOUNCMENT"
 						}
 					}
 					

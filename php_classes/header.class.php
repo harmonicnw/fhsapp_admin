@@ -31,7 +31,7 @@ class header {
 	
 	private function add_announcement_button() {
 		$html = '
-		<a href="create.php">
+		<a href="announcement.php?page_type=create">
 			<div class="button" id="add_announcements_button">Add Announcement</div>
 			<img class="add_image" src="images/add.png" /> <!--Icons by DryIcons-->
 			</div>

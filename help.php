@@ -40,6 +40,9 @@ c_cookie::assist_log();
 		<img class="beta" src="images/betterbeta.png">
 		<h1>FHS APP	</h1>
 		<a href="help.php"><img class="help" src="images/help-icon.png" alt="help-icon"></a>
+		<div class="buttons">
+		<a class="button" id="home_button" href="main.php?current=1">Home</a>
+		</div>
 	</div>	
 	<ul class="help_links">
 		<li><a data-target="Home" href="#">Home</a></li>

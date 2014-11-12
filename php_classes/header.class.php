@@ -5,6 +5,7 @@ class header {
 	public function generate_header() {
 		
 		echo '<div class="buttons">';
+		
 		//$this->add_feedback_button();
 		$this->home_button();
 		$this->log_out_button();

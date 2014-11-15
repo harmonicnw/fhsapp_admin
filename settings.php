@@ -47,7 +47,8 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 		if(empty($existing_periods)) {
 			for($i = 0; $i < count($periods); $i++) {
 				$period_number = $i + 1;
-				$query = "INSERT INTO subtype(name, type_id, author_id, period) VALUES ('$periods[$i]', '2', '$user_id', '$period_number');";
+				$period = addslashes($periods[$i]);
+				$query = "INSERT INTO subtype(name, type_id, author_id, period) VALUES ('$period', '2', '$user_id', '$period_number');";
 				mysql_query($query);
 			}
 			
@@ -88,6 +89,8 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 		$club_count = 0;
 		foreach ($clubs as $club) { //*$club is the name of the club
 			if(!empty($club)) {
+				//?Thing to remove stuff for quotes
+				$club = addslashes($club);
 				foreach($existing_clubs as $existing_club) { //*$existing_club is an array comprised of id, name
 					if($clubs_id[$club_count] == $existing_club['id']) {
 						$query = "UPDATE subtype SET name='$club' WHERE id='{$existing_club['id']}';";
@@ -152,6 +155,7 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 		
 		$sports_count = 0;
 		foreach($sports_name as $sport) { //*$sport is the name of the sport
+			$sport = addslashes($sport);
 			foreach($existing_sports as $existing_sport) { //*$existing_sport is an array comprised of id, name
 				if($sports_id[$sports_count] == $existing_sport['id']) {
 					$query = "UPDATE subtype SET name='$sport' WHERE id='{$existing_sport['id']}'";
@@ -206,7 +210,7 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 		$staff_count = 0;
 		foreach($staff_name as $staff) { //$staff is the name of staff						
 			$existing_st = false;
-			
+			$staff = addslashes($staff);
 			foreach($existing_staffs as $existing_staff) { //this was all copy-pasta'd by the way, might b rong
 				if($staff_id[$staff_count] == $existing_staff['id']) {
 					$query = "UPDATE subtype SET name='$staff' WHERE id='{$existing_staff['id']}'";

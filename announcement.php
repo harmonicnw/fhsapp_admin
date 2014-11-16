@@ -23,19 +23,39 @@ $sports_p = $_SESSION['sports'];
 $staff_p = $_SESSION['staff'];
 
 $submitted = $_REQUEST['submitted']; //?Make a variable called submit that goes through request. If you're just coming to the page, submit should't exist.
-$page_type = $_REQUEST['page_type']; //?We are going to have to add this in. page_type can equal "create" or "edit"
+$page_type = strtolower($_REQUEST['page_type']); //?We are going to have to add this in. page_type can equal "create" or "edit"
+
+$anno = new anno(); //pass create/edit in the constructor and set it up from there
 
 //*Check the page_type. If "create", start creating
 if($submitted == "true") {
-	$anno = new anno();
 	$check_subtype = $anno->set_subtype_ids();
 	
 	if(!$check_subtype) {
-		if($page_type = "create") {
+		if($page_type == "create") {
 			$anno->create_announcement();
-		} 
+		} else if ($page_type == "edit") {
+			$anno->edit_announcement();
+		}
+	}
+	
+} else {
+	if ($page_type == "edit") {
+		$anno->get_anno_id();
+	
+		$query = "SELECT * FROM announcements WHERE id='{$anno->anno_id}'";
+		$anno_info = $db->runQuery($query);
+		$anno->set_info($anno_info[0], false);
+		
+		
+		//*Also gonna need the anno_subtype relationships so you know what to check.
+		$query = "SELECT * FROM anno_subtype WHERE anno_id='{$anno->anno_id}'";
+		$anno->anno_cb = $db->runQuery($query); //*This is where the the checkbox info is
+		//redirect here maybe?
 	}
 }
+
+
 
 ?>
 
@@ -118,7 +138,7 @@ if($submitted == "true") {
 			
 			<div class="anno_section" id="anno_title" >
 				<label class="anno_label" id="anno_title_label">Title<span style="color:red">*</span></label>
-				<input name="title" type="text" value="" class="anno_text" id="anno_text_title"/>
+				<input name="title" type="text" value="<?php echo $anno->title;?>" class="anno_text" id="anno_text_title"/>
 				<br />
 			</div>
 			
@@ -136,7 +156,7 @@ if($submitted == "true") {
 			<div class="anno_section" id="anno_description">
 				<label class="anno_label" id="anno_description_label">Description<span style="color:red">*</span></label>
 				<div class="mcedummy">
-					<textarea name="description" rows="5" col="50" id="anno_textarea"></textarea>
+					<textarea name="description" rows="5" col="50" id="anno_textarea"><?php echo $anno->description;?></textarea>
 				</div>
 				<br />
 			</div>
@@ -144,13 +164,13 @@ if($submitted == "true") {
 			<div class="anno_section" id="anno_start_end">
 				<div class="anno_se_section" id="anno_start_date">
 					<label class="anno_opt_label" id="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
-					<input name="start_date" type="text" value="" id="anno_text_start_date" class="anno_text" />
+					<input name="start_date" type="text" value="<?php echo $anno->start_date;?>" id="anno_text_start_date" class="anno_text" />
 					<br />
 				</div>
 			
 				<div class="anno_se_section" id="anno_end_date">
 					<label class="anno_opt_label" id="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
-					<input name="end_date" type="text" value="" id="anno_text_end_date" class="anno_text" />
+					<input name="end_date" type="text" value="<?php echo $anno->end_date;?>" id="anno_text_end_date" class="anno_text" />
 					<br />
 				</div>
 			</div>
@@ -160,21 +180,23 @@ if($submitted == "true") {
 				
 				<div class="anno_opt_section" id="anno_date">
 					<label class="anno_opt_label" id="anno_date_label">Actual Date of Event</label>
-					<input id="date" name="date" type="text" value="" class="anno_text" id="anno_text_date"/>
+					<input id="date" name="date" type="text" value="<?php if($anno->date != "0000-00-00"){echo $anno->date;}?>" class="anno_text" id="anno_text_date"/>
 					<br />
 				</div>
 				
 				<div class="anno_opt_section" id="anno_time">
 					<label class="anno_opt_label" id="anno_time_label">Time of Event</label>
-					<input name="time" type="text" value="" class="anno_text" id="anno_text_time"/>
+					<input name="time" type="text" value="<?php echo $anno->time;?>" class="anno_text" id="anno_text_time"/>
 					<br />
 				</div>
 				
 				<div class="anno_opt_section" id="anno_location">
 					<label class="anno_opt_label" id="anno_location_label">Location</label>
-					<input name="location" type="text" value="" class="anno_text" id="anno_text_location"/>
+					<input name="location" type="text" value="<?php echo $anno->location;?>" class="anno_text" id="anno_text_location"/>
 					<br />
 				</div>
+				
+				<input name="anno_id" type="hidden" value="<?php echo $anno->anno_id;?>"/>
 			</div>
 			
 			<div id="anno_corner">
@@ -183,7 +205,7 @@ if($submitted == "true") {
 				</div>
 				
 				<div id="anno_submit">
-					<input type="submit" class="button" id="anno_submit_button" value="Create Announcement" />
+					<input type="submit" class="button" id="anno_submit_button" value="<?php echo ($page_type == "create" ? "Create" : ($page_type == "edit" ? "Update" : "") )?> Announcement" />
 				</div>
 			
 				<div id="anno_cancel">
@@ -202,13 +224,35 @@ if($submitted == "true") {
 					$query = "SELECT * FROM subtype WHERE type_id = '1'";
 					$generals = $db->runQuery($query);
 					echo "<div class='cat_div'><label class='cat_label'>General:</label><br />";
-					foreach($generals as $general) {
-						$id = $general['id'];
-						$name = $general['name'];
-						if(!empty($name)) {
-							echo '<label class="cat_subtype_label">'.$name.':</label>
-							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-							<br />';
+					if($page_type == "create") {	
+						foreach($generals as $general) {
+							$id = $general['id'];
+							$name = $general['name'];
+							if(!empty($name)) {
+								echo '<label class="cat_subtype_label">'.$name.':</label>
+								<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
+								<br />';
+							}
+						}
+					} else if ($page_type == "edit") {
+						foreach($generals as $general) {
+							$checked = false;
+							$id = $general['id'];
+							$name = $general['name'];
+							foreach($anno->anno_cb as $anno_cbc) {
+								if($anno_cbc['subtype_id']==$id) {
+									echo '<label class="cat_subtype_label">'.$name.':</label>
+									<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
+									<br />';
+									$checked = true;
+									break;
+								}
+							}
+							if(!$checked) {
+								echo '<label class="cat_subtype_label">'.$name.':</label>
+								<input name="check[]" type="checkbox" value="'.$id.'" />
+								<br />';
+							}
 						}
 					}
 					echo "</div>";
@@ -218,29 +262,78 @@ if($submitted == "true") {
 					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='2'";
 					$periods = $db->runQuery($query);
 					echo "<div class='cat_div'><label class='cat_label'>Classes:</label><br />";
-						foreach($periods as $period) {
-						$id = $period['id'];
-						$name = $period['name'];
-						$number = $period['period'];
-						if(!empty($name)) {
-							echo '<label class="cat_subtype_label">Period '.$number.': '.$name.'</label>
-							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-							<br />';
+						if($page_type == "create") {
+							foreach($periods as $period) {
+								$id = $period['id'];
+								$name = $period['name'];
+								$number = $period['period'];
+								if(!empty($name)) {
+									echo '<label class="cat_subtype_label">Period '.$number.': '.$name.'</label>
+									<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
+									<br />';
+								}
+							}
+						} else if($page_type == "edit") {
+							foreach($periods as $period) {
+								$checked = false;
+								$id = $period['id'];
+								$name = $period['name'];
+								$number = $period['period'];
+								
+								foreach($anno->anno_cb as $anno_cbc) {
+									if($anno_cbc['subtype_id']==$id) {
+										echo '<label class="cat_subtype_label">Period '.$number.': '.$name.'</label>
+										<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
+										<br />';
+										$checked = true;
+										break;
+									}
+								}
+								
+								if(!$checked) {
+									echo '<label class="cat_subtype_label">Period '.$number.': '.$name.'</label>
+									<input name="check[]" type="checkbox" value="'.$id.'" />
+									<br />';
+								}
+							}	
 						}
-					}
+					
 					echo "</div>";
 				}
+				
 				
 				if($club_p) {
 					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='3'";
 					$clubs = $db->runQuery($query);
 					echo "<div class='cat_div'><label class='cat_label'>Club(s):</label><br />";
-					foreach($clubs as $club) {
-						$id = $club['id'];
-						$name = $club['name'];
-						echo '<label class="cat_subtype_label">'.$name.':</label>
-						<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-						<br />';
+					if($page_type == "create") {	
+						foreach($clubs as $club) {
+							$id = $club['id'];
+							$name = $club['name'];
+							echo '<label class="cat_subtype_label">'.$name.':</label>
+							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
+							<br />';
+						}
+					} else if ($page_type == "edit"){
+						foreach($clubs as $club) {
+							$checked = false;
+							$id = $club['id'];
+							$name = $club['name'];
+							foreach($anno->anno_cb as $anno_cbc) {
+								if($anno_cbc['subtype_id']==$id) {
+									echo '<label class="cat_subtype_label">'.$name.':</label>
+									<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
+									<br />';
+									$checked = true;
+									break;
+								}
+							}
+							if(!$checked) {
+								echo '<label class="cat_subtype_label">'.$name.':</label>
+								<input name="check[]" type="checkbox" value="'.$id.'" />
+								<br />';
+							}
+						}
 					}
 					echo "</div>";
 				}
@@ -249,12 +342,34 @@ if($submitted == "true") {
 					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='4'";
 					$sports = $db->runQuery($query);
 					echo "<div class='cat_div'><label class='cat_label'>Sport(s):</label><br />";
-					foreach($sports as $sport) {
-						$id = $sport['id'];
-						$name = $sport['name'];
-						echo '<label class="cat_subtype_label">'.$name.':</label>
-						<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-						<br />';
+					if($page_type == "create") {	
+						foreach($sports as $sport) {
+							$id = $sport['id'];
+							$name = $sport['name'];
+							echo '<label class="cat_subtype_label">'.$name.':</label>
+							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
+							<br />';
+						}
+					} else if ($page_type == "edit") {
+						foreach($sports as $sport) {
+							$checked = false;
+							$id = $sport['id'];
+							$name = $sport['name'];
+							foreach($anno->anno_cb as $anno_cbc) {
+								if($anno_cbc['subtype_id']==$id) {
+									echo '<label class="cat_subtype_label">'.$name.':</label>
+									<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
+									<br />';
+									$checked = true;
+									break;
+								}
+							}
+							if(!$checked) {
+								echo '<label class="cat_subtype_label">'.$name.':</label>
+								<input name="check[]" type="checkbox" value="'.$id.'" />
+								<br />';
+							}
+						}
 					}
 					echo "</div>";
 				}
@@ -263,12 +378,34 @@ if($submitted == "true") {
 					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='5'";
 					$staffs = $db->runQuery($query);
 					echo "<div class='cat_div'><label class='cat_label'>Faculty(s):</label><br />";
-					foreach($staffs as $staff) {
-						$id = $staff['id'];
-						$name = $staff['name'];
-						echo '<label class="cat_subtype_label">'.$name.':</label>
-						<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-						<br />';
+					if($page_type == "create") {
+						foreach($staffs as $staff) {
+							$id = $staff['id'];
+							$name = $staff['name'];
+							echo '<label class="cat_subtype_label">'.$name.':</label>
+							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
+							<br />';
+						}
+					} else if ($page_type == "edit") {
+						foreach($staffs as $staff) {
+							$checked = false;
+							$id = $staff['id'];
+							$name = $staff['name'];
+							foreach($anno->anno_cb as $anno_cbc) {
+								if($anno_cbc['subtype_id']==$id) {
+									echo '<label class="cat_subtype_label">'.$name.':</label>
+									<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
+									<br />';
+									$checked = true;
+									break;
+								}
+							}
+							if(!$checked) {
+								echo '<label class="cat_subtype_label">'.$name.':</label>
+								<input name="check[]" type="checkbox" value="'.$id.'" />
+								<br />';
+							}
+						}
 					}
 					echo "</div>";
 				}

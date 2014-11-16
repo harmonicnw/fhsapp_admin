@@ -74,7 +74,7 @@ $staff_p = $_SESSION['staff'];
 			$date = $info['date'];
 			$location = $info['location'];
 			$time = $info['time'];
-		} 
+		}
 		
 		//*Also gonna need the anno_subtype relationships so you know what to check.
 		$query = "SELECT * FROM anno_subtype WHERE anno_id='$anno_id'";

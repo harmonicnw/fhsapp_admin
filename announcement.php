@@ -31,7 +31,7 @@ $anno = new anno(); //pass create/edit in the constructor and set it up from the
 if($submitted == "true") {
 	$check_subtype = $anno->set_subtype_ids();
 	
-	if(!$check_subtype) {
+	if($check_subtype) {
 		if($page_type == "create") {
 			$anno->create_announcement();
 		} else if ($page_type == "edit") {
@@ -130,7 +130,7 @@ if($submitted == "true") {
 	</div>	
 
 	<div id="create_wrapper">	
-		<form id="form" method="get" action="create.php" class="anno_form">
+		<form id="form" method="get" action="announcement.php?<?php echo "page_type=".$page_type; if($page_type == "edit") {echo "&anno_id=".$anno->anno_id;}?>" class="anno_form">
 			<!--<label></label>
 			<input name="" type="text" value=""/>
 			<br />-->

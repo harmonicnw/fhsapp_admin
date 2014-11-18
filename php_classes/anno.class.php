@@ -1,7 +1,7 @@
 <?php
 
 class anno {
-
+	public $user_id;
 	public $subtype_ids;
 	
 	public $title;
@@ -43,6 +43,7 @@ class anno {
 	}
 	
 	public function set_info($info, $submitted) {
+			$this->user_id = $_SESSION['user_id'];
 			if($submitted) {
 				/*foreach($info as $i) { //?I don't know if this works, so manual escaping for now
 					$i = mysql_real_escape_string($i);

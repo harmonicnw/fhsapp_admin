@@ -157,7 +157,7 @@ if(!$subtype_id) {
 								$cats = $db->runQuery($query);
 							
 								//*Title
-								echo '<td class="anno_row_title"><a href="edit.php?anno_id='.$announcement["id"].'">'.$announcement["title"].'</a></td>';
+								echo '<td class="anno_row_title"><a href="announcement.php?page_type=edit&anno_id='.$announcement["id"].'">'.$announcement["title"].'</a></td>';
 							
 								/*Categories
 								echo'<td class="anno_row_cats">';
@@ -177,7 +177,7 @@ if(!$subtype_id) {
 								echo '<td class="anno_row_end_date">'.$announcement["end_date"].'</td>'; //?make betterer later
 						
 								//*Edit link
-								echo '<td class="anno_row_edit"><a href="edit.php?anno_id='.$announcement["id"].'">Edit<a></td>';
+								echo '<td class="anno_row_edit"><a href="announcement.php?page_type=edit&anno_id='.$announcement["id"].'">Edit<a></td>';
 						
 								//*Delete link (still need to write this)
 								echo '<td class="anno_row_delete"><a href="delete.php?anno_id='.$announcement["id"].'&current_id='.$subtype_id.'" class="delete_link">Delete<a></td>';
@@ -190,7 +190,7 @@ if(!$subtype_id) {
 							$cats = $db->runQuery($query);
 							
 							//*Title
-							echo '<td class="anno_row_title"><a href="edit.php?anno_id='.$announcement["id"].'">'.$announcement["title"].'</a></td>';
+							echo '<td class="anno_row_title"><a href="announcement.php?page_type=edit&anno_id='.$announcement["id"].'">'.$announcement["title"].'</a></td>';
 							
 							//*Categories
 							/*echo'<td class="anno_row_cats">';
@@ -210,7 +210,7 @@ if(!$subtype_id) {
 							echo '<td class="anno_row_end_date">'.$announcement["end_date"].'</td>'; //?make betterer later
 						
 							//*Edit link
-							echo '<td class="anno_row_edit"><a href="edit.php?anno_id='.$announcement["id"].'">Edit<a></td>';
+							echo '<td class="anno_row_edit"><a href="announcement.php?page_type=edit&anno_id='.$announcement["id"].'">Edit<a></td>';
 						
 							//*Delete link (still need to write this)
 							echo '<td class="anno_row_delete"><a href="delete.php?anno_id='.$announcement["id"].'&current_id='.$subtype_id.'" class="delete_link">Delete<a></td>';

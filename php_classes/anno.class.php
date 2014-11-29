@@ -1,6 +1,8 @@
 <?php
 
 class anno {
+	public $page_type;
+
 	public $user_id;
 	public $subtype_ids;
 	
@@ -16,6 +18,10 @@ class anno {
 	
 	public $anno_cb;
 
+	public function __construct($page_type) {
+		$this->page_type = $page_type;
+	}
+	
 	public function create_announcement() {
 		$this->set_info($_REQUEST, true);
 		$this->insert_data();
@@ -104,6 +110,60 @@ class anno {
 			mysql_query($query);
 		}
 	}
+	#end
+	
+	#region checkboxes
+	public function create_cb($subtypes, $title) {
+		echo "<div class='cat_div'><label class='cat_label'>".$title."</label><br />";
+		if($this->page_type == "create") {	
+			foreach($subtypes as $subtype) {
+				$id = $subtype['id'];
+				$name = $subtype['name'];
+				
+				if(!empty($name)) {
+				
+					if(isset($subtype['period']) && $subtype['period'] != "0") {
+						$name = $subtype['period'] . ': ' . $name;
+					}
+				
+					echo '<label class="cat_subtype_label">'.$name.':</label>
+					<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
+					<br />';
+				}
+			}
+		} else if ($this->page_type == "edit") {
+			foreach($subtypes as $subtype) {
+				$checked = false;
+				$id = $subtype['id'];
+				$name = $subtype['name'];
+				foreach($this->anno_cb as $anno_cbc) {
+					if($anno_cbc['subtype_id']==$id && !empty($name)) {
+					
+						if(isset($subtype['period']) && $subtype['period'] != "0") {
+							$name = $subtype['period'] . ': ' . $name;
+						}
+						
+						echo '<label class="cat_subtype_label">'.$name.':</label>
+						<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
+						<br />';
+						$checked = true;
+						break;
+					}
+				}
+				if(!$checked) {
+					if(isset($subtype['period']) && $subtype['period'] != "0") {
+						$name = $subtype['period'] . ': ' . $name;
+					}
+				
+					echo '<label class="cat_subtype_label">'.$name.':</label>
+					<input name="check[]" type="checkbox" value="'.$id.'" />
+					<br />';
+				}
+			}
+		}
+		echo "</div>";
+	}
+	
 	#end
 	
 	private function redirect() {

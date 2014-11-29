@@ -25,7 +25,7 @@ $staff_p = $_SESSION['staff'];
 $submitted = $_REQUEST['submitted']; //?Make a variable called submit that goes through request. If you're just coming to the page, submit should't exist.
 $page_type = strtolower($_REQUEST['page_type']); //?We are going to have to add this in. page_type can equal "create" or "edit"
 
-$anno = new anno(); //pass create/edit in the constructor and set it up from there
+$anno = new anno($page_type); //pass create/edit in the constructor and set it up from there
 
 //*Check the page_type. If "create", start creating
 if($submitted == "true") {
@@ -223,191 +223,37 @@ if($submitted == "true") {
 				if($admin_p) {
 					$query = "SELECT * FROM subtype WHERE type_id = '1'";
 					$generals = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>General:</label><br />";
-					if($page_type == "create") {	
-						foreach($generals as $general) {
-							$id = $general['id'];
-							$name = $general['name'];
-							if(!empty($name)) {
-								echo '<label class="cat_subtype_label">'.$name.':</label>
-								<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-								<br />';
-							}
-						}
-					} else if ($page_type == "edit") {
-						foreach($generals as $general) {
-							$checked = false;
-							$id = $general['id'];
-							$name = $general['name'];
-							foreach($anno->anno_cb as $anno_cbc) {
-								if($anno_cbc['subtype_id']==$id) {
-									echo '<label class="cat_subtype_label">'.$name.':</label>
-									<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
-									<br />';
-									$checked = true;
-									break;
-								}
-							}
-							if(!$checked) {
-								echo '<label class="cat_subtype_label">'.$name.':</label>
-								<input name="check[]" type="checkbox" value="'.$id.'" />
-								<br />';
-							}
-						}
-					}
-					echo "</div>";
+					$title = "General";
+					$anno->create_cb($generals, $title);
 				}
 				
 				if($teacher_p) {
 					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='2'";
 					$periods = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>Classes:</label><br />";
-						if($page_type == "create") {
-							foreach($periods as $period) {
-								$id = $period['id'];
-								$name = $period['name'];
-								$number = $period['period'];
-								if(!empty($name)) {
-									echo '<label class="cat_subtype_label">Period '.$number.': '.$name.'</label>
-									<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-									<br />';
-								}
-							}
-						} else if($page_type == "edit") {
-							foreach($periods as $period) {
-								$checked = false;
-								$id = $period['id'];
-								$name = $period['name'];
-								$number = $period['period'];
-								
-								foreach($anno->anno_cb as $anno_cbc) {
-									if($anno_cbc['subtype_id']==$id) {
-										echo '<label class="cat_subtype_label">Period '.$number.': '.$name.'</label>
-										<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
-										<br />';
-										$checked = true;
-										break;
-									}
-								}
-								
-								if(!$checked) {
-									echo '<label class="cat_subtype_label">Period '.$number.': '.$name.'</label>
-									<input name="check[]" type="checkbox" value="'.$id.'" />
-									<br />';
-								}
-							}	
-						}
-					
-					echo "</div>";
+					$title = "Classes";
+					$anno->create_cb($periods, $title);
 				}
 				
 				
 				if($club_p) {
 					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='3'";
 					$clubs = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>Club(s):</label><br />";
-					if($page_type == "create") {	
-						foreach($clubs as $club) {
-							$id = $club['id'];
-							$name = $club['name'];
-							echo '<label class="cat_subtype_label">'.$name.':</label>
-							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-							<br />';
-						}
-					} else if ($page_type == "edit"){
-						foreach($clubs as $club) {
-							$checked = false;
-							$id = $club['id'];
-							$name = $club['name'];
-							foreach($anno->anno_cb as $anno_cbc) {
-								if($anno_cbc['subtype_id']==$id) {
-									echo '<label class="cat_subtype_label">'.$name.':</label>
-									<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
-									<br />';
-									$checked = true;
-									break;
-								}
-							}
-							if(!$checked) {
-								echo '<label class="cat_subtype_label">'.$name.':</label>
-								<input name="check[]" type="checkbox" value="'.$id.'" />
-								<br />';
-							}
-						}
-					}
-					echo "</div>";
+					$title = "Clubs";
+					$anno->create_cb($clubs, $title);
 				}
 				
 				if($sports_p) {
 					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='4'";
 					$sports = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>Sport(s):</label><br />";
-					if($page_type == "create") {	
-						foreach($sports as $sport) {
-							$id = $sport['id'];
-							$name = $sport['name'];
-							echo '<label class="cat_subtype_label">'.$name.':</label>
-							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-							<br />';
-						}
-					} else if ($page_type == "edit") {
-						foreach($sports as $sport) {
-							$checked = false;
-							$id = $sport['id'];
-							$name = $sport['name'];
-							foreach($anno->anno_cb as $anno_cbc) {
-								if($anno_cbc['subtype_id']==$id) {
-									echo '<label class="cat_subtype_label">'.$name.':</label>
-									<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
-									<br />';
-									$checked = true;
-									break;
-								}
-							}
-							if(!$checked) {
-								echo '<label class="cat_subtype_label">'.$name.':</label>
-								<input name="check[]" type="checkbox" value="'.$id.'" />
-								<br />';
-							}
-						}
-					}
-					echo "</div>";
+					$title = "Sports";
+					$anno->create_cb($sports, $title);
 				}
 				
 				if($staff_p) {
 					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='5'";
 					$staffs = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>Faculty(s):</label><br />";
-					if($page_type == "create") {
-						foreach($staffs as $staff) {
-							$id = $staff['id'];
-							$name = $staff['name'];
-							echo '<label class="cat_subtype_label">'.$name.':</label>
-							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-							<br />';
-						}
-					} else if ($page_type == "edit") {
-						foreach($staffs as $staff) {
-							$checked = false;
-							$id = $staff['id'];
-							$name = $staff['name'];
-							foreach($anno->anno_cb as $anno_cbc) {
-								if($anno_cbc['subtype_id']==$id) {
-									echo '<label class="cat_subtype_label">'.$name.':</label>
-									<input name="check[]" type="checkbox" value="'.$id.'" checked="checked"/>
-									<br />';
-									$checked = true;
-									break;
-								}
-							}
-							if(!$checked) {
-								echo '<label class="cat_subtype_label">'.$name.':</label>
-								<input name="check[]" type="checkbox" value="'.$id.'" />
-								<br />';
-							}
-						}
-					}
-					echo "</div>";
+					$title = "Staff";
+					$anno->create_cb($staffs, $title);
 				}
 				?>
 			</div>

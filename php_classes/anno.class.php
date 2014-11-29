@@ -42,8 +42,9 @@ class anno {
 			$this->subtype_ids = $_REQUEST['check']; //*The checkbox data
 			return 1;
 		} else {                                                      //*If there is no checkbox checked, throw up an error.
-			$message = "You must check a category.";
-			$error->set_message($message);
+			//THIS WON'T WORK
+			$GLOBALS['message'] = "You must check a category.";
+			//$error->set_message($message);
 			return 0;
 		}	
 	}
@@ -101,12 +102,12 @@ class anno {
 	
 	private function update_anno_subtype() {
 		//*First delete all the existing ones
-		$query = "DELETE FROM anno_subtype WHERE anno_id='$anno_id'";
+		$query = "DELETE FROM anno_subtype WHERE anno_id='$this->anno_id'";
 		mysql_query($query);
 		
 		//*Then, insert the new ones.
-		foreach($subtype_ids as $subtype_id) {
-			$query = "INSERT INTO anno_subtype(anno_id, subtype_id) VALUES('$anno_id', '$subtype_id');";
+		foreach($this->subtype_ids as $subtype_id) {
+			$query = "INSERT INTO anno_subtype(anno_id, subtype_id) VALUES('$this->anno_id', '$subtype_id');";
 			mysql_query($query);
 		}
 	}

@@ -29,7 +29,11 @@ class login {
 	
 		if($result){
 			$row = mysql_fetch_row($result);
-			$hash = $row[0]; 
+			if ($row) {
+				$hash = $row[0]; 
+			} else {
+				return "This user does not exist.";
+			}
 		}
 	
 		if($this->typedhash === $hash){

@@ -49,7 +49,7 @@ if(!empty($_REQUEST)) {
 		header("Location: main.php?current=1");
 	} else {
 		$message = "You must check a category.";
-		$error->set_message($message);
+		$error->set_message(/*$message*/);
 	}
 }
 

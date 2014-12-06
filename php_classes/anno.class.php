@@ -43,7 +43,7 @@ class anno {
 			return 1;
 		} else {                                                      //*If there is no checkbox checked, throw up an error.
 			//THIS WON'T WORK
-			$GLOBALS['message'] = "You must check a category.";
+			$_SESSION['error_message'] = "You must check a category.";
 			//$error->set_message($message);
 			return 0;
 		}	

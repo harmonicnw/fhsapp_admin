@@ -18,8 +18,9 @@ if(!empty($_POST)) {
 	$user = $_POST['user'];
 	$pass = $_POST['pass'];
 	$login = new login( $user, $pass );
-	$error_message = $login->create_login();
-	$error->set_message($error_message);
+	$_SESSION['error_message'] = $login->create_login();
+	//$error_message = $login->create_login();
+	//$error->set_message($error_message);
 }
 
 ?>

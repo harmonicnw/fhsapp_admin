@@ -39,21 +39,22 @@ if($submitted == "true") {
 		}
 	}
 	
-} else {
-	if ($page_type == "edit") {
-		$anno->get_anno_id();
+} 
+
+if ($page_type == "edit") {
+	$anno->get_anno_id();
+
+	$query = "SELECT * FROM announcements WHERE id='$anno->anno_id'";
+	$anno_info = $db->runQuery($query);
+	$anno->set_info($anno_info[0], false);
 	
-		$query = "SELECT * FROM announcements WHERE id='$anno->anno_id'";
-		$anno_info = $db->runQuery($query);
-		$anno->set_info($anno_info[0], false);
-		
-		
-		//*Also gonna need the anno_subtype relationships so you know what to check.
-		$query = "SELECT * FROM anno_subtype WHERE anno_id='$anno->anno_id'";
-		$anno->anno_cb = $db->runQuery($query); //*This is where the the checkbox info is
-		//redirect here maybe?
-	}
+	
+	//*Also gonna need the anno_subtype relationships so you know what to check.
+	$query = "SELECT * FROM anno_subtype WHERE anno_id='$anno->anno_id'";
+	$anno->anno_cb = $db->runQuery($query); //*This is where the the checkbox info is
+	//redirect here maybe?
 }
+
 
 
 

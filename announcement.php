@@ -22,12 +22,12 @@ $club_p = $_SESSION['club'];
 $sports_p = $_SESSION['sports'];
 $staff_p = $_SESSION['staff'];
 
-$submitted = $_REQUEST['submitted']; //?Make a variable called submit that goes through request. If you're just coming to the page, submit should't exist.
-$page_type = strtolower($_REQUEST['page_type']); //?We are going to have to add this in. page_type can equal "create" or "edit"
+$submitted = $_REQUEST['submitted']; //*Check if the page has been submitted to itself.
+$page_type = strtolower($_REQUEST['page_type']); //*page_type can equal "create" or "edit"
 
-$anno = new anno($page_type); //pass create/edit in the constructor and set it up from there
+$anno = new anno($page_type); //*pass create/edit in the constructor and set it up from there ?Honestly, there should be two classes that extend off of the original anno class or something, but for now I'm keeping it simple.
 
-//*Check the page_type. If "create", start creating
+//*Check the page_type. If "create", start creating, if "edit", update.
 if($submitted == "true") {
 	$check_subtype = $anno->set_subtype_ids();
 	
@@ -41,6 +41,7 @@ if($submitted == "true") {
 	
 } 
 
+//*If it's an edit page, grab all the stuff from the database to populate the page.
 if ($page_type == "edit") {
 	$anno->get_anno_id();
 

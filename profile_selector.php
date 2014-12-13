@@ -36,14 +36,23 @@ foreach($profiles as $profile) {  //make sure the original thing is pluralised !
 }
 
 
-echo "<pre>";
+/*echo "<pre>";
 print_r($pages); //the testing print thing, use echo json encode for the final
 echo "</pre>"; 
 /*echo "<pre>";
 print_r($names); //the tester for the join names
 echo "</pre>"; */
 
+//?The problem is rooted here.
+$callback = $_GET["callback"]; 
 
+// dynamically determine if JSON or JSONP is being used
+if ( isset($_GET['callback']) ) echo "{$_GET['callback']}(";
+
+echo json_encode($pages); //final product
+
+// dynamically determine if JSON or JSONP is being used
+if ( isset($_GET['callback']) ) echo ")";
 
 
 

@@ -2,6 +2,7 @@
 
 /*
  * @class FileValidation
+ * @author Jason Chen <jason@jcor.me>
  *
  * Validates file types by checking first
  * four bytes of the file.
@@ -69,18 +70,20 @@ class FileValidation
      */
     public function validateFileType()
     {
-        /** @noinspection PhpWrongStringConcatenationInspection */
         // Convert hex to an integer
-        $bytes = $this->getBytes() + 0;
+        $bytes = $this->getBytes();
 
-        if (array_key_exists($bytes, $this->allowedTypes))
+        /** @noinspection PhpWrongStringConcatenationInspection */
+        // Convert hex string ($bytes) to int by adding 0
+        if (array_key_exists(($bytes + 0), $this->allowedTypes))
         {
+            /** @noinspection PhpWrongStringConcatenationInspection */
             // Return the file type (extension) if file is valid.
-            return $this->allowedTypes[$bytes];
+            return $this->allowedTypes[($bytes + 0)];
         }
         // 14 isn't some magic number
         // It's the size for the file signature of the largest file type we allow.
-        elseif (strlen($bytes) < 14) {
+        elseif (strlen($bytes) < 14 && (strlen($bytes) % 2) == 0) {
             // Each index in byte array contains 2 bytes, so we only want to iterate and call getBytes ($remainingBytes / 2) times.
             $remainingBytes = (14 - strlen($bytes)) / 2;
             // Define this outside to allow us to throw exception with correct file signature.
@@ -118,12 +121,12 @@ class FileValidation
             // fopen allows us to read streams (to save memory)
             $handle = fopen($this->file, 'r');
             // Read each 4 or (4 + n) bytes from the file and unpack to byte array.
-            $file = unpack('n*', fread($handle, ($extraBytes) ? (4 + $extraBytes) : 4));
+            $file = unpack('n*', fread($handle, (4 + $extraBytes)));
         }
         else
         {
             /*
-             * We create a copy of $this->file here if the original file was a URL
+             * We create a copy of $this->file here if the original file path was a URL
              * Since we can't handle streams with HTTP, we have already read the entire file.
              * We're not directly referencing $this->file because if it's a local path, we
              * must keep that local path to be read again if getBytes is called again with (more) $extraBytes.
@@ -136,7 +139,7 @@ class FileValidation
             // Hex string representing file signature
             $bytes = '0x';
             // Since each index in the byte array represents two bytes, we divide the number of extra bytes by two.
-            $extraBytes = $extraBytes / 2;
+            $extraBytes = (4 + $extraBytes) / 2;
 
             for ($i = 1; $i <= $extraBytes; $i++)
             {
@@ -151,8 +154,8 @@ class FileValidation
          * 0th index of the unpacked byte array is (probably...) always blank.
          * Declared separately or the resulting number will be much larger than intended.
          */
-        $firstTwoBytes = $this->file[1];
-        $secondTwoBytes = $this->file[2];
+        $firstTwoBytes = $file[1];
+        $secondTwoBytes = $file[2];
 
         /*
          * Converts the first four bytes to hex.

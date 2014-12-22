@@ -4,8 +4,8 @@ namespace Tests;
 
 define('__ROOT__', dirname(dirname(__FILE__)));
 
-require_once(__ROOT__ . '/app/services/FileValidation.php');
-require_once(__ROOT__ . '/app/services/FileValidationError.php');
+require_once(__ROOT__ . '/php_classes/FileValidation.php');
+require_once(__ROOT__ . '/php_classes/FileValidationError.php');
 
 use FileValidation;
 
@@ -15,7 +15,7 @@ class FileValidationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \FileValidationError
-     * @expectedExceptionMessage File with byte signature 0x7BDEA904D5804 is invalid.
+     * @expectedExceptionMessage File with byte signature 0x46696C652076616C is invalid.
      */
     public function testExceptionIsRaisedForInvalidFile()
     {

@@ -4,12 +4,13 @@
  * @class FileValidation
  * @author Jason Chen <jason@jcor.me>
  *
- * Validates file types by checking first
- * four bytes of the file.
+ * Validates file types by checking a
+ * file's byte signature.
  *
  * Current valid file types:
  *  jpeg
  *  pdf
+ *  gif
  *  png
  *  tiff
  *  Microsoft Office documents
@@ -17,15 +18,36 @@
 
 class FileValidation
 {
+    /**
+     * An (associative) array of all the allowed file types in the format: 'file signature' => 'file type'
+     *
+     * @var array
+     */
     protected $allowedTypes;
 
+    /**
+     * The local path of the file being validated or the byte array of a file from the internet (if a URL is provided).
+     *
+     * @var string|array
+     */
     protected $file;
 
+    /**
+     * The file being validated is a URL (on the internet).
+     *
+     * @var bool
+     */
     protected $isURL;
 
     /**
-     * @param $file_path string The location of the file being validated; can be either a local (relative/absolute) or URL address.
+     * The largest (strlen) file signature of all valid file types.
      *
+     * @var int
+     */
+    protected $largestFileSignature;
+
+    /**
+     * @param $file_path string The location of the file being validated; can be either a local (relative/absolute) or URL address.
      * @throws FileValidationError
      */
     public function __construct($file_path)
@@ -36,7 +58,7 @@ class FileValidation
          *
          * @todo I believe this function "breaks" and returns 301/302 on a redirect, even to a valid (redirected) URL.
          */
-        $this->isURL = strpos(@get_headers($file_path)[0], '200');
+        $this->isURL = strpos(@get_headers($file_path)[0], '200') ? true : false;
 
         // $file_path must either be a valid local path or a valid URL.
         if (!file_exists($file_path) && $this->isURL === false)
@@ -54,18 +76,18 @@ class FileValidation
         else
         {
             // Don't read the file yet if it's a local path.
-            // We CAN read streams from a local file, thus we leave it to getBytes() to decide what to read.
+            // We CAN read streams from a local file, so we leave it to getBytes() to decide what to read.
             $this->file = $file_path;
         }
 
         $this->allowedTypes = $this->getAllowedTypes();
+        $this->setLargestFileSignature();
     }
 
     /**
-     * Validates a file's type against the allowed types by checking the first four bytes of the file.
+     * Validates a file's type against the allowed types by checking the file's (file) signature.
      *
      * @throws FileValidationError
-     *
      * @return string The file type/extension.
      */
     public function validateFileType()
@@ -82,17 +104,14 @@ class FileValidation
             return $this->allowedTypes[($bytes + 0)];
         }
         // 14 isn't some magic number
-        // It's the size for the file signature of the largest file type we allow.
-        elseif (strlen($bytes) < 14 && (strlen($bytes) % 2) == 0) {
+        // It's the size for the largest file signature of all the file types we allow.
+        elseif (strlen($bytes) < $this->largestFileSignature) {
             // Each index in byte array contains 2 bytes, so we only want to iterate and call getBytes ($remainingBytes / 2) times.
-            $remainingBytes = (14 - strlen($bytes)) / 2;
-            // Define this outside to allow us to throw exception with correct file signature.
-            $bytes = 0;
+            $remainingBytes = ($this->largestFileSignature - strlen($bytes)) / 2;
 
             for ($i = 1; $i <= $remainingBytes; $i++) {
                 /** @noinspection PhpWrongStringConcatenationInspection */
                 // Multiply $i by two because it's the number of extra bytes (+4) that we want.
-                // getBytes will divide by two...
                 $bytes = $this->getBytes($i * 2) + 0;
 
                 if (array_key_exists((int) $bytes, $this->allowedTypes))
@@ -102,6 +121,97 @@ class FileValidation
 
         // @todo Throw exception here with relevant information.
         throw new FileValidationError("File with byte signature 0x" . strtoupper(base_convert($bytes, '10', '16')) . " is invalid.");
+    }
+
+
+    /**
+     * Dynamically add a new file type to the array of already allowed types.
+     *
+     * @param $fileSignature int Hex number representing the file type's byte signature.
+     * @param $fileType string A string identifying the file type being added.
+     * @return void
+     * @throws FileValidationError
+     */
+    public function allowFileType($fileSignature, $fileType)
+    {
+        // PHP loves to auto convert all hex numbers to decimal...
+        $hexString = base_convert($fileSignature, '10', '16');
+
+        // We should always get an even number of bytes >= 2
+        if (!is_int($fileSignature) || ((strlen($hexString) % 2) !== 0))
+            throw new FileValidationError("The file signature " . $fileSignature . " is invalid. It must be a hex number and contain an even number of bytes >= 2.");
+
+        $this->allowedTypes[$fileSignature] = $fileType;
+        $this->setLargestFileSignature();
+    }
+
+    /**
+     * Disallows a currently allowed file type (by file type); otherwise, has no effect.
+     *
+     * @param $fileType string A string identifying the file type to be disallowed.
+     * @return int Returns 1 if a file type was disallowed, 0 if it's not a currently allowed type.
+     *
+     * @todo Breaking DRY here with this and disallowFileSignature()
+     */
+    public function disallowFileType($fileType)
+    {
+        // Multiple file signatures may identify the same file type, so we keep count here if > 1 is removed.
+        $removed = 0;
+        // We store all file type strings in lowercase.
+        $fileType = strtolower($fileType);
+
+        foreach ($this->allowedTypes as $fileSignature => $allowedType)
+        {
+            if ($allowedType === $fileType)
+                unset($this->allowedTypes[$fileSignature]);
+                $removed++;
+        }
+
+        // Return the number of types removed if we removed anything.
+        if ($removed)
+            return $removed;
+
+        return 0;
+    }
+
+    /**
+     * Disallows a currently allowed file type by file signature); otherwise, has no effect.
+     *
+     * @param $fileSignature int Hex number representing the file signature of the file type to be disallowed.
+     * @return int Returns 1 if a file type was disallowed, 0 if it's not a currently allowed type.
+     *
+     * @todo Breaking DRY here with this and disallowFileType()
+     */
+    public function disallowFileSignature($fileSignature)
+    {
+        foreach ($this->allowedTypes as $keyFileSignature => $allowedType)
+        {
+            if ($keyFileSignature === $fileSignature)
+            {
+                unset($this->allowedTypes[$keyFileSignature]);
+                // There cannot be two identical keys, so we can safely say the requested file signature has been disallowed.
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get an array of all allowed file types without signatures.
+     *
+     * @return array
+     */
+    public function allowedFileTypes()
+    {
+        $types = array();
+
+        foreach ($this->allowedTypes as $allowedType)
+        {
+            $types[] = $allowedType;
+        }
+
+        return $types;
     }
 
     /**
@@ -138,7 +248,7 @@ class FileValidation
         {
             // Hex string representing file signature
             $bytes = '0x';
-            // Since each index in the byte array represents two bytes, we divide the number of extra bytes by two.
+            // Since each index in the byte array represents two bytes, we divide the number of bytes we want by two.
             $extraBytes = (4 + $extraBytes) / 2;
 
             for ($i = 1; $i <= $extraBytes; $i++)
@@ -167,11 +277,12 @@ class FileValidation
     }
 
     /**
-     * Returns all valid file types in an associative array with the format: 'first four hex bytes => file type'.
+     * Returns all valid file types in an associative array with the format: 'file (byte) signature => file type'.
      *
      * @return array
      *
      * @todo Find any odd behavior or valid file types with different file signatures that may exist.
+     * @todo A load of different file types seem to share a similar signature to OOXML (e.g. ZIP files have 0x504B0304)...we need a reliable way to handle, especially since I've added the ability to dynamically add file types.
      */
     private function getAllowedTypes()
     {
@@ -198,15 +309,29 @@ class FileValidation
 
             // OOXML is the Microsoft Office Open XML Format.
             // Used in recent versions of Office.
-            0x504B0304 => 'microsoft.ooxml',
+            0x504B030414000600 => 'microsoft.ooxml',
             // PHP gets rid of leading 0 in hex when changing bases
             // Leave both just in case...
-            0x504B304  => 'microsoft.ooxml',
+            0x504B3041400600  => 'microsoft.ooxml',
 
             // OLECF is a file format used by Microsoft in earlier versions of Office (should be '97-'03).
             0xD0CF11E0 => 'microsoft.olecf',
         );
 
         return $types;
+    }
+
+    /**
+     * Iterates through all allowed file types and finds and sets the largest file signature.
+     *
+     * @return void
+     */
+    private function setLargestFileSignature()
+    {
+        foreach ($this->allowedTypes as $fileSignature => $allowedType)
+        {
+            if (strlen($fileSignature) > $this->largestFileSignature)
+                $this->largestFileSignature = strlen($fileSignature);
+        }
     }
 }

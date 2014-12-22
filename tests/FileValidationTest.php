@@ -9,13 +9,13 @@ require_once(__ROOT__ . '/php_classes/FileValidationError.php');
 
 use FileValidation;
 
+/** @noinspection PhpUndefinedClassInspection */
 class FileValidationTest extends \PHPUnit_Framework_TestCase
 {
     const TEST_FILE_DIRECTORY = __ROOT__ . '/tests/assets/file_validation/';
 
     /**
      * @expectedException \FileValidationError
-     * @expectedExceptionMessage File with byte signature 0x46696C652076616C is invalid.
      */
     public function testExceptionIsRaisedForInvalidFile()
     {
@@ -97,5 +97,35 @@ class FileValidationTest extends \PHPUnit_Framework_TestCase
         $validate = new FileValidation(static::TEST_FILE_DIRECTORY . 'a_pdf.pdf');
 
         $this->assertEquals('pdf', $validate->validateFileType());
+    }
+
+    /**
+     * @expectedException \FileValidationError
+     */
+    public function testCanValidateDisallowingPDFFileType()
+    {
+        $validate = new FileValidation(static::TEST_FILE_DIRECTORY . 'a_pdf.pdf');
+        $validate->disallowFileType('pdf');
+        $validate->validateFileType();
+    }
+
+    /**
+     * @expectedException \FileValidationError
+     */
+    public function testCanValidateDisallowingPDFFileSignature()
+    {
+        $validate = new FileValidation(static::TEST_FILE_DIRECTORY . 'a_pdf.pdf');
+        $validate->disallowFileSignature(0x25504446);
+        $validate->validateFileType();
+    }
+
+    public function testCanValidateDynamicallyAllowingRBFileType()
+    {
+        $validate = new FileValidation(static::TEST_FILE_DIRECTORY . 'a_rb.rb');
+        // I don't believe this is the actual file signature for rb files, if they have one at all.
+        // Just testing the allowFileType() function here...
+        $validate->allowFileType(0x72657175, 'ruby');
+
+        $this->assertEquals('ruby', $validate->validateFileType());
     }
 }

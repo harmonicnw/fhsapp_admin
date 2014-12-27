@@ -18,11 +18,12 @@ $names=$db->runQuery($query2);
 $pages = array(); //sets what's put's out's
 
 foreach($profiles as $profile) {  //make sure the original thing is pluralised !! v. imporant
-	array_push($pages, array(
+	$id = $profile['id']-1; //this variable is a marker of where a profile is in the table. Unimportant otherwise
+	array_push($pages, array( 
 		"author_id"=>$profile['author_id'], //each of these is an important piece of the final produkt, 
-		"first_name"=>$names[0]['first_name'],
-		"last_name"=>$names[0]['last_name'],
-		"bio"=>$profile['bio'],
+		"first_name"=>$names[$id]['first_name'], //the ID comes into play here. [#] distinguishes which entry of the lJoin name array is pulled
+		"last_name"=>$names[$id]['last_name'], //$id is the profile id minus one, this should work, unless I haven't forseen something
+		"bio"=>$profile['bio'], //^the above is probably bad code. don't hit me. 
 		"room_number"=>$profile['room_number'],
 		"other_roles"=>$profile['other_roles'],
 		"other_info"=>$profile['other_info'],
@@ -30,7 +31,6 @@ foreach($profiles as $profile) {  //make sure the original thing is pluralised !
 		"facebook"=>$profile['facebook'],
 		"twitter"=>$profile['twitter'],
 		"wordpress_blog"=>$profile['wordpress_blog'],
-		
 		)
 	);
 }

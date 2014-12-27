@@ -7,11 +7,11 @@ error_reporting(E_ALL);
 //include_once('functions.php'); "it comes standard"
 $db = new Db($dbConfig); //boilerplate stuff FOR moctezuma
 
-$catids = explode(',', $_REQUEST['catids']); //sacrifical captives were made of the catids, their individual strings quartered at each comma
+$catids = explode(',', $_REQUEST['catids']); //sacrifical captives were made of the catids, their individual strings quartered at each comma ((cuts em up))
 //PRINT_R($catids); //temporary ceremonial display pyramid
 $annoData = array();
 $entry_count=0;
-$feedUrl ="http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";  //seedlings to quetzalcoatl 
+$feedUrl ="http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";  //seedlings to quetzalcoatl ((local variable within the server)) 
 //array_push($massive_array_dos, array("feedUrl"=>$feedUrl));
 
 foreach($catids as $catid){

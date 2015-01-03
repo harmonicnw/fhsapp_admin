@@ -27,7 +27,7 @@ foreach ($profiles as $profile){
 	$person= $db->runQuery($query1);
 	//PRINT_R($person);  //you can see all the data that query 1 pulls out using this!
 	for($i=0;$i<$entry_count;$i++){ //runs a quick loop equal to the number of entries
-		if($person[0]['author_id'] === $recognized_profiles[$i]){ //tests! "is this guy's ID one we've already encountered?"
+		if(in_array($person[0]['author_id'],$recognized_profiles)){ //tests! "is this guy's ID one we've already encountered?"
 		}else{ //do nothing if it is, we don't need repeats
 		array_push($profile_data, array( //if it's brand new, pushes all the relevant info to the page
 			"id"=>$person[0]['author_id'],
@@ -49,5 +49,6 @@ foreach ($profiles as $profile){
 	$entry_count++; //increments things
 }
 PRINT_R($profile_data); //ceremonial display period
+PRINT_R($recognized_profiles);
 
 ?>

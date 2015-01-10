@@ -7,11 +7,10 @@ error_reporting(E_ALL);
 //include_once('functions.php'); "it comes standard"
 $db = new Db($dbConfig); //boilerplate stuff FOR moctezuma
 
-//the link should come out as linkname.php?profiles=number,number,number
-//by the way, 490 and 441 are the testing profile subtype ids used, both jexplosion
+//the link should come out as linkname.php?profiles=#,#,#
 
 $profiles = explode(',', $_REQUEST['profiles']); //pulls the appended numbers, dusts 'em off, and cuts them at the comma
-PRINT_R($profiles); //polishes and displays the profile numbers for the Imperial Inspector ((just for testing))
+//PRINT_R($profiles); //polishes and displays the profile numbers for the Imperial Inspector ((just for testing))
 $profile_data = array(); //this'll be popped out later, mind you
 $entry_count = 0; //keeps track of how many people are there for counting and loop length purposes
 $recognized_profiles = array(); //repeat prevention storage device
@@ -41,6 +40,7 @@ foreach ($profiles as $profile){
 			"facebook"=>$person[0]['facebook'],
 			"twitter"=>$person[0]['twitter'],
 			"wordpress_blog"=>$person[0]['wordpress_blog'],
+			"image_link"=>$person[0]['image_link'],
 			));
 		array_push($recognized_profiles, $person[0]['author_id']); //marks that user as previously encountered to restart the loop
 		}
@@ -48,7 +48,12 @@ foreach ($profiles as $profile){
 	}
 	$entry_count++; //increments things
 }
-PRINT_R($profile_data); //ceremonial display period
-PRINT_R($recognized_profiles);
+/*PRINT_R($profile_data); //ceremonial display pyramid
+PRINT_R($recognized_profiles); */
+$callback = $_GET["callback"];
+
+if ( isset($_GET['callback']) ) echo "{$_GET['callback']}(";
+echo JSON_encode($profile_data); //presents the data in a good jsony way
+if ( isset($_GET['callback']) ) echo ")"; 
 
 ?>

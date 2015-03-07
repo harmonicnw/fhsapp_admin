@@ -9,47 +9,63 @@ $db = new Db($dbConfig); //boilerplate stuff FOR moctezuma
 
 //the link should come out as linkname.php?profiles=#,#,#
 
-$profiles = explode(',', $_REQUEST['profiles']); //pulls the appended numbers, dusts 'em off, and cuts them at the comma
-//PRINT_R($profiles); //polishes and displays the profile numbers for the Imperial Inspector ((just for testing))
+$pSubtypes = explode(',', $_REQUEST['pSubtypes']); //pulls the appended numbers, dusts 'em off, and cuts them at the comma
+//PRINT_R($pSubtypes); //polishes and displays the profile numbers for the Imperial Inspector ((just for testing))
 $profile_data = array(); //this'll be popped out later, mind you
 $entry_count = 0; //keeps track of how many people are there for counting and loop length purposes
-$recognized_profiles = array(); //repeat prevention storage device
+$recognized_pSubtypes = array(); //repeat prevention storage device
 
-foreach ($profiles as $profile){
+
+foreach ($pSubtypes as $pSubtype){
 	//this pulls out a huge mess of info about each person that will b used in the profile
-	$query1= "SELECT * FROM subtype
+	$query1= "SELECT * FROM subtype 
 			INNER JOIN users
 			ON subtype.author_id = users.id
 			INNER JOIN user_profile
 			ON users.id = user_profile.author_id
-			WHERE subtype.id = '$profile'";
+			WHERE subtype.id = '$pSubtype'"; //pSubtype stands for profile related Subtype, showing that it is a feed related 2 a person
 	$person= $db->runQuery($query1);
 	//PRINT_R($person);  //you can see all the data that query 1 pulls out using this!
 	for($i=0;$i<$entry_count;$i++){ //runs a quick loop equal to the number of entries
-		if(in_array($person[0]['author_id'],$recognized_profiles)){ //tests! "is this guy's ID one we've already encountered?"
-		}else{ //do nothing if it is, we don't need repeats
-		array_push($profile_data, array( //if it's brand new, pushes all the relevant info to the page
-			"id"=>$person[0]['author_id'],
-			"first_name"=>$person[0]['first_name'],
-			"last_name"=>$person[0]['last_name'],
-			"room_number"=>$person[0]['room_number'], //these are self-evident
-			"bio"=>$person[0]['bio'],
-			"other_roles"=>$person[0]['other_roles'],
-			"other_info"=>$person[0]['other_info'],
-			"website_link"=>$person[0]['website_link'],
-			"facebook"=>$person[0]['facebook'],
-			"twitter"=>$person[0]['twitter'],
-			"wordpress_blog"=>$person[0]['wordpress_blog'],
-			"image_link"=>$person[0]['image_link'],
-			));
-		array_push($recognized_profiles, $person[0]['author_id']); //marks that user as previously encountered to restart the loop
+		if(!in_array($person[0]['author_id'],$recognized_pSubtypes)){ //tests! "is this guy's ID one we've already encountered?"
+			if($person[0]['id']&&$person[0]['teacher']==1){ //tests that data exists (noNULLS) and they have teacher permissions in users
+			array_push($profile_data, array( //if it's brand new, pushes all the relevant info to the page
+				"id"=>$person[0]['author_id'],
+				"first_name"=>$person[0]['first_name'],
+				"last_name"=>$person[0]['last_name'],
+				"room_number"=>$person[0]['room_number'], //these are self-evident
+				"bio"=>$person[0]['bio'],
+				"other_roles"=>$person[0]['other_roles'],
+				"other_info"=>$person[0]['other_info'],
+				"website_link"=>$person[0]['website_link'],
+				"facebook"=>$person[0]['facebook'],
+				"twitter"=>$person[0]['twitter'],
+				"wordpress_blog"=>$person[0]['wordpress_blog'],
+				"image_link"=>$person[0]['image_link'],
+				));
+				
+			}else{ //in case of nulls which break the first query, we have a backup that gets the bare-bones profile datums! 
+				$query2="SELECT * FROM subtype 
+				INNER JOIN users
+				ON subtype.author_id = users.id
+				WHERE subtype.id ='$pSubtype'"; //does not use the user_profile table at all
+				$biolessPerson= $db->runQuery($query2);
+				if ($biolessPerson[0]['teacher']==1){ //checks teacher permissions
+					array_push($profile_data, array(
+						"id"=>$biolessPerson[0]['author_id'],
+						"first_name"=>$biolessPerson[0]['first_name'],  //these are the bare bones things
+						"last_name"=>$biolessPerson[0]['last_name'],
+					));
+				}
+			}
+		array_push($recognized_pSubtypes, $person[0]['author_id']); //marks that user as previously encountered to restart the loop
 		}
-		
 	}
 	$entry_count++; //increments things
-}
+} 
+
 /*PRINT_R($profile_data); //ceremonial display pyramid
-PRINT_R($recognized_profiles); */
+PRINT_R($recognized_pSubtypes); */
 $callback = $_GET["callback"];
 
 if ( isset($_GET['callback']) ) echo "{$_GET['callback']}(";

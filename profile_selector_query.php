@@ -11,12 +11,10 @@ $db = new Db($dbConfig); //boilerplate stuff FOR moctezuma
 
 $pSubtypes = explode(',', $_REQUEST['pSubtypes']); //pulls the appended numbers, dusts 'em off, and cuts them at the comma
 //PRINT_R($pSubtypes); //polishes and displays the profile numbers for the Imperial Inspector ((just for testing))
-echo "\n";
 $profile_data = array(); //this'll be popped out later, mind you
 
 
 foreach ($pSubtypes as $pSubtype){
-	//echo "Subtype through loop: ".$pSubtype."\n";
 	//this pulls out a huge mess of info about each person that will b used in the profile
 	$query1= "SELECT * FROM subtype 
 			INNER JOIN users
@@ -26,10 +24,8 @@ foreach ($pSubtypes as $pSubtype){
 			WHERE subtype.id = '$pSubtype'"; //pSubtype stands for profile related Subtype, showing that it is a feed related 2 a person
 	$person= $db->runQuery($query1);
 	//PRINT_R($person);  //you can see all the data that query 1 pulls out using this!
-		if($person[0]['author_id'] && !in_array($person[0]['author_id'],$recognized_psAuthors)){ //tests! "is this guy's ID one we've already encountered?"
-			//echo "Prelim stats: ".$person[0]['first_name']." Table id ".$person[0]['id']." Teacher status ".$person[0]['teacher']."\n";
-			if($person[0]['id']&&($person[0]['teacher']==1)){ //tests that data exists (noNULLS) and they have teacher permissions in users
-				//echo "This person's in the array:".$person[0]['first_name']."\n";
+		if($person[0]['author_id']){ //tests! did the first query work? NO?
+			if($person[0]['teacher']==1){ //tests that they have teacher permissions in users
 				array_push($profile_data, array( //if it's brand new, pushes all the relevant info to the page
 					"id"=>$person[0]['author_id'],
 					"first_name"=>$person[0]['first_name'],
@@ -57,15 +53,12 @@ foreach ($pSubtypes as $pSubtype){
 					"first_name"=>$biolessPerson[0]['first_name'],  //these are the bare bones things
 					"last_name"=>$biolessPerson[0]['last_name'],
 				));
-				/*echo "The following array is for a truly bioless person:";
-				PRINT_R($biolessPerson); */
 			}
-			//echo "This person was rejected by the first query: ".$biolessPerson[0]['first_name']."\n";
 		}
 } 
 
-/*PRINT_R($profile_data); //ceremonial display pyramid
-PRINT_R($recognized_psAuthors); */
+//PRINT_R($profile_data); //ceremonial display pyramid
+
 $callback = $_GET["callback"];
 
 if ( isset($_GET['callback']) ) echo "{$_GET['callback']}(";

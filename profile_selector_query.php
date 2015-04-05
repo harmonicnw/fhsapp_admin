@@ -12,7 +12,7 @@ $db = new Db($dbConfig); //boilerplate stuff FOR moctezuma
 $pSubtypes = explode(',', $_REQUEST['pSubtypes']); //pulls the appended numbers, dusts 'em off, and cuts them at the comma
 //PRINT_R($pSubtypes); //polishes and displays the profile numbers for the Imperial Inspector ((just for testing))
 $profile_data = array(); //this'll be popped out later, mind you
-
+$recognizedAuthors = array();
 
 foreach ($pSubtypes as $pSubtype){
 	//this pulls out a huge mess of info about each person that will b used in the profile
@@ -25,7 +25,7 @@ foreach ($pSubtypes as $pSubtype){
 	$person= $db->runQuery($query1);
 	//PRINT_R($person);  //you can see all the data that query 1 pulls out using this!
 		if($person[0]['author_id']){ //tests! did the first query work? NO?
-			if($person[0]['teacher']==1){ //tests that they have teacher permissions in users
+			if($person[0]['teacher']==1 && !in_array($person[0]['author_id'], $recognizedAuthors)){ //tests that they have teacher permissions in users
 				array_push($profile_data, array( //if it's brand new, pushes all the relevant info to the page
 					"id"=>$person[0]['author_id'],
 					"first_name"=>$person[0]['first_name'],
@@ -40,6 +40,7 @@ foreach ($pSubtypes as $pSubtype){
 					"wordpress_blog"=>$person[0]['wordpress_blog'],
 					"image_link"=>$person[0]['image_link'],
 					));
+				array_push($recognizedAuthors, $person[0]['author_id']);
 			}
 		}else{ //in case of nulls which break the first query, we have a backup that gets the bare-bones profile datums! 
 			$query2="SELECT * FROM subtype 
@@ -47,13 +48,14 @@ foreach ($pSubtypes as $pSubtype){
 			ON subtype.author_id = users.id
 			WHERE subtype.id ='$pSubtype'"; //does not use the user_profile table at all
 			$biolessPerson= $db->runQuery($query2);
-			if ($biolessPerson[0]['teacher']==1){ //checks teacher permissions
+			if ($biolessPerson[0]['teacher']==1 && !in_array($biolessPerson[0]['author_id'], $recognizedAuthors)){ //checks teacher permissions
 				array_push($profile_data, array(
 					"id"=>$biolessPerson[0]['author_id'],
 					"first_name"=>$biolessPerson[0]['first_name'],  //these are the bare bones things
 					"last_name"=>$biolessPerson[0]['last_name'],
 				));
 			}
+			array_push($recognizedAuthors, $biolessPerson[0]['author_id']);
 		}
 } 
 

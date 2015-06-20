@@ -285,9 +285,6 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 
 <!DOCTYPE HTML>
 
-<!--Notes:
-	-Remember mysql_insert_id(); Gets the id of the last executed query, so will be important
--->
 <html>
 
 <head>

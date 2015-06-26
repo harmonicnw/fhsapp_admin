@@ -289,13 +289,26 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 	-Remember mysql_insert_id(); Gets the id of the last executed query, so will be important
 -->
 <html>
-
 <head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
 	<title>Settings</title>
-	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="icon" href="images/franklin_logo.gif">
+
+	<!-- Bootstrap -->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript"> //The easy way to validate. Credit this later.
 	$(document).ready(
 		function(){	
@@ -312,281 +325,206 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 		}
 	);
 	</script>
-	<link rel="icon" href="images/franklin_logo.gif">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="style.css" />
-
-	<!-- Bootstrap -->
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
-<?php
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">		
+      	<img class="logo" src="images/daytime.png">
+		<!-- <img class="beta" src="images/betterbeta.png"> -->
+	  </a>
+    </div>
 
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://fhsapp.com/admin/create.php">Create New Announcement</a></li>
+        <li><a href="http://fhsapp.com/admin/new_user.php">Create New User</a></li>
+        <li><a href="http://fhsapp.com/admin/users.php">Users</a></li>
+        <li><a href="http://fhsapp.com/admin/settings.php">Settings</a></li>
+        <li><a href="http://fhsapp.com/admin/main.php?current=1">Home</a></li>
+        <li><a href="http://fhsapp.com/admin/logout.php">Logout</a></li>
+        <li><a href="http://fhsapp.com/admin/help.php">Help</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="row">
+					<h1>General:</h1>
+					<label>Username:</label>
+					<input name="username" type="text" value="<?php echo $username;?>"/> 
+				</div>
 
+				<div class="row">
+					<label>Password:</label>
+					<input name="new_password" type="password" value=""/> 
+				</div>	
+						
+				<div class="row">
+					<label>Confirm Password:</label>
+					<input name="new_password_2" type="password" value=""/> 
+				</div>
 
-?>
-<div class="header">
-		<img class="logo" src="images/daytime.png">
-		<img class="beta" src="images/betterbeta.png">
-		<h1>FHS APP	</h1>
-		<a href="help.php"><img class="help" src="images/help-icon.png" alt="help-icon"></a>
+				<div class="row">
+					<label>First name:</label>
+					<input name="first_name" type="text" value="<?php echo $first_name;?>"/> 
+				</div>
 
-		<?php
-		$header = new header();
-		$header->generate_header();
-		?>
-		
-	</div>	
+				<div class="row">
+					<label>Last name:</label>
+					<input name="last_name" type="text" value="<?php echo $last_name;?>"/> 
+				</div>
 
-	
-	<div class="wrapper">
-		
-		<?php
-				
-////////////////SELECTING VALUES FOR INPUTS////////////////////////////////////////////////////////////////////////////////////////
-				
-				$user_data = mysql_fetch_array(mysql_query("SELECT username, password, first_name, last_name, email FROM users WHERE id = '$user_id';")); //Gonna need an inner join so you get all that other announcement stuff. Look up how to use mysql_fetch_array.
-				
-				$username = $user_data['username'];
-				$first_name = $user_data['first_name'];
-				$last_name = $user_data['last_name'];
-				$email = $user_data['email'];
-
-				////Teacher
+				<div class="row">
+					<label>Email:</label>
+					<input name="email" type="text" value="<?php echo $email;?>"/> 
+				</div> 
+		</div> <!-- End Column -->
+		<div class="col-md-4">
+			<?php 
 				if($teacher) {
-					$result = mysql_query("SELECT * FROM subtype WHERE author_id = '$user_id' AND type_id = '2' ORDER BY period;");
-					$classes = array();
-					while($rows = mysql_fetch_array($result)) {
-						$classes[] = $rows;
+					echo '<div class="column">';
+				
+					echo "<div id='classes_info'><h1>Your Classes:</h1><p>If you have no class in a period, leave it blank.</p>";
+					
+					//*Making the class inputs:
+					$i = 1;
+					if(!empty($classes)) { //*If the classes exist, put in the values.
+						foreach($classes as $class) {
+							echo "<div class='row'><label>Period $i:</label>
+							<input name='p" . $i . "' type='text' value='".$class['name']."'/>
+							</div>";
+							$i++;
+						}
+					} else { //*If the classes haven't been made yet, make them empty.
+						for($j=1;$j<9;$j++) {
+							echo "<div class='row'><label>Period $j</label>
+							<input name='p" . $j . "' type='text' value=''/>
+							</div>";
+						}
 					}
-				}
-
-				////Club
+					
+					echo "<br style='clear: both' clear='all'/></div>";
+				
+				
+				
+					echo "</div>";
+						}
+					?>
+		</div> <!-- End Column -->
+		<div class="col-md-4">
+			<?php 
 				if($club_p) {
-					$club_values = $db->runQuery("SELECT * FROM subtype WHERE author_id = '$user_id' AND type_id = '3' ORDER BY id;");
-					/*echo "<p>Here are the values to be put in the inputs:</p><br />";
-					echo "<pre>";
-					print_r($club_values);
-					echo "</pre>";*/
-				}
-				
-				
-				////Sport
-				if($sports) {
-					$result = mysql_query("SELECT * FROM subtype WHERE author_id = '$user_id' AND type_id = '4' ORDER BY id;");
-					$sports_values = array();
-					while($rows = mysql_fetch_array($result)) {
-						$sports_values[] = $rows;
+					echo "<div id='clubs_info'><h1>Clubs:</h1>";
+					
+					$i = 1;
+					if(!empty($club_values)) {
+						foreach($club_values as $club_value) {
+							echo '<div class="club_wrapper">
+								<label>Club '.$i.':</label>
+								<input name="cname[]" type="text" value="'. $club_value["name"] .'"/>
+								<input name="cid[]" type="hidden" value="'. $club_value["id"] .'"/>
+								<a href="#" class="delete_club">X</a>
+								<br /></div>';
+							$i++;
+						}
+					} else {
+						echo '<label>Club 1:</label>
+							<input name="cname[]" type="text" value=""/>
+							<input name="cid[]" type="hidden" value=""/>
+							<br />';
 					}
+					
+					echo "</div>";
+					echo "<button id='add_club'>Add new club</button>";
+				}
+				?>
+				
+				<?php 
+				
+				if($sports) {
+					echo "<div id='sports_info'><h1>Sports:</h1>";
+					
+					$i = 1;
+					if(!empty($sports_values)) {
+						foreach($sports_values as $sport_value) {
+							echo '<div class="sports_wrapper">
+								<label>Sport '.$i.':</label>
+								<input name="sname[]" type="text" value="'. $sport_value["name"] .'"/>
+								<input name="sid[]" type="hidden" value="'. $sport_value["id"] .'"/>
+								<a href="#" class="delete_sports">X</a>
+								<br /></div>';
+							$i++;
+						}
+					} else {
+						echo '<label>Sport 1:</label>
+							<input name="sname[]" type="text" value=""/>
+							<input name="sid[]" type="hidden" value=""/>
+							<br />';
+					}
+					
+					echo "</div>";
+					echo "<button id='add_sports'>Add new sport</button>";
 				}
 				
-				//FACULTRONY
-				if($staff_p){
-					$staff_values = $db->runQuery("SELECT * FROM subtype WHERE author_id = '$user_id' AND type_id = '5' ORDER BY id;");
-				}
-		?>
-		
-		<pre>
-			<?php //print_r($user_data);?>
-			<?php //print_r($classes);?>
-			<?php //print_r($club_values);?>
-			<?php //print_r($sports_values);?>
-		</pre>
-
-
-			<form id="form" method="get" action="settings.php">
-				<div class="columns_wrapper">	
+				?>
+				
 				<?php 
-				//determine number of columns
-				if($teacher) { 
-					$number_columns= 3;
+				
+				if($staff_p) {
+					echo "<div id='staff_info'><h1>Staff:</h1>";
+					
+					$i = 1;
+					if(!empty($staff_values)) {
+						foreach($staff_values as $staff_value) {
+							echo '<div class="staff_wrapper">
+								<label>Staff '.$i.':</label>
+								<input name="stname[]" type="text" value="'. $staff_value["name"] .'"/>
+								<input name="stid[]" type="hidden" value="'. $staff_value["id"] .'"/>
+								
+								<br /></div>';
+							$i++;
+						}
+					} else {
+						echo '<label>Staff 1:</label>
+							<input name="stname[]" type="text" value=""/>
+							<input name="stid[]" type="hidden" value=""/>
+							<br />';
+					}
+					
+					echo "</div>";
+					
 				}
-				else {
-					$number_columns= 2;
+				
+				?>
+		</div><!-- End Column -->
+
+	</div> <!-- End Row -->
+	<div class="row">
+		<div class="col-md-12">
+			<?php 
+				if($updated) {
+					echo "<div class='alert'>Settings Updated. <a href='main.php?current=1'>Go to home</a></div>";
 				}
-				?>				
-					<div class="settings_columns <?php echo "number_columns_$number_columns"?>">
+			?>
+			<input class="button" id="settings_save_button" type="submit" value="Save"/>
+		</div>
+	</div>
 
-						<div class="inner">
-
-							<div class="column">
-								<div class="row">
-									<h1>General:</h1>
-									<label>Username:</label>
-									<input name="username" type="text" value="<?php echo $username;?>"/> 
-								</div>
-
-								<div class="row">
-									<label>Password:</label>
-									<input name="new_password" type="password" value=""/> 
-								</div>	
-										
-								<div class="row">
-									<label>Confirm Password:</label>
-									<input name="new_password_2" type="password" value=""/> 
-								</div>
-
-								<div class="row">
-									<label>First name:</label>
-									<input name="first_name" type="text" value="<?php echo $first_name;?>"/> 
-								</div>
-
-								<div class="row">
-									<label>Last name:</label>
-									<input name="last_name" type="text" value="<?php echo $last_name;?>"/> 
-								</div>
-
-								<div class="row">
-									<label>Email:</label>
-									<input name="email" type="text" value="<?php echo $email;?>"/> 
-								</div>
-
-							</div>
-							<?php 
-								if($teacher) {
-									echo '<div class="column">';
-								
-									echo "<div id='classes_info'><h1>Your Classes:</h1><p>If you have no class in a period, leave it blank.</p>";
-									
-									//*Making the class inputs:
-									$i = 1;
-									if(!empty($classes)) { //*If the classes exist, put in the values.
-										foreach($classes as $class) {
-											echo "<div class='row'><label>Period $i:</label>
-											<input name='p" . $i . "' type='text' value='".$class['name']."'/>
-											</div>";
-											$i++;
-										}
-									} else { //*If the classes haven't been made yet, make them empty.
-										for($j=1;$j<9;$j++) {
-											echo "<div class='row'><label>Period $j</label>
-											<input name='p" . $j . "' type='text' value=''/>
-											</div>";
-										}
-									}
-									
-									echo "<br style='clear: both' clear='all'/></div>";
-								
-								
-								
-									echo "</div>";
-										}
-									?>
-							<div class="column">
-								<?php 
-								if($club_p) {
-									echo "<div id='clubs_info'><h1>Clubs:</h1>";
-									
-									$i = 1;
-									if(!empty($club_values)) {
-										foreach($club_values as $club_value) {
-											echo '<div class="club_wrapper">
-												<label>Club '.$i.':</label>
-												<input name="cname[]" type="text" value="'. $club_value["name"] .'"/>
-												<input name="cid[]" type="hidden" value="'. $club_value["id"] .'"/>
-												<a href="#" class="delete_club">X</a>
-												<br /></div>';
-											$i++;
-										}
-									} else {
-										echo '<label>Club 1:</label>
-											<input name="cname[]" type="text" value=""/>
-											<input name="cid[]" type="hidden" value=""/>
-											<br />';
-									}
-									
-									echo "</div>";
-									echo "<button id='add_club'>Add new club</button>";
-								}
-								?>
-								
-								<?php 
-								
-								if($sports) {
-									echo "<div id='sports_info'><h1>Sports:</h1>";
-									
-									$i = 1;
-									if(!empty($sports_values)) {
-										foreach($sports_values as $sport_value) {
-											echo '<div class="sports_wrapper">
-												<label>Sport '.$i.':</label>
-												<input name="sname[]" type="text" value="'. $sport_value["name"] .'"/>
-												<input name="sid[]" type="hidden" value="'. $sport_value["id"] .'"/>
-												<a href="#" class="delete_sports">X</a>
-												<br /></div>';
-											$i++;
-										}
-									} else {
-										echo '<label>Sport 1:</label>
-											<input name="sname[]" type="text" value=""/>
-											<input name="sid[]" type="hidden" value=""/>
-											<br />';
-									}
-									
-									echo "</div>";
-									echo "<button id='add_sports'>Add new sport</button>";
-								}
-								
-								?>
-								
-								<?php 
-								
-								if($staff_p) {
-									echo "<div id='staff_info'><h1>Staff:</h1>";
-									
-									$i = 1;
-									if(!empty($staff_values)) {
-										foreach($staff_values as $staff_value) {
-											echo '<div class="staff_wrapper">
-												<label>Staff '.$i.':</label>
-												<input name="stname[]" type="text" value="'. $staff_value["name"] .'"/>
-												<input name="stid[]" type="hidden" value="'. $staff_value["id"] .'"/>
-												
-												<br /></div>';
-											$i++;
-										}
-									} else {
-										echo '<label>Staff 1:</label>
-											<input name="stname[]" type="text" value=""/>
-											<input name="stid[]" type="hidden" value=""/>
-											<br />';
-									}
-									
-									echo "</div>";
-									
-								}
-								
-								?>
-							</div>
-							
-							<div class="settings_save_div">
-								<?php 
-									if($updated) {
-										echo "<div class='settings_updated_alert'>Settings Updated. <a href='main.php?current=1'>Go to home</a></div>";
-									}
-								?>
-								<input class="button" id="settings_save_button" type="submit" value="Save"/>
-							</div>			
-							
-							</div>	<!--end inner-->	
-						</div>
-
-		</form>
-		
-		<script type="text/javascript">
-			initSettingsColumns();
-		</script>
+</div>
 		
 </body>
-
 </html>

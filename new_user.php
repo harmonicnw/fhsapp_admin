@@ -14,83 +14,7 @@ $error = new error();
 c_cookie::enforce_log();
 ?>
 
-<!DOCTYPE HTML>
-
-<!--Notes:
-	-Remember mysql_insert_id(); Gets the id of the last executed query, so will be important
-	-For admins making new users only. Should not concern making the subtypes whatsoever, that's the user's job.
--->
-<html>
-
-<head>
-	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
-	<title>New User</title>
-	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
-	<script type="text/javascript"> //The easy way to validate. Credit this later.
-	$(document).ready(
-		function(){	
-				jQuery.validator.addMethod("notEqual", function(value, element, param) {
-  return this.optional(element) || value != param;
-}, "Please specify a different (non-default) value");
-	$("form").validate({
-		ignore: "",
-				rules: {
-					username: {
-						required: true,
-						'notEqual': "Username"
-					},
-					email: {
-						required: true,
-						email: true,
-						'notEqual': "E-Mail"
-					},
-					first_name: {
-						required: true, 
-						'notEqual': "First Name"
-					},
-					last_name: {
-						required: true,
-						'notEqual': "Last Name"
-					},
-					password: {
-						required: true,
-					},
-					password_2: {
-						required: true,
-						equalTo: "input[name=password]"
-					}
-				}
-			});
-
-		}
-	);
-	</script>
-	<link rel="icon" href="images/franklin_logo.gif">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="style.css" />
-</head>
-
-<body class="new_user">
-	<div class="header">
-		<img class="logo" src="images/daytime.png">
-		<img class="beta" src="images/betterbeta.png">
-		<h1>FHS APP	</h1>
-		<a href="help.php"><img class="help" src="images/help-icon.png" alt="help-icon"></a>
-		
-		<?php
-		$header = new header();
-		$header->generate_header();
-		?>
-
-		</div>	
-
-
-	<div class="columns_wrapper">
-		<div class="columns">
-			<div class="column">
-			<?php
+				<?php
 				function checkbox_checked($checkbox_value) {
 					if($checkbox_value == "on") {
 						return 1;
@@ -148,6 +72,82 @@ c_cookie::enforce_log();
 					}
 				}	
 			?>
+
+<!DOCTYPE HTML>
+
+<!--Notes:
+	-Remember mysql_insert_id(); Gets the id of the last executed query, so will be important
+	-For admins making new users only. Should not concern making the subtypes whatsoever, that's the user's job.
+-->
+<html>
+
+<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+	<title>Users</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="icon" href="images/franklin_logo.gif">
+
+	<!-- Bootstrap -->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript"> //The easy way to validate. Credit this later.
+	$(document).ready(
+		function(){	
+				jQuery.validator.addMethod("notEqual", function(value, element, param) {
+  return this.optional(element) || value != param;
+}, "Please specify a different (non-default) value");
+	$("form").validate({
+		ignore: "",
+				rules: {
+					username: {
+						required: true,
+						'notEqual': "Username"
+					},
+					email: {
+						required: true,
+						email: true,
+						'notEqual': "E-Mail"
+					},
+					first_name: {
+						required: true, 
+						'notEqual': "First Name"
+					},
+					last_name: {
+						required: true,
+						'notEqual': "Last Name"
+					},
+					password: {
+						required: true,
+					},
+					password_2: {
+						required: true,
+						equalTo: "input[name=password]"
+					}
+				}
+			});
+
+		}
+	);
+	</script>
+</head>
+
+<body>
+	<?php include_once("nav.inc"); ?>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
 	
 				<form id="form" action="new_user.php" method="post" name="new_user_form">
 					<legend>
@@ -157,20 +157,24 @@ c_cookie::enforce_log();
 					</legend>
 
 					<div class="row">
+						<label>First Name</label>
 						<input name="first_name" onblur="if (this.value=='') this.value='First Name'" onfocus="if (this.value=='First Name') this.value = ''" type="text" value="First Name">
 					</div>
 		
 					<div class="row"> 
+						<label>Last Name</label>
 						<input name="last_name" onblur="if (this.value=='') this.value='Last Name'" onfocus="if (this.value=='Last Name') this.value = ''" type="text" value="Last Name">
 					</div> 
 					<!--<label>Last Name: </label><input type="text" name="last_name"/>-->
 
 					<div class="row"> 
+						<label>Email</label>
 						<input name="email" onblur="if (this.value=='') this.value='E-Mail'" onfocus="if (this.value=='E-Mail') this.value = ''" type="text" value="E-Mail">
 					</div>
 					<!-- <label>E-Mail: </label><input type="text" name="e-mail"/>-->
 	
 					<div class="row">
+						<label>Username</label>
 						<input name="username" onblur="if (this.value=='') this.value='Username'" onfocus="if (this.value=='Username') this.value = ''" type="text" value="Username">
 					</div> 
 					<!--<label>Username: </label><input type="text" name="username"/>-->
@@ -179,11 +183,13 @@ c_cookie::enforce_log();
 					document.getElementById('password').focus() moves the curser from the first text box to the next and style="display: none" hides the second text box. onblur displays the origional text when we click something else-->
 
 					<div class="row"> 
+						<label>Password</label>
 						<input id="password_text" onfocus="this.style.display='none';document.getElementById('password').style.display='block'; document.getElementById('password').focus()" type="text" value="Password">
 						<input onblur="if (this.value==''){this.style.display='none';document.getElementById('password_text').style.display='block'}" id="password" style="display: none" type="password" name="password"/>
 					</div>
 
 					<div class="row"> 
+						<label>Repeat Password</label>
 						<input id="password_text2" onfocus="this.style.display='none';document.getElementById('password2').style.display='block'; document.getElementById('password2').focus()" type="text" value="Re-enter Password">
 						<input onblur="if (this.value==''){this.style.display='none';document.getElementById('password_text2').style.display='block'}" id="password2" style="display: none" type="password" name="password_2"/>
 					</div>
@@ -202,9 +208,10 @@ c_cookie::enforce_log();
 						<input type="submit" value="Submit" class="button" id="submit_new_user_button"/>
 					</div>
 				</form>
-			</div> <!--end column -->
+			</div>
 		</div>
 	</div>
+
 </body>
 
 </html>

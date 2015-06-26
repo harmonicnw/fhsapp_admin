@@ -328,37 +328,7 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 </head>
 
 <body>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">		
-      	<img class="logo" src="images/daytime.png">
-		<!-- <img class="beta" src="images/betterbeta.png"> -->
-	  </a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://fhsapp.com/admin/create.php">Create New Announcement</a></li>
-        <li><a href="http://fhsapp.com/admin/new_user.php">Create New User</a></li>
-        <li><a href="http://fhsapp.com/admin/users.php">Users</a></li>
-        <li><a href="http://fhsapp.com/admin/settings.php">Settings</a></li>
-        <li><a href="http://fhsapp.com/admin/main.php?current=1">Home</a></li>
-        <li><a href="http://fhsapp.com/admin/logout.php">Logout</a></li>
-        <li><a href="http://fhsapp.com/admin/help.php">Help</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+	<?php include_once("nav.inc"); ?>
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">

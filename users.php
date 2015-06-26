@@ -20,36 +20,62 @@ $users=$db->runQuery($query);
 
 <head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
-	<title></title>
-	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<title>Users</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
 	<link rel="icon" href="images/franklin_logo.gif">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="style.css" />
+
+	<!-- Bootstrap -->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 
+
 <body>
-	<div class="header">
-		<img class="logo" src="images/daytime.png">
-		<img class="beta" src="images/betterbeta.png">
-		<h1>FHS APP	</h1>
-		<a href="help.php"><img class="help" src="images/help-icon.png" alt="help-icon"></a>
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">		
+      	<img class="logo" src="images/daytime.png">
+		<!-- <img class="beta" src="images/betterbeta.png"> -->
+	  </a>
+    </div>
 
-		<?php
-		$header = new header();
-		$header->generate_header();
-		?>
-		
-	</div>
-	
-	<div class="main_wrapper">
-		<!--<pre>
-			<?php print_r($users);?>
-		</pre>-->
-
-		<div class="settings_columns">
-
-			<table class="nice_table">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://fhsapp.com/admin/create.php">Create New Announcement</a></li>
+        <li><a href="http://fhsapp.com/admin/new_user.php">Create New User</a></li>
+        <li><a href="http://fhsapp.com/admin/users.php">Users</a></li>
+        <li><a href="http://fhsapp.com/admin/settings.php">Settings</a></li>
+        <li><a href="http://fhsapp.com/admin/main.php?current=1">Home</a></li>
+        <li><a href="http://fhsapp.com/admin/logout.php">Logout</a></li>
+        <li><a href="http://fhsapp.com/admin/help.php">Help</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<table class="table">
 				
 					<tr> <!--Headers-->
 						<th>Last Name</th>
@@ -82,43 +108,10 @@ $users=$db->runQuery($query);
 					?>
 				</tbody>
 			</table>
+			</div>
 		</div>
-
-		<!--
-		<table border="1px border black" style="background-color:white">
-			<thead>
-				<tr> <!--Headers
-					<th>Last Name</th>
-					<th>First Name</th>
-					<th>Username</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<!--<tr>
-					<th><a href="edit_user.php?=1">Edit</a></th>
-					<th>Last name</th>
-					<th>First name</th>
-					<th>Username</th>
-					<th><a href="delete.user.php?=1">Delete</a></th>
-				</tr>
-				<?php 
-					foreach($users as $user) {
-						echo '
-						<tr>
-							<th>'.$user["last_name"].'</th>
-							<th>'.$user["first_name"].'</th>
-							<th>'.$user["username"].'</th>
-							<th><a href="edit_user.php?e_user_id='.$user["id"].'">Reset Password</a></th>
-							<th><a href="delete_user.php?d_user_id='.$user["id"].'">Delete</a></th>
-						</tr>';
-					}
-				?>
-			</tbody>
-		</table>
-		-->
 	</div>
+
 </body>
 
 </html>

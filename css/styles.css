@@ -6,3 +6,13 @@
 .navbar-brand{
 	padding: 5px;
 }
+
+.required::after{
+	font-weight:bold; 
+	color:red;
+	content:"*";
+}
+
+.buttons{
+	margin-top: 20px;
+}

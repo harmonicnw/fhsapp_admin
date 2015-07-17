@@ -49,7 +49,7 @@ if(!empty($_REQUEST)) {
 		header("Location: main.php?current=1");
 	} else {
 		$message = "You must check a category.";
-		$error->set_message(/*$message*/);
+		//$error->set_message(/*$message*/);
 	}
 }
 
@@ -61,15 +61,24 @@ if(!empty($_REQUEST)) {
 
 <head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
-	<title>Create Announcement</title>
-	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-	<!--Credit: http://jqueryvalidation.org/-->
-	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-	<!--Credit: http://api.jqueryui.com/-->
-	<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
-	<!--Credit: http://www.tinymce.com/index.php-->
-	<script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+	<title>Users</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="icon" href="images/franklin_logo.gif">
+
+	<!-- Bootstrap -->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		
 
@@ -102,198 +111,103 @@ if(!empty($_REQUEST)) {
 		
 	);
 	</script>
-	<link rel="icon" href="images/franklin_logo.gif">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="style.css" />
-	<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
 </head>
 
 <body>
-	<!--Header goes here-->
-	<div class="header">
-		
-
-		<img class="logo" src="images/daytime.png">
-		<img class="beta" src="images/betterbeta.png">
-		<h1>FHS APP	</h1>
-		<a href="help.php"><img class="help" src="images/help-icon.png" alt="help-icon"></a>
-
-		<?php
-		$header = new header();
-		$header->generate_header();
-		?>
-		
-	</div>	
-
-	<div id="create_wrapper">	
-		<form id="form" method="get" action="create.php" class="anno_form">
-			<!--<label></label>
-			<input name="" type="text" value=""/>
-			<br />-->
-			<div id="anno_left">
-			
-			<div class="anno_section" id="anno_title" >
-				<label class="anno_label" id="anno_title_label">Title<span style="color:red">*</span></label>
-				<input name="title" type="text" value="" class="anno_text" id="anno_text_title"/>
-				<br />
-			</div>
-			
-			<script>
-				function setTitleHeight() {	
-					var cornerHeight = $("#anno_corner").height();
-					console.log("Here is the height of the corner: " + cornerHeight);
-					$("#anno_title").height(cornerHeight);
-					$("#anno_text_title").height(cornerHeight / 1.5);
-				}
-				
-				//setTitleHeight();
-			</script>
-			
-			<div class="anno_section" id="anno_description">
-				<label class="anno_label" id="anno_description_label">Description<span style="color:red">*</span></label>
-				<div class="mcedummy">
-					<textarea name="description" rows="5" col="50" id="anno_textarea"></textarea>
-				</div>
-				<br />
-			</div>
-			
-			<div class="anno_section" id="anno_start_end">
-				<div class="anno_se_section" id="anno_start_date">
-					<label class="anno_opt_label" id="anno_start_date_label">Announcement Starting Date<span style="color:red">*</span></label>
-					<input name="start_date" type="text" value="" id="anno_text_start_date" class="anno_text" />
-					<br />
-				</div>
-			
-				<div class="anno_se_section" id="anno_end_date">
-					<label class="anno_opt_label" id="anno_end_date_label">Announcement End Date<span style="color:red">*</span></label>
-					<input name="end_date" type="text" value="" id="anno_text_end_date" class="anno_text" />
-					<br />
+<?php include_once("nav.inc"); ?>
+	<div class="container">
+		<form>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<p><span class="required"></span> = Required Field</p>
 				</div>
 			</div>
-			
-			<div class="anno_section" id="anno_optional">
-				<label class="anno_label" id="anno_optional_label">Additional Information:</label>
-				
-				<div class="anno_opt_section" id="anno_date">
-					<label class="anno_opt_label" id="anno_date_label">Actual Date of Event</label>
-					<input id="date" name="date" type="text" value="" class="anno_text" id="anno_text_date"/>
-					<br />
+		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<div class="form-group">
+					<label class="required">Title</label>
+					<input type="text" class="form-control">
 				</div>
-				
-				<div class="anno_opt_section" id="anno_time">
-					<label class="anno_opt_label" id="anno_time_label">Time of Event</label>
-					<input name="time" type="text" value="" class="anno_text" id="anno_text_time"/>
-					<br />
+				<div class="form-group">
+					<label class="required">Description</label>
+					<textarea class="form-control"></textarea>
 				</div>
-				
-				<div class="anno_opt_section" id="anno_location">
-					<label class="anno_opt_label" id="anno_location_label">Location</label>
-					<input name="location" type="text" value="" class="anno_text" id="anno_text_location"/>
-					<br />
+				<div class="row">
+					<div class="col-md-6">
+						<label class="required">Announcement Starting Date</label>
+						<input type="text" class="form-control">
+					</div>
+					<div class="col-md-6">
+						<label class="required">Announcement End Date</label>
+						<input type="text" class="form-control">
+					</div>
+				</div>
+				<h3>Addition Information:</h3>
+				<div class="row">
+					<div class="col-md-4">
+						<label>Actual Date of Event</label>
+						<input type="text" class="form-control">
+					</div>
+					<div class="col-md-4">
+						<label>Time of Event</label>
+						<input type="text" class="form-control">
+					</div>
+					<div class="col-md-4">
+						<label>Location</label>
+						<input type="text" class="form-control">
+					</div>
+				</div>
+				<div class="form-group buttons">
+					<input type="submit" class="btn btn-default" value="Create Announcement" />
+					<input type="button" class="btn btn-default" value="Cancel" />
 				</div>
 			</div>
-			
-			<div id="anno_corner">
-				<div id="required_label_div">
-					<label id="required_label"><span style="color:red">*</span> - Required</label>
+			<div class="col-md-2">
+				<h3 class="required">Categories</h3>
+				<h4>General</h4>
+				<div class="checkbox">
+			    	<label>
+			      		<input type="checkbox"> College Career and Counseling Info
+			    	</label>
+			    	<label>
+			      		<input type="checkbox"> Important Continuing Items
+			    	</label>
+			    	<label>
+			      		<input type="checkbox"> New/Timely Entries
+			    	</label>
+					<label>
+			      		<input type="checkbox"> Library
+			    	</label>
+			    	<label>
+			      		<input type="checkbox"> SUN News
+			    	</label>
 				</div>
-				
-				<div id="anno_submit">
-					<input type="submit" class="button" id="anno_submit_button" value="Create Announcement" />
-				</div>
-			
-				<div id="anno_cancel">
-					<a class="button" id="anno_cancel_button" href="main.php?current=1">Cancel</a>
+				<h4>Classes</h4>
+				<div class="checkbox">
+					<label>
+			      		<input type="checkbox"> Period 1: Testing
+			    	</label>
+			    	<label>
+			      		<input type="checkbox"> Period 3: Test Period
+			    	</label>
 				</div>
 			</div>
-			
-			</div>
-			
-			<div id="anno_right">
-			<div id="anno_cats">
-				<label id="anno_cats_label">Categories<span style="color:red">*</span></label>
-				<!--php must generate these...-->
-				<?php
-				if($admin_p) {
-					$query = "SELECT * FROM subtype WHERE type_id = '1'";
-					$generals = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>General:</label><br />";
-					foreach($generals as $general) {
-						$id = $general['id'];
-						$name = $general['name'];
-						if(!empty($name)) {
-							echo '<label class="cat_subtype_label">'.$name.':</label>
-							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-							<br />';
-						}
-					}
-					echo "</div>";
-				}
-				
-				if($teacher_p) {
-					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='2'";
-					$periods = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>Classes:</label><br />";
-						foreach($periods as $period) {
-						$id = $period['id'];
-						$name = $period['name'];
-						$number = $period['period'];
-						if(!empty($name)) {
-							echo '<label class="cat_subtype_label">Period '.$number.': '.$name.'</label>
-							<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-							<br />';
-						}
-					}
-					echo "</div>";
-				}
-				
-				if($club_p) {
-					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='3'";
-					$clubs = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>Club(s):</label><br />";
-					foreach($clubs as $club) {
-						$id = $club['id'];
-						$name = $club['name'];
-						echo '<label class="cat_subtype_label">'.$name.':</label>
-						<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-						<br />';
-					}
-					echo "</div>";
-				}
-				
-				if($sports_p) {
-					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='4'";
-					$sports = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>Sport(s):</label><br />";
-					foreach($sports as $sport) {
-						$id = $sport['id'];
-						$name = $sport['name'];
-						echo '<label class="cat_subtype_label">'.$name.':</label>
-						<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-						<br />';
-					}
-					echo "</div>";
-				}
-				
-				if($staff_p) {
-					$query = "SELECT * FROM subtype WHERE author_id='$user_id' AND type_id='5'";
-					$staffs = $db->runQuery($query);
-					echo "<div class='cat_div'><label class='cat_label'>Faculty(s):</label><br />";
-					foreach($staffs as $staff) {
-						$id = $staff['id'];
-						$name = $staff['name'];
-						echo '<label class="cat_subtype_label">'.$name.':</label>
-						<input class="cat_check" name="check[]" type="checkbox" value="'.$id.'" />
-						<br />';
-					}
-					echo "</div>";
-				}
-				?>
-			</div>
-				
-			<br />
+		</div>
 		</form>
 	</div>
+	<script>
+		function setTitleHeight() {	
+			var cornerHeight = $("#anno_corner").height();
+			console.log("Here is the height of the corner: " + cornerHeight);
+			$("#anno_title").height(cornerHeight);
+			$("#anno_text_title").height(cornerHeight / 1.5);
+		}
+		
+		//setTitleHeight();
+	</script>
+
 	<script type="text/javascript">
 		initLRHeight();
 		initDescrHeight();

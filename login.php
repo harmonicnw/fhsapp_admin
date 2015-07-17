@@ -29,10 +29,25 @@ if(!empty($_POST)) {
 
 <html>
 <head>
-	<title>Log In</title>
-	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+	<title>Settings</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="icon" href="images/franklin_logo.gif">
+
+	<!-- Bootstrap -->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript"> //The easy way to validate. Credit this later.
 	$(document).ready(
 		function(){	
@@ -56,49 +71,56 @@ if(!empty($_POST)) {
 		}
 	);
 	</script>
-	<link rel="icon" href="images/franklin_logo.gif">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="style.css">
-
-
 </head>
 <body class="login">
-	<div class="header">
-		<img class="logo" src="images/daytime.png">
-		<img class="beta" src="images/betterbeta.png">
-		<h1>FHS APP	</h1>
-		<a href="help.php"><img class="help" src="images/help-icon.png" alt="help-icon"></a>
-	</div>	
-	<div class="columns_wrapper"><div class="columns">
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">		
+      	<img class="logo" src="images/daytime.png">
+		<!-- <img class="beta" src="images/betterbeta.png"> -->
+	  </a>
+    </div>
 
-		<form action="login.php" method="post" name="login_form">
-			<div class="column">
-	
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="help.php">Help</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
 
 				<h2>Login</h2>
 
-				<div class="row">
-					<input name="user" onblur="if (this.value=='') this.value='Username'" onfocus="if (this.value=='Username') 		this.value = ''" type="text" value="Username">
+				<div class="form-group">
+					<input class="form-control" name="user" onblur="if (this.value=='') this.value='Username'" onfocus="if (this.value=='Username') 		this.value = ''" type="text" value="Username">
 				</div> 
 
-				<div class="row">
-					<input id="password_text" onfocus="this.style.display='none';document.getElementById('password').style.display='block'; document.getElementById('password').focus()" type="text" value="Password">
-					<input onblur="if (this.value==''){this.style.display='none';document.getElementById('password_text').style.display='block'}" id="password" style="display: none" type="password" name="pass"/>
+				<div class="form-group">
+					<input class="form-control" id="password_text" onfocus="this.style.display='none';document.getElementById('password').style.display='block'; document.getElementById('password').focus()" type="text" value="Password">
+					<input class="form-control" onblur="if (this.value==''){this.style.display='none';document.getElementById('password_text').style.display='block'}" id="password" style="display: none" type="password" name="pass"/>
 				</div>
-				<div class="row">
-					<input type="checkbox" id="staylogged" name="staylogged"/> <label for="staylogged">Stay Logged In</label>
+				<div class="checkbox">
+					<label for="staylogged">
+					<input type="checkbox" id="staylogged" name="staylogged"/> 
+					Stay Logged In</label>
 				</div>
 	
-				<div class="row">
-					<input type="submit" class="button" id="submit_login_button" value="Login"/>
+				<div class="form-group">
+					<input class="btn btn-default" type="submit" class="button" id="submit_login_button" value="Login"/>
 				</div>
-			</div>
-	
-	
-		</form>
+		</div>
 	</div>
-	</div>
-	
 	<?php $error->check_error(); ?>
 </body>
 </html>

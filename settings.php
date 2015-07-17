@@ -332,33 +332,33 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">
-			<div class="row">
+			<div class="form-group">
 					<h1>General:</h1>
 					<label>Username:</label>
 					<input name="username" type="text" value="<?php echo $username;?>"/> 
 				</div>
 
-				<div class="row">
+				<div class="form-group">
 					<label>Password:</label>
 					<input name="new_password" type="password" value=""/> 
 				</div>	
 						
-				<div class="row">
+				<div class="form-group">
 					<label>Confirm Password:</label>
 					<input name="new_password_2" type="password" value=""/> 
 				</div>
 
-				<div class="row">
+				<div class="form-group">
 					<label>First name:</label>
 					<input name="first_name" type="text" value="<?php echo $first_name;?>"/> 
 				</div>
 
-				<div class="row">
+				<div class="form-group">
 					<label>Last name:</label>
 					<input name="last_name" type="text" value="<?php echo $last_name;?>"/> 
 				</div>
 
-				<div class="row">
+				<div class="form-group">
 					<label>Email:</label>
 					<input name="email" type="text" value="<?php echo $email;?>"/> 
 				</div> 
@@ -374,14 +374,14 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 					$i = 1;
 					if(!empty($classes)) { //*If the classes exist, put in the values.
 						foreach($classes as $class) {
-							echo "<div class='row'><label>Period $i:</label>
+							echo "<div class='form-group'><label>Period $i:</label>
 							<input name='p" . $i . "' type='text' value='".$class['name']."'/>
 							</div>";
 							$i++;
 						}
 					} else { //*If the classes haven't been made yet, make them empty.
 						for($j=1;$j<9;$j++) {
-							echo "<div class='row'><label>Period $j</label>
+							echo "<div class='form-group'><label>Period $j</label>
 							<input name='p" . $j . "' type='text' value=''/>
 							</div>";
 						}
@@ -419,7 +419,7 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 					}
 					
 					echo "</div>";
-					echo "<button id='add_club'>Add new club</button>";
+					echo "<button class='btn btn-default' id='add_club'>Add new club</button>";
 				}
 				?>
 				
@@ -447,7 +447,7 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 					}
 					
 					echo "</div>";
-					echo "<button id='add_sports'>Add new sport</button>";
+					echo "<button class='btn btn-default' id='add_sports'>Add new sport</button>";
 				}
 				
 				?>
@@ -490,7 +490,7 @@ if(!empty($_REQUEST)) {//*Checks if anything has been submitted from the form ye
 					echo "<div class='alert'>Settings Updated. <a href='main.php?current=1'>Go to home</a></div>";
 				}
 			?>
-			<input class="button" id="settings_save_button" type="submit" value="Save"/>
+			<input class="btn btn-default" id="settings_save_button" type="submit" value="Save"/>
 		</div>
 	</div>
 

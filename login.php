@@ -97,6 +97,7 @@ if(!empty($_POST)) {
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<form action="login.php" method="post" name="login_form">
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 
@@ -121,6 +122,7 @@ if(!empty($_POST)) {
 				</div>
 		</div>
 	</div>
+	</form>
 	<?php $error->check_error(); ?>
 </body>
 </html>
